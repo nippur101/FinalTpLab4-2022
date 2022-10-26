@@ -10,7 +10,7 @@
           <form action="<?php echo FRONT_ROOT."User/Create" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
                 <div class="form-group">
                     <label for="">Nombre</label>
-                    <input type="text" name="name" class="form-control form-control-lg" placeholder="Nombre Masctota" required>
+                    <input type="text" name="name" class="form-control form-control-lg" placeholder="Nombre Mascota" required>
                </div>
                <div class="form-group">
                     <label for="">Plan de Vacunacion</label>

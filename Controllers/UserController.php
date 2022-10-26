@@ -32,6 +32,9 @@ class UserController{
             else
             {
                 require_once(VIEWS_PATH."validate-session.php");
+                if($user->getPets==null){
+                    require_once(VIEWS_PATH."create-pets.php");
+                }
                 require_once(VIEWS_PATH."logged-owner.php");
             }
         }
