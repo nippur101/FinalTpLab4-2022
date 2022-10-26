@@ -3,16 +3,21 @@
 
     class User
     {
+        
+        private $userID;
+        private $firstName;
+        private $lastName;
         private $email;
         private $password;
-        private $userID;
+        private $userType;
+        
 
-        public function getMail()
+        public function getEmail()
         {
             return $this->email;
         }
 
-        public function setMail($email)
+        public function setEmail($email)
         {
             $this->email = $email;
         }
@@ -35,6 +40,48 @@
         public function setUserID($userID)
         {
             $this->userID = $userID;
+        }
+
+       
+        public function getUserType()
+        {
+                return $this->userType;
+        }
+
+        
+        public function setUserType($userType)
+        {
+                $this->userType = $userType;
+
+                return $this;
+        }
+
+    
+        public function getFirstName()
+        {
+                return $this->firstName;
+        }
+
+    
+        public function setFirstName($firstName)
+        {
+                $this->firstName = $firstName;
+
+                return $this;
+        }
+
+         
+        public function getLastName()
+        {
+                return $this->lastName;
+        }
+
+      
+        public function setLastName($lastName)
+        {
+                $this->lastName = $lastName;
+
+                return $this;
         }
     }
 ?>
