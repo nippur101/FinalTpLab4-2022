@@ -7,7 +7,7 @@
                <h2>Exito carga</h2>
           </header>
 
-          <form action="<?php echo FRONT_ROOT."Home/Add" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
+          <form action="<?php echo FRONT_ROOT."User/CreatePets" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
                <button class="btn btn-primary btn-block btn-lg" type="submit">Ok</button>
           </form>
      </div>
