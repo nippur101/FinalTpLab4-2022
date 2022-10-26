@@ -4,7 +4,7 @@
 <main class="d-flex align-items-center justify-content-center height-100" >
      <div class="content">
           <header class="text-center">
-               <h2>TP Final</h2>
+               <h2>PetHero!</h2>
           </header>
 
           <form action="<?php echo FRONT_ROOT."User/Login" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
@@ -16,7 +16,15 @@
                     <label for="">Contraseña</label>
                     <input type="password" name="password" class="form-control form-control-lg" placeholder="Ingresar constraseña" required>
                </div>
-               <button class="btn btn-primary btn-block btn-lg" type="submit">Iniciar Sesión</button>
+               
+               <button class="btn btn-primary btn-block btn-lg" type="submit">Iniciar Sesión</button> <br>
+               <script>
+                    var btn = document.getElementById('crtAcc');
+                    btn.addEventListener('click', function() {
+                         document.location.href = '<?php echo 'create-account.php'; ?>';
+                    });
+               </script>
+               <button class="btn btn-secondary btn-block btn-lg" id="crtAcc">No tienes una cuenta? Click para crear una</button><br>
           </form>
      </div>
 </main>

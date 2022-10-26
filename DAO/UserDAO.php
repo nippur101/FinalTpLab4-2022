@@ -32,6 +32,22 @@ class UserDAO {
         return $check;
     }
 
+    public function alreadyExistUser($mail){
+            
+            $userList = $this->getAll();
+    
+            $check = false;
+    
+            foreach($userList as $user){
+    
+                if($user->getMail() == $mail){
+                    $check = true;
+                }
+            }
+    
+            return $check;
+    }
+
     public function retrieveData(){
 
         $this->userList = array();

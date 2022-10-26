@@ -32,6 +32,38 @@ class UserController{
         }
     }
 
+    public function Create($mail, $password1, $password2, $type)
+    {
+        if(!($this->userDAO->alreadyExistUser($mail)))
+        {
+            if($password1 == $password2)
+            {
+                $user = new User();
+                $user->setMail($mail);
+                $user->setPassword($password1);
+                $user->setType($type);
+
+                $this->userDAO->Add($user);
+
+                echo "<script> if(confirm('Usuario creado con exito!')); </script>";
+                require_once(VIEWS_PATH."validate-session.php");
+                require_once(VIEWS_PATH."index.php");
+            }
+            else
+            {
+                echo "<script> if(confirm('Las contraseñas no coinciden!')); </script>";
+                require_once(VIEWS_PATH."validate-session.php");
+                require_once(VIEWS_PATH."create-account.php");
+            }
+        }
+        else
+        {
+            echo "<script> if(confirm('El usuario ya existe!')); </script>";
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."create-account.php");
+        }
+    }
+
 
 }
 
