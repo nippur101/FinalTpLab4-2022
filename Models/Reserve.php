@@ -9,17 +9,7 @@
         private $keeper;
         private $pets;
         private $totalCost;
-        function __construct($startDate, $finalDate, $amountPaid,$keeper,$pets)
-        {
-            $this->startDate=$startDate;
-            $this->finalDate=$finalDate;
-            $this->amountPaid=$amountPaid;
-            $this->keeper=$keeper;
-            $this->pets=$pets;
-        }
-        
-
-       
+               
         public function getReserveId()
         {
                 return $this->reserveId;

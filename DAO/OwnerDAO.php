@@ -25,7 +25,7 @@ class OwnerDAO {
             $this->SaveOwner();
     }
 
-    public function validOwner($email, $password){
+    public function validOwner($email, $password){//VALIDACION DE EXISTENCIA CON MAIL Y PASSWORD O AGREGAMOS DNI?
         $check = false;
        $ownerList=$this->getAll();
        foreach($ownerList as $owner){

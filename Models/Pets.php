@@ -6,13 +6,9 @@
         private $vaccinationPlan;
         private $raze;
         private $video;
+        private $owner;
        
-        function __construct($name,$vaccinationPlan,$raze,$video){
-            $this->name=$name;
-            $this->vaccinationPlan=$vaccinationPlan;
-            $this->raze=$raze;
-            $this->video=$video;
-        }
+       
         
 
         public function getPetId()
@@ -80,6 +76,20 @@
         public function setVideo($video)
         {
                 $this->video = $video;
+
+                return $this;
+        }
+
+        
+        public function getOwner()
+        {
+                return $this->owner;
+        }
+
+        
+        public function setOwner($owner)
+        {
+                $this->owner = $owner;
 
                 return $this;
         }

@@ -6,15 +6,7 @@
         private $phone;
         private $pets;
         
-        function __construct($email,$password,$firstName,$lastName,$phone,$pets)
-        {
-            $this->firstName=$firstName;
-            $this->lastName=$lastName;
-            $this->phone=$phone;
-            $this->pets=$pets;
-            $this->email=$email;
-            $this->password=$password;
-        }
+        
         
 
         public function getFirstName()
