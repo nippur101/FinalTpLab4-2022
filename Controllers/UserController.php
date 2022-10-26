@@ -80,7 +80,7 @@ class UserController{
                 else
                 {
                     require_once(VIEWS_PATH."validate-session.php");
-                    require_once(VIEWS_PATH."logged-owner.php");
+                    require_once(VIEWS_PATH."create-pets.php");
                 }
             }
             else{
