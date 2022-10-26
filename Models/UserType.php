@@ -1,6 +1,6 @@
 
 <?php
- namespace Models;
+namespace Models;
 enum UserType
 {
     case Owner;

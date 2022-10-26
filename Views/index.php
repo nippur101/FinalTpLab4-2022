@@ -22,7 +22,7 @@
                     var btn = document.getElementById('crtAcc');
                     btn.addEventListener('click', function() {
                          document.location.href = '<?php echo 'create-account.php'; ?>';
-                    });
+                    }); //A esto no lo puedo hacer andar, deberia redigir a crear cuenta pero ni idea, es javascript
                </script>
                <button class="btn btn-secondary btn-block btn-lg" id="crtAcc">No tienes una cuenta? Click para crear una</button><br>
           </form>

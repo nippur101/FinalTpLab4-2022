@@ -16,6 +16,20 @@ class UserDAO {
 
     }
 
+    public function NewID(){
+
+        $id = 0;
+
+        foreach($this->userList as $user){
+
+            $id = ($user->getUserID() > $id) ? $user->getUserID() : $id;
+
+        }
+
+        return $id + 1;
+
+    }
+
     public function Add(User $user)
     {
             $this->RetrieveData();
@@ -29,16 +43,14 @@ class UserDAO {
 
         $userList = $this->getAll();
 
-        $check = false;
-
         foreach($userList as $user){
 
-            if($user->getMail() == $mail && $user->getPassword() == $password){
-                $check = true;
+            if($user->getEmail() == $mail && $user->getPassword() == $password){
+                $userR = $user;
             }
         }
 
-        return $check;
+        return $userR;
     }
 
     public function alreadyExistUser($mail){
@@ -49,7 +61,7 @@ class UserDAO {
     
             foreach($userList as $user){
     
-                if($user->getMail() == $mail){
+                if($user->getEmail() == $mail){
                     $check = true;
                 }
             }
@@ -72,9 +84,9 @@ class UserDAO {
                     
                     $user = new User();
                     $user->setUserId($valuesArray["userId"]);
-                    $user->setFirstName($valuesArray["firsName"]);
+                    $user->setFirstName($valuesArray["firstName"]);
                     $user->setLastName($valuesArray["lastName"]);
-                    $user->setMail($valuesArray["email"]);
+                    $user->setEmail($valuesArray["email"]);
                     $user->setPassword($valuesArray["password"]);
                     $user->setUserType($valuesArray["userType"]);
 
