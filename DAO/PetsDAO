@@ -38,6 +38,24 @@ class PetsDAO {
 
     }
 
+    public function alreadyExistPets($owner,$name){
+            
+        $petsList = $this->getAll();
+
+        $check = false;
+
+        foreach($petsList as $pets){
+
+            if( $pets->getOwner()==$owner ){
+                If( $pets->getName() == $name){
+                    $check = true;
+                }
+            }
+        }
+
+        return $check;
+}
+
     public function retrieveData(){
 
         $this->petsList = array();
@@ -57,6 +75,7 @@ class PetsDAO {
                     $pets->setName($valuesArray["name"]);
                     $pets->setVaccinationPlan($valuesArray["vaccinationPlan"]);
                     $pets->setRaze($valuesArray["raze"]);
+                    $pets->setPetType($valuesArray["petType"]);
                     $pets->setVideo($valuesArray["video"]);
                     $pets->setOwner($valuesArray["owner"]);
                     
@@ -75,6 +94,7 @@ class PetsDAO {
             $valuesArray["petId"] = $pets->getPetId();
             $valuesArray["name"] = $pets->getName();
             $valuesArray["vaccinationPlan"] = $pets->getVaccinationPlan();
+            $valuesArray["petType"] = $pets->getPetType();
             $valuesArray["raze"] = $pets->getRaze();
             $valuesArray["video"] = $pets->getVideo();
             $valuesArray["owner"] = $pets->getOwner();
@@ -86,6 +106,19 @@ class PetsDAO {
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
         
         file_put_contents('Data/pets.json', $jsonContent);
+    }
+    public function NewID(){
+
+        $id = 0;
+
+        foreach($this->petsList as $pets){
+
+            $id = ($pets->getPetId() > $id) ? $pets->getPetId() : $id;
+
+        }
+
+        return $id + 1;
+
     }
 
 }
