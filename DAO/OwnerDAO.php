@@ -25,16 +25,16 @@ class OwnerDAO {
             $this->SaveOwner();
     }
 
-    public function validOwner($email, $password){//VALIDACION DE EXISTENCIA CON MAIL Y PASSWORD O AGREGAMOS DNI?
-        $check = false;
-       $ownerList=$this->getAll();
-       foreach($ownerList as $owner){
-            if($owner->getEmail()==$email && $owner->getPassword()==$password ){
-                $check=true;
-            }
-       }
-       return $check;
+    public function GetOwner($userID){
+        $this->retrieveData();
 
+        foreach($this->ownerList as $owner){
+            if($owner->getUserID() == $userID){
+                $ownerR = $owner;
+            }
+        }
+
+        return $ownerR;
     }
 
     public function retrieveData(){
@@ -53,8 +53,6 @@ class OwnerDAO {
                     //$email,$password,$firstName,$lastName,$phone,$pets
                     $owner = new Owner();
                    
-                    $owner->setEmail($valuesArray["email"]);
-                    $owner->setPassword($valuesArray["password"]);
                     $owner->setFirstName($valuesArray["firstName"]);
                     $owner->setLastName($valuesArray["lastName"]);
                     $owner->setPhone($valuesArray["phone"]);
@@ -72,8 +70,6 @@ class OwnerDAO {
 
         foreach($this->ownerList as $owner)
         {
-            $valuesArray["email"] = $owner->getEmail();
-            $valuesArray["password"] = $owner->getPassword();
             $valuesArray["firstName"] = $owner->getFirstName();
             $valuesArray["lastName"] = $owner->getLastName();
             $valuesArray["phone"] = $owner->getPhone();

@@ -4,13 +4,22 @@
      </span>
      <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT."Home/Add" ?>">Agregar Cerveza</a>
-          </li>
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT."Home/List" ?>">Listar Cervezas</a>
-          </li>   
-          <li class="nav-item">
-               <a class="nav-link" href="<?php echo FRONT_ROOT."Home/Logout" ?>">Cerrar Sesión</a>
-          </li>        
+          <?php if(isset($_SESSION["loggedUser"])) { ?>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowProfile" ?>">Perfil</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/Logout" ?>">Cerrar Sesión</a>
+               </li>
+          <?php }else{
+               ?>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/Index" ?>">Iniciar Sesión</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/Create" ?>">Registrarse</a>
+               </li>
+               <?php
+          } ?>
      </ul>
 </nav>

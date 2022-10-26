@@ -1,12 +1,12 @@
 <?php
     namespace Models;
     class Owner extends User{
+        private $userID;
         private $firstName;
         private $lastName;
         private $phone;
         private $pets;
-        
-        
+
         
 
         public function getFirstName()
@@ -59,6 +59,16 @@
             $this->pets = $pets;
 
             return $this;
+        }
+
+        public function getUserID()
+        {
+                return $this->userID;
+        }
+
+        public function setUserID($userID)
+        {
+                $this->userID = $userID;
         }
     }
 
