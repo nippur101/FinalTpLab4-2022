@@ -1,9 +1,8 @@
-
 <?php
- namespace Models;
+namespace Models;
 enum PetType
 {
-    case Pequeño;
+    case Pequenio;
     case Mediano;
     case Grande;
     

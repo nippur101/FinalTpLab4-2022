@@ -32,6 +32,9 @@ class UserController{
             else
             {
                 require_once(VIEWS_PATH."validate-session.php");
+                if($user->getPets==null){
+                    require_once(VIEWS_PATH."create-pets.php");
+                }
                 require_once(VIEWS_PATH."logged-owner.php");
             }
         }
@@ -43,6 +46,19 @@ class UserController{
         }
     }
 
+    public function CreateAccount(){
+
+        require_once(VIEWS_PATH."create-account.php");
+
+    }
+
+    public function CreatePets(){
+
+        require_once(VIEWS_PATH."validate-session.php");
+        require_once(VIEWS_PATH."create-pets.php");
+
+    }
+    
     public function Create($firstName, $lastName, $mail, $password1, $password2, $type)
     {
         if(!($this->userDAO->alreadyExistUser($mail))){

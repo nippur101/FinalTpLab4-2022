@@ -5,10 +5,18 @@
         private $name;
         private $vaccinationPlan;
         private $raze;
+        private $petType;
         private $video;
         private $owner;
        
-       
+        function __construct($name,$vaccinationPlan,$raze,$petType,$video,$owner){
+            $this->name=$name;
+            $this->vaccinationPlan=$vaccinationPlan;
+            $this->raze=$raze;
+            $this->petType=$petType;
+            $this->video=$video;
+            $this->owner=$owner;
+        }
         
 
         public function getPetId()
@@ -80,13 +88,26 @@
                 return $this;
         }
 
-        
+      
+        public function getPetType()
+        {
+                return $this->petType;
+        }
+
+       
+        public function setPetType($petType)
+        {
+                $this->petType = $petType;
+
+                return $this;
+        }
+
+       
         public function getOwner()
         {
                 return $this->owner;
         }
 
-        
         public function setOwner($owner)
         {
                 $this->owner = $owner;

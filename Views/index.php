@@ -18,13 +18,12 @@
                </div>
                
                <button class="btn btn-primary btn-block btn-lg" type="submit">Iniciar Sesión</button> <br>
-               <script>
-                    var btn = document.getElementById('crtAcc');
-                    btn.addEventListener('click', function() {
-                         document.location.href = '<?php echo 'create-account.php'; ?>';
-                    }); //A esto no lo puedo hacer andar, deberia redigir a crear cuenta pero ni idea, es javascript
-               </script>
+               
+          </form>
+          <form action="<?php echo FRONT_ROOT."User/CreateAccount" ?>" method="" class="login-form bg-dark-alpha p-5 bg-light">
+
                <button class="btn btn-secondary btn-block btn-lg" id="crtAcc">No tienes una cuenta? Click para crear una</button><br>
+               
           </form>
      </div>
 </main>
