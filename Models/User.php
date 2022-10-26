@@ -12,12 +12,12 @@
         private $userType;
         
 
-        public function getMail()
+        public function getEmail()
         {
             return $this->email;
         }
 
-        public function setMail($email)
+        public function setEmail($email)
         {
             $this->email = $email;
         }
