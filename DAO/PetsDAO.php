@@ -7,7 +7,11 @@ use Models\Owner;
 class PetsDAO {
 
     private $petsList = array();
-
+    public function __construct()
+    {
+        
+    }
+    
     public function getAll(){
 
         $this->retrieveData();
@@ -107,19 +111,7 @@ class PetsDAO {
         
         file_put_contents('Data/pets.json', $jsonContent);
     }
-    public function NewID(){
-
-        $id = 0;
-
-        foreach($this->petsList as $pets){
-
-            $id = ($pets->getPetId() > $id) ? $pets->getPetId() : $id;
-
-        }
-
-        return $id + 1;
-
-    }
+    
 
 }
 

@@ -16,6 +16,7 @@
             $controllerClassName = "Controllers\\". $controllerName;            
 
             $controller = new $controllerClassName;
+           
             
             if(!isset($methodParameters))            
                 call_user_func(array($controller, $methodName));
