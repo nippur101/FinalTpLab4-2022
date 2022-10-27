@@ -4,27 +4,33 @@ namespace Controllers;
 
 use DAO\PetsDAO;
 use Models\Pets as Pets;
+use Models\Owner as Owner;
+use DAO\OwnerDAO;
 
 class PetsController{
 
     private $petsDAO;
+    private $ownerDAO;
 
     public function __construct()
     {
        $this->petsDAO=new PetsDAO();
+       $this->ownerDAO=new OwnerDAO();
     }
 
     
     
-    public function CreatePets( $name, $vaccinationPlan, $raze,$petType, $video, $owner)
+    public function CreatePets( $name, $vaccinationPlan, $raze,$petType, $video)
     {
-        $this->petsDAO=new PetsDAO();
+        $user = $_SESSION["loggedUser"] ; 
+        $owner = new Owner();
+        $owner = $this->ownerDAO->GetOwner($user->getUserID());
         
         
         if(!($this->petsDAO->alreadyExistPets($owner,$name))){
            
                 $pets = new Pets();
-                $pets->setPetId($this->NewID);
+                $pets->setPetId($this->petsDAO->NewID());
                 $pets->setName($name);
                 $pets->setVaccinationPlan($vaccinationPlan);
                 $pets->setRaze($raze);
@@ -42,18 +48,7 @@ class PetsController{
             require_once(VIEWS_PATH."create-account.php");
         }
     }
-    public function NewId() {
-        $petList = $this->petsDAO->GetAll();
-        $id = 0;
-        if($petList!=null){
-            foreach($petList as $pets) {
-                if($pets->getPetId() > $id) {
-                    $id = $pets->getPetId();
-                }
-            }
-        }
-        return $id + 1;
-    }
+   
 
 
 }

@@ -1,0 +1,20 @@
+[
+    {
+        "petId": 1,
+        "name": "Francisco",
+        "vaccinationPlan": null,
+        "petType": "a@a.com",
+        "raze": "Pediconi",
+        "video": "a",
+        "owner": null
+    },
+    {
+        "petId": 2,
+        "name": "tito",
+        "vaccinationPlan": "asd",
+        "petType": "Pequenio",
+        "raze": "perro",
+        "video": "yputube.abc",
+        "owner": null
+    }
+]

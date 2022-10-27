@@ -22,7 +22,7 @@
                </div>
                <div class="form-group">
                     <label for="">Tipo</label>
-                    <select name="type" class="form-control">
+                    <select name="petType" class="form-control">
                          <option value="0">Seleccione</option>
                          <option value="Pequenio">Pequeño</option>
                          <option value="Mediano">Mediano</option>

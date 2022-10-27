@@ -111,6 +111,19 @@ class PetsDAO {
         
         file_put_contents('Data/pets.json', $jsonContent);
     }
+
+    public function NewId() {
+        $petList = $this->GetAll();
+        $id = 0;
+        if($petList!=null){
+            foreach($petList as $pets) {
+                if($pets->getPetId() > $id) {
+                    $id = $pets->getPetId();
+                }
+            }
+        }
+        return $id + 1;
+    }
     
 
 }
