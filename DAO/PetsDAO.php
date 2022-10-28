@@ -111,9 +111,8 @@ class PetsDAO {
         
         file_put_contents('Data/pets.json', $jsonContent);
     }
-
     public function NewId() {
-        $petList = $this->GetAll();
+        $petList = $this->petsDAO->GetAll();
         $id = 0;
         if($petList!=null){
             foreach($petList as $pets) {
@@ -124,7 +123,7 @@ class PetsDAO {
         }
         return $id + 1;
     }
-    
+
 
 }
 
