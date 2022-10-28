@@ -11,10 +11,10 @@
     {
         "petId": 2,
         "name": "tito",
-        "vaccinationPlan": "asd",
+        "vaccinationPlan": "a,b,c",
         "petType": "Pequenio",
         "raze": "perro",
         "video": "yputube.abc",
-        "owner": null
+        "owner": {}
     }
 ]
