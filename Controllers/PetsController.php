@@ -22,9 +22,9 @@ class PetsController{
     
     public function CreatePets( $name, $vaccinationPlan, $raze,$petType, $video)
     {
-        $owner = $_SESSION["loggedUser"] ; 
-       // $owner = new Owner();
-       // $owner = $this->ownerDAO->GetOwner($user->getUserID());
+        $user = $_SESSION["loggedUser"] ; 
+        $owner = new Owner();
+        $owner = $this->ownerDAO->GetOwner($user->getUserID());
         
         
         if(!($this->petsDAO->alreadyExistPets($owner,$name))){

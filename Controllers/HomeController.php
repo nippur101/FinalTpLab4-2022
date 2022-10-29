@@ -23,6 +23,11 @@
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."create-account.php");
         } 
+        public function CreatePets()
+        {   
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."create-pets.php");
+        } 
         
         public function Logout()
         {
