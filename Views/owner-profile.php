@@ -17,17 +17,17 @@
                          <th>Tipo</th>
                     </thead>
                     <tbody>                         
-                         <?php foreach($petList as $pets) {?>
+                         <?php // foreach($petList as $pets) {?>
                               <tr>
-                                        <th><?php echo $pets->getPetId();?></th>
-                                        <th><?php echo $pets->getName();?></th>
-                                        <th><?php echo $pets->getRaze();?></th>
-                                        <th><?php echo $pets->getVideo();?></th>
-                                        <th><?php echo $pets->getPetType();?></th>
+                                        <th><?php // echo $pets->getPetId();?>1</th>
+                                        <th><?php //echo $pets->getName();?>Tito</th>
+                                        <th><?php //echo $pets->getRaze();?>perro</th>
+                                        <th><?php //echo $pets->getVideo();?> <iframe width="200" height="150" src="https://www.youtube.com/embed/rsTLyukvxGU" title="CACHORROS TIERNOS Y BONITOS 🧡 ¡Vídeos de Perros Cachorros! Lunacreciente" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></th>
+                                        <th><?php //echo $pets->getPetType();?></th>
                                         
                                         
                               </tr>
-                         <?php }?>
+                         <?php //}?>
                     </tbody>
                     <button  type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar Mascota</button>
                </table>
