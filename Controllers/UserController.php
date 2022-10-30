@@ -32,9 +32,6 @@ class UserController{
             else
             {
                 require_once(VIEWS_PATH."validate-session.php");
-                if($user->getPets==null){
-                    require_once(VIEWS_PATH."create-pets.php");
-                }
                 require_once(VIEWS_PATH."logged-owner.php");
             }
         }
@@ -86,13 +83,13 @@ class UserController{
             }
             else{
                 echo "<script> if(confirm('Las contraseñas no coinciden!')); </script>";
-                require_once(VIEWS_PATH."validate-session.php");
+                //require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."create-account.php");
             }
         }
         else{
             echo "<script> if(confirm('El usuario ya existe!')); </script>";
-            require_once(VIEWS_PATH."validate-session.php");
+            //require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."create-account.php");
         }
     }

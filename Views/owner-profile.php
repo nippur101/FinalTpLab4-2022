@@ -24,6 +24,7 @@
                     <label for="">Mascotas</label>
                     <select name="pets" class="form-control">
                          <?php foreach($owner->getPets() as $pet){ ?>
+                              <option value="0">Listado</option>
                               <option value="<?php echo $pet->getType() ?>"><?php echo $pet->getType() ?></option>
                          <?php } ?>
                     </select>
