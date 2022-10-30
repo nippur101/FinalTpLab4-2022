@@ -73,12 +73,13 @@ class UserController{
                 if($user->getUserType == 1)
                 {
                     require_once(VIEWS_PATH."validate-session.php");
-                    require_once(VIEWS_PATH."logged-keeper.php");
+                    require_once(VIEWS_PATH."create-keeper.php");
                 }
                 else
                 {
+                    
                     require_once(VIEWS_PATH."validate-session.php");
-                    require_once(VIEWS_PATH."logged-owner.php");
+                    require_once(VIEWS_PATH."owner-profile.php");
                 }
             }
             else{

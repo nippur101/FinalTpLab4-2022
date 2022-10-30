@@ -7,7 +7,7 @@
                <h2>PetHero! - Ingresa Tu Mascota</h2>
           </header>
 
-          <form action="<?php echo FRONT_ROOT."User/Create" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
+          <form action="<?php echo FRONT_ROOT."Pets/CreatePets" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
                 <div class="form-group">
                     <label for="">Nombre</label>
                     <input type="text" name="name" class="form-control form-control-lg" placeholder="Nombre Mascota" required>
@@ -22,7 +22,7 @@
                </div>
                <div class="form-group">
                     <label for="">Tipo</label>
-                    <select name="type" class="form-control">
+                    <select name="petType" class="form-control">
                          <option value="0">Seleccione</option>
                          <option value="Pequenio">Pequeño</option>
                          <option value="Mediano">Mediano</option>

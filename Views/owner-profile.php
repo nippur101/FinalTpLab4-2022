@@ -1,37 +1,38 @@
-<?php include_once('header.php'); 
-      include_once('nav.php');?>
 
-<main class="d-flex align-items-center justify-content-center height-100" >
-     <div class="content">
-          <header class="text-center">
-               <h2>Mi cuenta</h2>
-          </header>
-
-          <form action="<?php echo FRONT_ROOT."Owner/Update" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
-                <div class="form-group">
-                    <label for="">Nombre</label>
-                    <input type="text" name="firstName" class="form-control form-control-lg" placeholder=<?php $owner->getFirstName() ?> required>
-               </div>
-               <div class="form-group">
-                    <label for="">Apellido</label>
-                    <input type="text" name="lastName" class="form-control form-control-lg" placeholder=<?php $owner->getLastName() ?> required>
-               </div>
-                <div class="form-group">
-                    <label for="">Telefono</label>
-                    <input type="text" name="phone" class="form-control form-control-lg" placeholder=<?php $owner->getPhone() ?> required>
-               </div>
-               <div class="form-group">
-                    <label for="">Mascotas</label>
-                    <select name="pets" class="form-control">
-                         <?php foreach($owner->getPets() as $pet){ ?>
-                              <option value="0">Listado</option>
-                              <option value="<?php echo $pet->getType() ?>"><?php echo $pet->getType() ?></option>
-                         <?php } ?>
-                    </select>
-                </div>
-                <button class="btn btn-primary btn-block btn-lg" type="submit">Actualizar datos</button> <br>
-          </form>
-     </div>
+<?php
+    require_once(VIEWS_PATH."header.php");
+    require_once(VIEWS_PATH."nav.php");
+?>
+<main class="py-5">
+     <section id="listado" class="mb-5">
+          <div class="container">
+               <h2 class="mb-4"><?php $user = $_SESSION["loggedUser"] ; 
+                echo $user->getFirstName()."  ".$user->getLastName().":" ?> </h2>
+                 <form action="<?php echo FRONT_ROOT."Home/CreatePets" ?>" method="POST" >
+               <table class="table bg-light-alpha">
+                    <thead>
+                         <th>ID</th>
+                         <th>Nombre</th>
+                         <th>Raza</th>
+                         <th>Video</th>
+                         <th>Tipo</th>
+                    </thead>
+                    <tbody>                         
+                         <?php // foreach($petList as $pets) {?>
+                              <tr>
+                                        <th><?php // echo $pets->getPetId();?>1</th>
+                                        <th><?php //echo $pets->getName();?>Tito</th>
+                                        <th><?php //echo $pets->getRaze();?>perro</th>
+                                        <th><?php //echo $pets->getVideo();?> <iframe width="200" height="150" src="https://www.youtube.com/embed/rsTLyukvxGU" title="CACHORROS TIERNOS Y BONITOS 🧡 ¡Vídeos de Perros Cachorros! Lunacreciente" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></th>
+                                        <th><?php //echo $pets->getPetType();?></th>
+                                        
+                                        
+                              </tr>
+                         <?php //}?>
+                    </tbody>
+                    <button  type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar Mascota</button>
+               </table>
+               </form>
+          </div>
+     </section>
 </main>
-
-<?php include_once('footer.php'); ?>

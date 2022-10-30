@@ -17,17 +17,9 @@
     },
     {
         "userId": 3,
-        "firstName": "Diego",
-        "lastName": "De La Vega",
-        "email": "d@b",
-        "password": "1234",
-        "userType": "2"
-    },
-    {
-        "userId": 4,
-        "firstName": "Ash",
-        "lastName": "Ketchup",
-        "email": "a@k",
+        "firstName": "die",
+        "lastName": "sadas",
+        "email": "a@r",
         "password": "1234",
         "userType": "2"
     }
