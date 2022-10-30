@@ -33,6 +33,10 @@
                     <label for="">Video</label>
                     <input type="text" name="video" class="form-control form-control-lg" placeholder="Ingresa tu Video" required>
                </div>
+               <div class="form-group">
+                    <label for="">Imagen</label>
+                    <input type="text" name="image" class="form-control form-control-lg" placeholder="Ingresa una Imagen" required>
+               </div>
                
                 <button class="btn btn-primary btn-block btn-lg" type="submit">Guardar Mascota</button> <br>
           </form>

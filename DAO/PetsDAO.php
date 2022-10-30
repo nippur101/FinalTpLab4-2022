@@ -81,6 +81,7 @@ class PetsDAO {
                     $pets->setRaze($valuesArray["raze"]);
                     $pets->setPetType($valuesArray["petType"]);
                     $pets->setVideo($valuesArray["video"]);
+                    $pets->setImage($valuesArray["image"]);
                     $pets->setOwner($valuesArray["owner"]);
                     
 
@@ -101,6 +102,7 @@ class PetsDAO {
             $valuesArray["petType"] = $pets->getPetType();
             $valuesArray["raze"] = $pets->getRaze();
             $valuesArray["video"] = $pets->getVideo();
+            $valuesArray["image"] = $pets->getImage();
             $valuesArray["owner"] = $pets->getOwner();
            
 

@@ -7,6 +7,7 @@
         private $raze;
         private $petType;
         private $video;
+        private $image;
         private $owner;
        /*
         function __construct($name,$vaccinationPlan,$raze,$petType,$video,$owner){
@@ -111,6 +112,20 @@
         public function setOwner($owner)
         {
                 $this->owner = $owner;
+
+                return $this;
+        }
+
+        
+        public function getImage()
+        {
+                return $this->image;
+        }
+
+        
+        public function setImage($image)
+        {
+                $this->image = $image;
 
                 return $this;
         }
