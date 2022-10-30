@@ -20,7 +20,7 @@ class PetsController{
 
     
     
-    public function CreatePets( $name, $vaccinationPlan, $raze,$petType, $video)
+    public function CreatePets( $name, $vaccinationPlan, $raze,$petType, $video,$image)
     {
         $user = $_SESSION["loggedUser"] ; 
         $owner = new Owner();
@@ -36,6 +36,7 @@ class PetsController{
                 $pets->setRaze($raze);
                 $pets->setPetType($petType);
                 $pets->setVideo($video);
+                $pets->setImage($Image);
                 $pets->setOwner($owner);
                 $this->petsDAO->Add($pets);
                 echo "<script> if(confirm('La Mascota se ha creado con exito!')); </script>";

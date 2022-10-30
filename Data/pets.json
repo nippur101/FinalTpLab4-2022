@@ -6,6 +6,7 @@
         "petType": "a@a.com",
         "raze": "Pediconi",
         "video": "a",
+        "image": "a",
         "owner": null
     },
     {
@@ -15,6 +16,7 @@
         "petType": "Pequenio",
         "raze": "perro",
         "video": "yputube.abc",
+        "image": "yputube.abc",
         "owner": {}
     }
 ]
