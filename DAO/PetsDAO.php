@@ -7,11 +7,7 @@ use Models\Owner;
 class PetsDAO {
 
     private $petsList = array();
-    public function __construct()
-    {
-        
-    }
-    
+
     public function getAll(){
 
         $this->retrieveData();
@@ -111,6 +107,7 @@ class PetsDAO {
         
         file_put_contents('Data/pets.json', $jsonContent);
     }
+
     public function NewId() {
         $petList = $this->petsDAO->GetAll();
         $id = 0;
@@ -123,8 +120,6 @@ class PetsDAO {
         }
         return $id + 1;
     }
-
-
 }
 
 ?>

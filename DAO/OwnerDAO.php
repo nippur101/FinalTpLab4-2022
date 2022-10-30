@@ -27,7 +27,9 @@ class OwnerDAO {
 
     public function GetOwner($userID){
         $this->retrieveData();
-        $ownerR=null;
+
+        $ownerR = null;
+
         foreach($this->ownerList as $owner){
             if($owner->getUserID() == $userID){
                 $ownerR = $owner;
@@ -35,6 +37,18 @@ class OwnerDAO {
         }
 
         return $ownerR;
+    }
+
+    public function Update(Owner $owner){
+        $this->retrieveData();
+
+        foreach($this->ownerList as $ownerAux){
+            if($ownerAux->getUserID() == $owner->getUserID()){
+                $ownerAux = $owner;
+            }
+        }
+
+        $this->SaveOwner();
     }
 
     public function retrieveData(){

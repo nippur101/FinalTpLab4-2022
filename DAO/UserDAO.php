@@ -30,6 +30,18 @@ class UserDAO {
 
     }
 
+    public function GetUser($userID){
+        $this->retrieveData();
+
+        foreach($this->userList as $user){
+            if($user->getUserID() == $userID){
+                $userR = $user;
+            }
+        }
+
+        return $userR;
+    }
+
     public function Add(User $user)
     {
             $this->RetrieveData();

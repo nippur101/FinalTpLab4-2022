@@ -20,7 +20,7 @@ class UserController{
 
         if($user != NULL)
         {
-            $_SESSION["loggedUser"] = $user;
+            $_SESSION["loggedUser"] = $user->getUserID();
             $firstName = $user->getFirstName();
             $lastName = $user->getLastName();
 
@@ -32,9 +32,6 @@ class UserController{
             else
             {
                 require_once(VIEWS_PATH."validate-session.php");
-                if($user->getPets==null){
-                    require_once(VIEWS_PATH."owner-profile.php");
-                }
                 require_once(VIEWS_PATH."logged-owner.php");
             }
         }
@@ -70,6 +67,7 @@ class UserController{
                 $user->setPassword($password1);
                 $user->setUserType($type);
                 $user->setUserID($this->userDAO->NewID());
+                $_SESSION["loggedUser"] = $user->getUserID();
                 $this->userDAO->Add($user);
                 echo "<script> if(confirm('Usuario creado con exito!')); </script>";
                 if($user->getUserType == 1)
@@ -86,13 +84,13 @@ class UserController{
             }
             else{
                 echo "<script> if(confirm('Las contraseñas no coinciden!')); </script>";
-                require_once(VIEWS_PATH."validate-session.php");
+                //require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."create-account.php");
             }
         }
         else{
             echo "<script> if(confirm('El usuario ya existe!')); </script>";
-            require_once(VIEWS_PATH."validate-session.php");
+            //require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."create-account.php");
         }
     }
