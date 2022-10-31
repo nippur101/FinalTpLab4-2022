@@ -27,12 +27,16 @@ class UserController{
 
         if($user != NULL)
         {
-            $_SESSION["loggedUser"] = $user->getUserID();
+
+          // $_SESSION["loggedUser"] = $user;
+
             $firstName = $user->getFirstName();
             $lastName = $user->getLastName();
 
             if($user->getUserType() == 1)
             {
+                $_SESSION["loggedUser"] =$this->keeperDAO->GetKeeper($user->getUserID());
+               
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."logged-keeper.php");
               
@@ -40,6 +44,7 @@ class UserController{
             }
             else
             {
+                $_SESSION["loggedUser"] =$this->ownerDAO->GetOwner($user->getUserID());
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."logged-owner.php");
             }

@@ -18,10 +18,8 @@ class KeeperController{
 
         public function CheckAndPushData(){ //la idea de esta funcion es poder convertir el user a un owner para empezar a laburarlo, 
                                             // tanto owner como user laburan con la misma id
-            $user = $_SESSION["loggedUser"] ; //esto no se si funciona xd
-            $keeper = new Keeper();
-            $keeper = $this->keeperDAO->GetKeeper($user->getUserID());
-
+            
+            $keeper = $_SESSION["loggedUser"] ; 
             if($keeper!=NULL){ //ACA SE FIJA SI TENIAMOS INFO, SI TENIAMOS ESTA TODO OK VA A MIRAR LOS KEEPER
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."keeper-profile.php");
@@ -30,9 +28,9 @@ class KeeperController{
             }
         }
         public function TimePeriod($startDate,$finalDate){
-            $user = $_SESSION["loggedUser"] ; 
-            $keeper = new Keeper();
-            $keeper = $this->keeperDAO->GetKeeper($user->getUserID());
+            $keeper= $_SESSION["loggedUser"] ; 
+            
+          
             
             if($this->keeperDAO->OcupedTimePeriod($startDate,$finalDate)){
                 $time=new FreeTimePeriod;
@@ -45,6 +43,18 @@ class KeeperController{
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."keeper-profile.php");
           
+        }
+ 
+        public function AddSecondInfo($address, $petSize,$stayCost ){
+        
+
+            $keeper= $_SESSION["loggedUser"] ; 
+            $keeper->setAddress($address);
+            $keeper->setStayCost($stayCost);
+            $keeper->setPetSize($petSize);
+            $this->keeperDAO->Update($keeper);
+
+
         }
 
         
