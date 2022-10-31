@@ -34,7 +34,7 @@ class PetsController{
                 $pets->setPetType($petType);
                 $pets->setVideo($video);
                 $pets->setImage($image);
-                $pets->setOwner($owner);
+                $pets->setOwner($owner->getUserID());
                 $this->petsDAO->Add($pets);
                 $this->ownerDAO->addPetOwner($pets,$owner);
                 echo "<script> if(confirm('La Mascota se ha creado con exito!')); </script>";

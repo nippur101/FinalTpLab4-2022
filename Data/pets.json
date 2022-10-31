@@ -7,7 +7,7 @@
         "raze": "Pediconi",
         "video": "a",
         "image": "a",
-        "owner": null
+        "owner": 3
     },
     {
         "petId": 2,
@@ -17,7 +17,7 @@
         "raze": "perro",
         "video": "yputube.abc",
         "image": "yputube.abc",
-        "owner": []
+        "owner": 3
     },
     {
         "petId": 3,
@@ -27,7 +27,7 @@
         "raze": "perro",
         "video": "https:\/\/www.youtube.com\/embed\/rsTLyukvxGU",
         "image": "https:\/\/olondriz.com\/wp-content\/uploads\/2020\/04\/ambar-perrito-1-1024x899.jpg",
-        "owner": null
+        "owner": 4
     },
     {
         "petId": 4,
@@ -37,6 +37,6 @@
         "raze": "perro",
         "video": "https:\/\/www.youtube.com\/embed\/rsTLyukvxGU",
         "image": "https:\/\/olondriz.com\/wp-content\/uploads\/2020\/04\/ambar-perrito-1-1024x899.jpg",
-        "owner": {}
+        "owner": 5
     }
 ]
