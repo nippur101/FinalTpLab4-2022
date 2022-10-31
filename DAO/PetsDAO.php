@@ -54,7 +54,7 @@ class PetsDAO {
 
         foreach($petsList as $pets){
 
-            if( $pets->getOwner()->getUserID()==$owner->getUserID() ){
+            if( $pets->getOwner()==$owner->getUserID() ){
                 If( $pets->getName() == $name){
                     $check = true;
                 }
