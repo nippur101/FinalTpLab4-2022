@@ -40,12 +40,13 @@ class PetsController{
                 echo "<script> if(confirm('La Mascota se ha creado con exito!')); </script>";
                 
             }
-            else
+             else
             {
             echo "<script> if(confirm('La mascota ya existe!')); </script>";
-            require_once(VIEWS_PATH."validate-session.php");
-            require_once(VIEWS_PATH."create-account.php");
+           
         }
+        require_once(VIEWS_PATH."validate-session.php");
+        require_once(VIEWS_PATH."owner-profile.php");
     }
    
 
