@@ -4,10 +4,10 @@ namespace Controllers;
 
 use DAO\UserDAO;
 use DAO\KeeperDAO;
+use DAO\OwnerDAO;
 use Models\User as User;
 use Models\Keeper as Keeper;
-
-
+use Models\Owner;
 
 class UserController{
 
@@ -17,6 +17,7 @@ class UserController{
     {
         $this->userDAO = new UserDAO();
         $this->keeperDAO = new KeeperDAO();
+        $this->ownerDAO = new OwnerDAO();
         
     }
 
@@ -87,12 +88,27 @@ class UserController{
                     $keeper->setPassword($password1);
                     $keeper->setUserType($type);
                     $keeper->setUserID($user->getUserID());
+                    $keeper->setAddress(null);
+                    $keeper->setPetSize(null);
+                    $keeper->setStayCost(null);
+                    $keeper->setFreeTimePeriod(null);
+                    $keeper->setReviews(null);
                     $this->keeperDAO->Add($keeper);
                     require_once(VIEWS_PATH."validate-session.php");
                     require_once(VIEWS_PATH."keeper-profile.php");
                 }
                 else
                 {
+                    $owner=new Owner();
+                    $owner->setFirstName($firstName);
+                    $owner->setLastName($lastName);
+                    $owner->setEmail($mail);
+                    $owner->setPassword($password1);
+                    $owner->setUserType($type);
+                    $owner->setUserID($user->getUserID());
+                    $owner->setPhone(null);
+                    $owner->setPets(null);
+                    $this->ownerDAO->Add($owner);
                     
                     require_once(VIEWS_PATH."validate-session.php");
                     require_once(VIEWS_PATH."owner-profile.php");

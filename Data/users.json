@@ -54,5 +54,61 @@
         "email": "pe@pe",
         "password": "1234",
         "userType": "1"
+    },
+    {
+        "userId": 8,
+        "firstName": "pirulin",
+        "lastName": "Gomez",
+        "email": "piru@go",
+        "password": "1234",
+        "userType": "1"
+    },
+    {
+        "userId": 9,
+        "firstName": "ismael",
+        "lastName": "serrano",
+        "email": "is@se",
+        "password": "1234",
+        "userType": "1"
+    },
+    {
+        "userId": 10,
+        "firstName": "isma",
+        "lastName": "serea",
+        "email": "is@be",
+        "password": "1234",
+        "userType": "1"
+    },
+    {
+        "userId": 11,
+        "firstName": "mati",
+        "lastName": "oscar",
+        "email": "ma@os",
+        "password": "1234",
+        "userType": "2"
+    },
+    {
+        "userId": 12,
+        "firstName": "ma",
+        "lastName": "le",
+        "email": "ma@le",
+        "password": "1234",
+        "userType": "2"
+    },
+    {
+        "userId": 13,
+        "firstName": "ale",
+        "lastName": "gime",
+        "email": "ale@gi",
+        "password": "1234",
+        "userType": "1"
+    },
+    {
+        "userId": 14,
+        "firstName": "mia",
+        "lastName": "lorenzo",
+        "email": "mi@lo",
+        "password": "1234",
+        "userType": "2"
     }
 ]

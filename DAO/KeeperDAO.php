@@ -73,7 +73,6 @@ class KeeperDAO{
                     $keeper->setPassword($valuesArray["password"]);
                     $keeper->setUserType($valuesArray["userType"]);
 
-                    $keeper->setUserID($valuesArray["userID"]);
                     $keeper->setAddress($valuesArray["address"]);
                     $keeper->setPetSize($valuesArray["petSize"]);
                     $keeper->setStayCost($valuesArray["stayCost"]);
