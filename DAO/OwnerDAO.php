@@ -65,11 +65,16 @@ class OwnerDAO {
                 {
                    
                     //$email,$password,$firstName,$lastName,$phone,$pets
+                    
                     $owner = new Owner();
-                   
+
+                    $owner->setUserID($valuesArray["userId"]);
+                    $owner->setEmail($valuesArray["email"]);
                     $owner->setFirstName($valuesArray["firstName"]);
                     $owner->setLastName($valuesArray["lastName"]);
+                    $owner->setPassword($valuesArray["password"]);
                     $owner->setPhone($valuesArray["phone"]);
+                    $owner->setUserType($valuesArray["userType"]);
                     $owner->setPets($valuesArray["pets"]);
                     
 
@@ -84,9 +89,14 @@ class OwnerDAO {
 
         foreach($this->ownerList as $owner)
         {
+           
+            $valuesArray["userId"] = $owner->getUserId();
             $valuesArray["firstName"] = $owner->getFirstName();
             $valuesArray["lastName"] = $owner->getLastName();
+            $valuesArray["email"] = $owner->getEmail();
             $valuesArray["phone"] = $owner->getPhone();
+            $valuesArray["password"] = $owner->getPassword();
+            $valuesArray["userType"] = $owner->getUserType();
             $valuesArray["pets"] = $owner->getPets();
            
 

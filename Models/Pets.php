@@ -8,7 +8,7 @@
         private $petType;
         private $video;
         private $owner;
-       
+       /*
         function __construct($name,$vaccinationPlan,$raze,$petType,$video,$owner){
             $this->name=$name;
             $this->vaccinationPlan=$vaccinationPlan;
@@ -17,7 +17,7 @@
             $this->video=$video;
             $this->owner=$owner;
         }
-        
+        */
 
         public function getPetId()
         {
