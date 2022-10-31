@@ -7,7 +7,7 @@
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4"><?php $user = $_SESSION["loggedUser"] ; 
-                echo $user->getFirstName()."  ".$user->getLastName().":" ?> </h2>
+                echo "Owner: ". $user->getFirstName()."  ".$user->getLastName().":" ?> </h2>
                  <form action="<?php echo FRONT_ROOT."Home/CreatePets" ?>" method="POST" >
                <table class="table bg-light-alpha">
                     <thead>

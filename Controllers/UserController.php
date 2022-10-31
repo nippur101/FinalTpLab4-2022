@@ -3,7 +3,11 @@
 namespace Controllers;
 
 use DAO\UserDAO;
+use DAO\KeeperDAO;
 use Models\User as User;
+use Models\Keeper as Keeper;
+
+
 
 class UserController{
 
@@ -12,6 +16,8 @@ class UserController{
     public function __construct()
     {
         $this->userDAO = new UserDAO();
+        $this->keeperDAO = new KeeperDAO();
+        
     }
 
     public function Login($mail, $password)
@@ -28,6 +34,8 @@ class UserController{
             {
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."logged-keeper.php");
+              
+
             }
             else
             {
@@ -70,10 +78,18 @@ class UserController{
                 $_SESSION["loggedUser"] = $user->getUserID();
                 $this->userDAO->Add($user);
                 echo "<script> if(confirm('Usuario creado con exito!')); </script>";
-                if($user->getUserType == 1)
+                if($user->getUserType() == 1)
                 {
+                    $keeper=new Keeper();
+                    $keeper->setFirstName($firstName);
+                    $keeper->setLastName($lastName);
+                    $keeper->setEmail($mail);
+                    $keeper->setPassword($password1);
+                    $keeper->setUserType($type);
+                    $keeper->setUserID($user->getUserID());
+                    $this->keeperDAO->Add($keeper);
                     require_once(VIEWS_PATH."validate-session.php");
-                    require_once(VIEWS_PATH."create-keeper.php");
+                    require_once(VIEWS_PATH."keeper-profile.php");
                 }
                 else
                 {

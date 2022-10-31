@@ -4,8 +4,11 @@ namespace DAO;
 
 use Models\Keeper as Keeper;
 
+use DAO\UserDAO as UserDAO;
+
 class KeeperDAO{
     private $keeperList = array();
+    private $userList=array();
 
     public function getAll(){
         $this->retrieveData();
@@ -18,13 +21,14 @@ class KeeperDAO{
             
             array_push($this->keeperList, $keeper);
 
-            $this->SaveKeeper();
+
+            $this->SaveData();
     }
 
     public function GetKeeper($userID){
-        $this->retrieveData();
+       
+        $keeperR = new Keeper();
 
-        $keeperR = null;
 
         foreach($this->keeperList as $keeper){
             if($keeper->getUserID() == $userID){
@@ -44,7 +48,9 @@ class KeeperDAO{
             }
         }
 
-        $this->SaveKeeper();
+
+        $this->SaveData();
+
     }
 
     public function retrieveData(){
@@ -59,6 +65,14 @@ class KeeperDAO{
 
                 foreach($arrayToDecode as $valuesArray){
                     $keeper = new Keeper();
+
+                    $keeper->setUserId($valuesArray["userId"]);
+                    $keeper->setFirstName($valuesArray["firstName"]);
+                    $keeper->setLastName($valuesArray["lastName"]);
+                    $keeper->setEmail($valuesArray["email"]);
+                    $keeper->setPassword($valuesArray["password"]);
+                    $keeper->setUserType($valuesArray["userType"]);
+
                     $keeper->setUserID($valuesArray["userID"]);
                     $keeper->setAddress($valuesArray["address"]);
                     $keeper->setPetSize($valuesArray["petSize"]);
@@ -74,6 +88,15 @@ class KeeperDAO{
         $arrayToEncode = array();
 
         foreach($this->keeperList as $keeper){
+
+            
+            $valuesArray["userId"] = $keeper->getUserId();
+            $valuesArray["firstName"] = $keeper->getFirstName();
+            $valuesArray["lastName"] = $keeper->getLastName();
+            $valuesArray["email"] = $keeper->getEmail();
+            $valuesArray["password"] = $keeper->getPassword();
+            $valuesArray["userType"] = $keeper->getUserType();
+
             $valuesArray["address"] = $keeper->getAddress();
             $valuesArray["petSize"] = $keeper->getPetSize();
             $valuesArray["stayCost"] = $keeper->getStayCost();
@@ -85,5 +108,26 @@ class KeeperDAO{
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
         file_put_contents('Data/keeper.json', $jsonContent);
     }
+
+
+    public function OcupedTimePeriod($startDate,$finalDate){
+        $user = $_SESSION["loggedUser"] ; //esto no se si funciona xd
+        $keeper = new Keeper();
+        $keeper = $this->keeperDAO->GetKeeper($user->getUserID());
+        
+        if($keeper->getFreeTimePeriod()!=null){
+            foreach($keeper->getFreeTimePeriod() as $ocuped){
+                if(($ocuped->getStartDate()<$startDate && $ocuped->getFinalDate()<$finalDate)||
+                ($ocuped->getStartDate()>$startDate && $ocuped->getFinalDate()<$finalDate) ){
+                    $val=true;
+                }{
+                    $val=false;
+                }
+
+            }
+        }
+        return $val;
+    }
+
 
 }
