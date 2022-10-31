@@ -28,5 +28,25 @@
         "password": "1234",
         "userType": "2",
         "pets": null
+    },
+    {
+        "userId": 3,
+        "firstName": "Javier",
+        "lastName": "Macedo",
+        "email": "a@j",
+        "phone": null,
+        "password": "1234",
+        "userType": "2",
+        "pets": null
+    },
+    {
+        "userId": 4,
+        "firstName": "Javier",
+        "lastName": "Macedo",
+        "email": "a@b",
+        "phone": null,
+        "password": "1234",
+        "userType": "2",
+        "pets": null
     }
 ]

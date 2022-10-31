@@ -24,7 +24,7 @@ class KeeperDAO{
     }
 
     public function GetKeeper($userID){
-       
+        $this->RetrieveData();
         $keeperR = new Keeper();
 
         foreach($this->keeperList as $keeper){
@@ -37,7 +37,23 @@ class KeeperDAO{
     }
 
     public function Update(Keeper $keeper){
-        $this->retrieveData();
+        $this->RetrieveData();
+
+        $newList = array();
+
+        foreach($this->keeperList as $keeperL) {
+            if($keeperL->getUserID() != $keeper->getUserID()) {
+                array_push($newList, $keeperL);
+            }
+        }
+
+        $this->keeperList = $newList;
+        array_push($this->keeperList , $keeper);
+
+        $this->SaveData();
+       
+       
+       /* $this->retrieveData();
 
         foreach($this->keeperList as $keeperAux){
             if($keeperAux->getUserID() == $keeper->getUserID()){
@@ -46,6 +62,7 @@ class KeeperDAO{
         }
 
         $this->SaveData();
+        */
     }
 
     public function retrieveData(){
