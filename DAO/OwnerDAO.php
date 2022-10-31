@@ -39,17 +39,37 @@ class OwnerDAO {
         return $ownerR;
     }
 
-    public function Update(Owner $owner){
-        $this->retrieveData();
 
-        foreach($this->ownerList as $ownerAux){
-            if($ownerAux->getUserID() == $owner->getUserID()){
-                $ownerAux = $owner;
+    public function Remove($id) {
+        $this->RetrieveData();
+
+        $newList = array();
+
+        foreach($this->ownerList as $owner) {
+            if($owner->getUserID() != $id) {
+                array_push($newList, $owner);
             }
         }
 
+        $this->ownerList = $newList;
+
         $this->SaveOwner();
     }
+
+    public function addPetOwner($pet,$owner){
+        $this->retrieveData();
+        $owner->setPets($pet->getPetId());
+
+      
+        $this->Remove($owner->getUserID());
+    
+     
+        $this->add($owner);
+       
+        $this->SaveOwner();
+
+    }
+
 
     public function retrieveData(){
 

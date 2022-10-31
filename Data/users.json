@@ -30,5 +30,13 @@
         "email": "a@b",
         "password": "1234",
         "userType": "2"
+    },
+    {
+        "userId": 5,
+        "firstName": "joaquin",
+        "lastName": "Macedo",
+        "email": "j@m",
+        "password": "1234",
+        "userType": "2"
     }
 ]

@@ -5,18 +5,15 @@
         private $phone;
         private $pets;
 
-        /*
-        function __construct($email,$password,$firstName,$lastName,$phone,$pets)
+        
+        function __construct()
         {
-            $this->firstName=$firstName;
-            $this->lastName=$lastName;
-            $this->phone=$phone;
-            $this->pets=$pets;
-            $this->email=$email;
-            $this->password=$password;
+           
+            $this->pets=array();
+           
         }
         
-*/
+
        
 
         public function getPhone()

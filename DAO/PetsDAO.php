@@ -2,12 +2,18 @@
 
 namespace DAO;
 
+use DAO\OwnerDAO;
 use Models\Pets;
 use Models\Owner;
 class PetsDAO {
 
     private $petsList = array();
 
+    public function __construct()
+    {
+        $this->ownerDAO = new OwnerDAO();
+    }
+    
     public function getAll(){
 
         $this->retrieveData();
@@ -18,11 +24,14 @@ class PetsDAO {
 
     public function Add(Pets $pets)
     {
-            $this->RetrieveData();
+        $owner = $_SESSION["loggedUser"] ;
+        $this->ownerDAO->addPetOwner($pets,$owner);
+        
+        $this->RetrieveData();
             
-            array_push($this->petsList, $pets);
+        array_push($this->petsList, $pets);
 
-            $this->SavePets();
+        $this->SavePets();
     }
 
     public function validPet($name, $owner){
@@ -111,7 +120,7 @@ class PetsDAO {
     }
 
     public function NewId() {
-        $petList = $this->petsDAO->GetAll();
+        $petList = $this->GetAll();
         $id = 0;
         if($petList!=null){
             foreach($petList as $pets) {
