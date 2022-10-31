@@ -4,8 +4,29 @@
         "firstName": "Francisco",
         "lastName": "Pediconi",
         "email": "a@a.com",
+        "phone": "4323444",
         "password": "a",
         "userType": "2",
-        "phone":"4323444"
+        "pets": null
+    },
+    {
+        "userId": 12,
+        "firstName": "ma",
+        "lastName": "le",
+        "email": "ma@le",
+        "phone": null,
+        "password": "1234",
+        "userType": "2",
+        "pets": null
+    },
+    {
+        "userId": 14,
+        "firstName": "mia",
+        "lastName": "lorenzo",
+        "email": "mi@lo",
+        "phone": null,
+        "password": "1234",
+        "userType": "2",
+        "pets": null
     }
 ]

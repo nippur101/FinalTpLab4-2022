@@ -1,9 +1,35 @@
 [
     {
-        "userId": 7,
+        "userId": null,
         "firstName": "pepeto",
         "lastName": "perez",
         "email": "pe@pe",
+        "password": "1234",
+        "userType": "1",
+        "address": null,
+        "petSize": null,
+        "stayCost": null,
+        "freeTimePeriod": null,
+        "reviews": null
+    },
+    {
+        "userId": 10,
+        "firstName": "isma",
+        "lastName": "serea",
+        "email": "is@be",
+        "password": "1234",
+        "userType": "1",
+        "address": null,
+        "petSize": null,
+        "stayCost": null,
+        "freeTimePeriod": null,
+        "reviews": null
+    },
+    {
+        "userId": 13,
+        "firstName": "ale",
+        "lastName": "gime",
+        "email": "ale@gi",
         "password": "1234",
         "userType": "1",
         "address": null,
