@@ -37,6 +37,60 @@ class OwnerDAO {
         return $ownerR;
     }
 
+    public function Remove($id) {
+        $this->RetrieveData();
+
+        $newList = array();
+
+        foreach($this->ownerList as $owner) {
+            if($owner->getUserID() != $id) {
+                array_push($newList, $owner);
+            }
+        }
+
+        $this->ownerList = $newList;
+
+        $this->SaveOwner();
+    }
+
+    public function addPetOwner($pet,$owner){
+        $this->retrieveData();
+        $owner->setPets($pet->getPetId());
+
+       // if (($clave = array_search($owner, $this->ownerList)) !== false) {
+            //$replace=array($clave=>$owner);
+        $this->Remove($owner->getUserID());
+       // }
+        //$this->Add($owner);
+        
+
+        /*
+        $cont=0;
+        $idOw=0;
+        foreach($this->ownerList as $ownerL) {
+            if($ownerL->getUserID() == $owner->getUserID()) {
+                $idOw=$cont;
+            }
+        }
+        $replace=array($idOw=>$owner);
+        $this->ownerList=array_replace($replace);
+*/
+/*
+        $newList=array();
+        foreach($this->ownerList as $ownerL) {
+            if($ownerL->getUserID() != $owner->getUserID()) {
+                $newList=array_push($newList,$ownerL);
+            }
+        }
+        $this->ownerList=array_replace($newList);
+        $this->add($owner);
+     */
+        $this->add($owner);
+       
+        $this->SaveOwner();
+
+    }
+
     public function retrieveData(){
 
         $this->ownerList = array();

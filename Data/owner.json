@@ -1,52 +1,12 @@
 [
     {
-        "userId": 1,
-        "firstName": "Francisco",
-        "lastName": "Pediconi",
-        "email": "a@a.com",
-        "phone": "4323444",
-        "password": "a",
-        "userType": "2",
-        "pets": null
-    },
-    {
-        "userId": 12,
-        "firstName": "ma",
-        "lastName": "le",
-        "email": "ma@le",
-        "phone": null,
-        "password": "1234",
-        "userType": "2",
-        "pets": null
-    },
-    {
-        "userId": 14,
-        "firstName": "mia",
-        "lastName": "lorenzo",
-        "email": "mi@lo",
-        "phone": null,
-        "password": "1234",
-        "userType": "2",
-        "pets": null
-    },
-    {
-        "userId": 3,
-        "firstName": "Javier",
+        "userId": 5,
+        "firstName": "joaquin",
         "lastName": "Macedo",
-        "email": "a@j",
+        "email": "j@m",
         "phone": null,
         "password": "1234",
         "userType": "2",
-        "pets": null
-    },
-    {
-        "userId": 4,
-        "firstName": "Javier",
-        "lastName": "Macedo",
-        "email": "a@b",
-        "phone": null,
-        "password": "1234",
-        "userType": "2",
-        "pets": null
+        "pets": 4
     }
 ]

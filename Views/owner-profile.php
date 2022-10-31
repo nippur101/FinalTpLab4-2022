@@ -23,7 +23,7 @@
                               <tr>
                                         <th><?php // echo $pets->getPetId();?>1</th>
                                         <th><?php //echo $pets->getName();?>Tito</th>
-                                        <th><?php //echo $pets->getVaccinationPlan();?><img width="200" height="150" class="image-item" src="https://pin.it/1NMTGHg" ></th>
+                                        <th><?php //echo $pets->getVaccinationPlan();?><img width="200" height="150" class="image-item" src="https://i.pinimg.com/564x/b9/7d/a1/b97da1a2ca46ffc1b25254d870e5d0f4.jpg" ></th>
                                         <th><?php //echo $pets->getImage();?><img width="200" height="150" class="image-item" src="https://olondriz.com/wp-content/uploads/2020/04/ambar-perrito-1-1024x899.jpg" ></th>
                                         <th><?php //echo $pets->getRaze();?>perro</th>
                                         <th><?php //echo $pets->getVideo();?> <iframe width="200" height="150" src="https://www.youtube.com/embed/rsTLyukvxGU" title="CACHORROS TIERNOS Y BONITOS 🧡 ¡Vídeos de Perros Cachorros! Lunacreciente" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></th>
