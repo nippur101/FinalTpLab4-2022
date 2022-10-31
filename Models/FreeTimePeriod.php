@@ -1,13 +1,9 @@
 <?php
     namespace Models;
     
-   class freeTimePeriod{
+   class FreeTimePeriod{
     private $startDate;
     private $finalDate;
-    function __construct($startDate,$finalDate){
-        $this->startDate=$startDate;
-        $this->finalDate=$finalDate;
-    }
     
 
     public function getStartDate()

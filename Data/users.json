@@ -22,5 +22,37 @@
         "email": "a@r",
         "password": "1234",
         "userType": "2"
+    },
+    {
+        "userId": 4,
+        "firstName": "lucas",
+        "lastName": "motero",
+        "email": "l@m",
+        "password": "1234",
+        "userType": "1"
+    },
+    {
+        "userId": 5,
+        "firstName": "elisa",
+        "lastName": "gomez",
+        "email": "e@g",
+        "password": "1234",
+        "userType": "1"
+    },
+    {
+        "userId": 6,
+        "firstName": "pepito",
+        "lastName": "perez",
+        "email": "p@p",
+        "password": "1234",
+        "userType": "1"
+    },
+    {
+        "userId": 7,
+        "firstName": "pepeto",
+        "lastName": "perez",
+        "email": "pe@pe",
+        "password": "1234",
+        "userType": "1"
     }
 ]

@@ -1,0 +1,15 @@
+[
+    {
+        "userId": 7,
+        "firstName": "pepeto",
+        "lastName": "perez",
+        "email": "pe@pe",
+        "password": "1234",
+        "userType": "1",
+        "address": null,
+        "petSize": null,
+        "stayCost": null,
+        "freeTimePeriod": null,
+        "reviews": null
+    }
+]
