@@ -30,5 +30,45 @@
         "email": "a@k",
         "password": "1234",
         "userType": "2"
+    },
+    {
+        "userId": 5,
+        "firstName": "Francisco",
+        "lastName": "Pediconi",
+        "email": "b@b.com",
+        "password": "b",
+        "userType": "1"
+    },
+    {
+        "userId": 6,
+        "firstName": "Pedro",
+        "lastName": "Picapiedra",
+        "email": "c@c.com",
+        "password": "c",
+        "userType": "1"
+    },
+    {
+        "userId": 7,
+        "firstName": "Cosme",
+        "lastName": "Fulanito",
+        "email": "d@d.com",
+        "password": "d",
+        "userType": "1"
+    },
+    {
+        "userId": 8,
+        "firstName": "Astor",
+        "lastName": "Muddy",
+        "email": "f@f.com",
+        "password": "f",
+        "userType": "1"
+    },
+    {
+        "userId": 9,
+        "firstName": "Tester",
+        "lastName": "Primero",
+        "email": "bt@bt.com",
+        "password": "bt",
+        "userType": "1"
     }
 ]

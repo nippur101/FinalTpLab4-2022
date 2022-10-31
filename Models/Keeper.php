@@ -1,14 +1,16 @@
 <?php
     namespace Models;
+
+    use Models\FreeTimePeriod as FreeTimePeriod;
     
     class Keeper extends User{
         private $keeperId;
         private $address;
         private $petSize;
         private $stayCost;
-        private $freeTimePeriod;
+        private $freeTimePeriod = array();
         private $reviews;
-        function __construct($firstName,$lastName,$email,$password,$address,$petSize,$stayCost,$freeTimePeriod){
+        function __construct($firstName,$lastName,$email,$password,$address,$petSize,$stayCost, $userID){
             $this->firstName=$firstName;
             $this->lastName=$lastName;
             $this->email=$email;
@@ -16,7 +18,8 @@
             $this->address=$address;
             $this->petSize=$petSize;
             $this->stayCost=$stayCost;
-
+            $this->keeperId = $userID;
+            //$this->freeTimePeriod=array();
         }
         
         

@@ -18,6 +18,14 @@ class OwnerController{
             $this->userDAO = new UserDAO();
         }
 
+        public function ShowOwnerView() {
+            $user = $this->userDAO->GetUser($_SESSION["loggedUser"]);
+            $owner = $this->ownerDAO->GetOwner($user->getUserID());
+
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."owner-profile.php");
+        }
+
         public function CheckAndPushData(){
             $user = $this->userDAO->GetUser($_SESSION["loggedUser"]);
             $owner = $this->ownerDAO->GetOwner($user->getUserID());
@@ -31,6 +39,7 @@ class OwnerController{
                 $owner->setFirstName($user->getFirstName());
                 $owner->setLastName($user->getLastName());
 
+                $this->ownerDAO->Add($owner);
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."owner-profile.php");
             }

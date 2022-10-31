@@ -18,7 +18,7 @@ class KeeperDAO{
             
             array_push($this->keeperList, $keeper);
 
-            $this->SaveKeeper();
+            $this->SaveData();
     }
 
     public function GetKeeper($userID){
@@ -27,7 +27,7 @@ class KeeperDAO{
         $keeperR = null;
 
         foreach($this->keeperList as $keeper){
-            if($keeper->getUserID() == $userID){
+            if($keeper->getKeeperId() == $userID){
                 $keeperR = $keeper;
             }
         }
@@ -36,18 +36,21 @@ class KeeperDAO{
     }
 
     public function Update(Keeper $keeper){
-        $this->retrieveData();
+        $flag = false;
+        //$this->retrieveData();
 
         foreach($this->keeperList as $keeperAux){
-            if($keeperAux->getUserID() == $keeper->getUserID()){
+            if($keeperAux->getKeeperId() == $keeper->getKeeperId()){
                 $keeperAux = $keeper;
+                $flag = true;
             }
         }
 
-        $this->SaveKeeper();
+        $this->SaveData();
+        return $flag;
     }
 
-    public function retrieveData(){
+    public function RetrieveData(){
 
         $this->keeperList = array();
 
@@ -58,11 +61,8 @@ class KeeperDAO{
                 $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
                 foreach($arrayToDecode as $valuesArray){
-                    $keeper = new Keeper();
-                    $keeper->setUserID($valuesArray["userID"]);
-                    $keeper->setAddress($valuesArray["address"]);
-                    $keeper->setPetSize($valuesArray["petSize"]);
-                    $keeper->setStayCost($valuesArray["stayCost"]);
+                    $keeper = new Keeper("Unknown", "Unknown", "Unknown", "Unknown",$valuesArray["address"], 
+                                        $valuesArray["petSize"], $valuesArray["stayCost"], $valuesArray["userID"]);
                     $keeper->setFreeTimePeriod($valuesArray["freeTimePeriod"]);
                     $keeper->setReviews($valuesArray["reviews"]);
                     array_push($this->keeperList, $keeper);
@@ -74,6 +74,7 @@ class KeeperDAO{
         $arrayToEncode = array();
 
         foreach($this->keeperList as $keeper){
+            $valuesArray["userID"] = $keeper->getKeeperId();
             $valuesArray["address"] = $keeper->getAddress();
             $valuesArray["petSize"] = $keeper->getPetSize();
             $valuesArray["stayCost"] = $keeper->getStayCost();

@@ -1,0 +1,39 @@
+[
+    {
+        "userID": 6,
+        "address": "Calle falsa 123",
+        "petSize": "Grande",
+        "stayCost": "1",
+        "freeTimePeriod": null,
+        "reviews": null
+    },
+    {
+        "userID": 7,
+        "address": "Rivadavia 3408",
+        "petSize": "grande",
+        "stayCost": "460",
+        "freeTimePeriod": null,
+        "reviews": null
+    },
+    {
+        "userID": 8,
+        "address": "Calle falsa 123",
+        "petSize": "grande",
+        "stayCost": "500",
+        "freeTimePeriod": [
+            [],
+            []
+        ],
+        "reviews": null
+    },
+    {
+        "userID": 9,
+        "address": "Rivadavia 3408",
+        "petSize": "chico",
+        "stayCost": "460",
+        "freeTimePeriod": [
+            {}
+        ],
+        "reviews": null
+    }
+]

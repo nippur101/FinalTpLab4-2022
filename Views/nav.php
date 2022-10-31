@@ -5,9 +5,18 @@
      <ul class="navbar-nav ml-auto">
           <li class="nav-item">
           <?php if(isset($_SESSION["loggedUser"])) { ?>
-               <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowProfile" ?>">Perfil</a>
-               </li>
+               <?php if($_SESSION["loggedUserType"] == 1) { ?>
+                    <li class="nav-item">
+                         <a class="nav-link" href="<?php echo FRONT_ROOT."Keeper/ShowKeeperView" ?>">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                         <a class="nav-link" href="<?php echo FRONT_ROOT."Keeper/ShowCalendarView" ?>">Calendario</a>
+                    </li>
+               <?php } else { ?>
+                    <li class="nav-item">
+                         <a class="nav-link" href="<?php echo FRONT_ROOT."Owner/ShowProfile" ?>">Perfil</a>
+                    </li>
+               <?php } ?>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT."Home/Logout" ?>">Cerrar Sesión</a>
                </li>

@@ -21,6 +21,7 @@ class UserController{
         if($user != NULL)
         {
             $_SESSION["loggedUser"] = $user->getUserID();
+            $_SESSION["loggedUserType"] = $user->getUserType();
             $firstName = $user->getFirstName();
             $lastName = $user->getLastName();
 
@@ -68,9 +69,10 @@ class UserController{
                 $user->setUserType($type);
                 $user->setUserID($this->userDAO->NewID());
                 $_SESSION["loggedUser"] = $user->getUserID();
+                $_SESSION["loggedUserType"] = $user->getUserType();
                 $this->userDAO->Add($user);
                 echo "<script> if(confirm('Usuario creado con exito!')); </script>";
-                if($user->getUserType == 1)
+                if($user->getUserType() == 1)
                 {
                     require_once(VIEWS_PATH."validate-session.php");
                     require_once(VIEWS_PATH."logged-keeper.php");
