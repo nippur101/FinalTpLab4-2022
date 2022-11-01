@@ -50,20 +50,24 @@ class KeeperController{
         public function TimePeriod($startDate,$finalDate){
             $keeper= $_SESSION["loggedUser"] ; 
 
-                if($this->keeperDAO->OcupedTimePeriod($startDate,$finalDate) || $keeper->getFreeTimePeriod()==null){
-                    $timeArray=array();
-                    if($keeper->getFreeTimePeriod()!=null){
-                        $timeArray=$keeper->getFreeTimePeriod();
+                if($this->keeperDAO->IsAvaiableTime($startDate,$finalDate, $keeper) || $keeper->getFreeTimePeriod()==null){
+
+                    if($keeper->getFreeTimePeriod()==NULL || $keeper->getFreeTimePeriod()==[]){
+                        $oldTime = $this->keeperDAO->GetKeeper($user->getUserID());
+                        $newTime = array();
+                        $oldTime->setFreeTimePeriod($newTime);
                     }
+
                     $time=new FreeTimePeriod();
                     $time->setStartDate($startDate);
                     $time->setFinalDate($finalDate);
-                    array_push($timeArray,$time);
                     
-                    $this->keeperDAO->addFreePeriodOfTime($timeArray,$keeper);
+                    $this->keeperDAO->addFreePeriodOfTime($time,$keeper);
                     echo "<script> if(confirm('Periodo Creado!')); </script>";
+                    $this->ShowCalendarView();
                 }else{
                     echo "<script> if(confirm('Periodo de Tiempo ocupado!')); </script>";
+                    $this->CheckAndPushData();
                 }
 
                 require_once(VIEWS_PATH."validate-session.php");

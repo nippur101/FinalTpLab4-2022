@@ -70,5 +70,37 @@
         "email": "master@keeper.com",
         "password": "mk",
         "userType": "1"
+    },
+    {
+        "userId": 10,
+        "firstName": "Beta",
+        "lastName": "Tester",
+        "email": "beta@tester",
+        "password": "tester",
+        "userType": "1"
+    },
+    {
+        "userId": 11,
+        "firstName": "Agustin",
+        "lastName": "Battaglia",
+        "email": "elbati@bati",
+        "password": "bati",
+        "userType": "1"
+    },
+    {
+        "userId": 12,
+        "firstName": "Batti",
+        "lastName": "Dos",
+        "email": "b@2",
+        "password": "b2",
+        "userType": "1"
+    },
+    {
+        "userId": 13,
+        "firstName": "Batti ",
+        "lastName": "Tres",
+        "email": "bati@3",
+        "password": "b3",
+        "userType": "1"
     }
 ]

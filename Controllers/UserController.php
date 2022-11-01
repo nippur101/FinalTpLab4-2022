@@ -37,10 +37,8 @@ class UserController{
 
             if($user->getUserType() == 1)
             {
-                $prueba = $this->keeperDAO->GetKeeper($user->getUserID());
-                $prueba2 = array();
-                $prueba->setFreeTimePeriod($prueba2);
-                $_SESSION["loggedUser"] = $prueba;
+                
+                $_SESSION["loggedUser"] = $this->keeperDAO->GetKeeper($user->getUserID());
 
                 $_SESSION["typeUser"] = 1;
                 require_once(VIEWS_PATH."validate-session.php");

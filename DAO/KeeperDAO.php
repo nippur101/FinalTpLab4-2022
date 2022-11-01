@@ -110,12 +110,15 @@ class KeeperDAO{
                     $keeper->setAddress($valuesArray["address"]);
                     $keeper->setPetSize($valuesArray["petSize"]);
                     $keeper->setStayCost($valuesArray["stayCost"]);
-                    foreach($valuesArray["freeTimePeriod"] as $value){
-                        $time = new FreeTimePeriod();
-                        $time->setStartDate($value["dateStart"]);
-                        $time->setFinalDate($value["dateFinal"]);
-                        $keeper->AddTimePeriod($time);
+                    if(isset($valuesArray["freeTimePeriod"])){
+                        foreach($valuesArray["freeTimePeriod"] as $value){
+                            $time = new FreeTimePeriod();
+                            $time->setStartDate($value["dateStart"]);
+                            $time->setFinalDate($value["dateFinal"]);
+                            $keeper->AddTimePeriod($time);
+                        }
                     }
+                    
                     $keeper->setReviews($valuesArray["reviews"]);
                     array_push($this->keeperList, $keeper);
                 }
@@ -139,11 +142,14 @@ class KeeperDAO{
             $valuesArray["address"] = $keeper->getAddress();
             $valuesArray["petSize"] = $keeper->getPetSize();
             $valuesArray["stayCost"] = $keeper->getStayCost();
-            foreach($keeper->getFreeTimePeriod() as $time){
-                $arrayTime["dateStart"]=$time->getStartDate();
-                $arrayTime["dateFinal"]=$time->getFinalDate();
-                $valuesArray["freeTimePeriod"][]=$arrayTime;
+            if($keeper->getFreeTimePeriod()!=null){
+                foreach($keeper->getFreeTimePeriod() as $time){
+                    $arrayTime["dateStart"]=$time->getStartDate();
+                    $arrayTime["dateFinal"]=$time->getFinalDate();
+                    $valuesArray["freeTimePeriod"][]=$arrayTime;
+                }
             }
+            
             $valuesArray["reviews"] = $keeper->getReviews();
             array_push($arrayToEncode, $valuesArray);
 
@@ -153,25 +159,34 @@ class KeeperDAO{
         file_put_contents('Data/keeper.json', $jsonContent);
     }
 
-    public function OcupedTimePeriod($startDate,$finalDate){
-        $keeper = $_SESSION["loggedUser"];
-        
-        $val = false;
-
-        if($keeper->getFreeTimePeriod()!=null){
-            foreach($keeper->getFreeTimePeriod() as $time){
-                if($time->getStartDate() == $startDate && $time->getFinalDate() == $finalDate){
-                    $val = true;
-                }
+    public function IsAvaiableTime($dateStart,$dateFinal,$keeper){
+        $this->RetrieveData();
+        $avaiable = true;
+        foreach($keeper->getFreeTimePeriod() as $time){
+            if(($time->getStartDate() == $dateStart && $time->getFinalDate() == $dateFinal) ||
+               ($time->getStartDate() == $dateStart && $time->getFinalDate() > $dateFinal) ||
+               ($time->getStartDate() < $dateStart && $time->getFinalDate() == $dateFinal) ||
+               ($time->getStartDate() < $dateStart && $time->getFinalDate() > $dateFinal) ||
+               ($time->getStartDate() > $dateStart && $time->getFinalDate() < $dateFinal)){
+                $avaiable = false;
             }
-            /*
-            foreach(($keeper->getFreeTimePeriod()) as $ocuped){
+        }
+        return $avaiable;
+    }
+
+    public function OcupedTimePeriod($startDate,$finalDate){
+        $val=true;
+        $keeper=$_SESSION["loggedUser"] ;
+        if($keeper->getFreeTimePeriod()!=null){
+            foreach($keeper->getFreeTimePeriod() as $ocuped){
                 if(($ocuped->getStartDate()<$startDate && $ocuped->getFinalDate()<$finalDate)||
                 ($ocuped->getStartDate()>$startDate && $ocuped->getFinalDate()<$finalDate) ){
                     $val=true;
+                }else{
+                    $val=false;
                 }
+
             }
-            */
         }
         return $val;
     }

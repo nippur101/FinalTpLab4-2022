@@ -10,6 +10,11 @@
         private $stayCost;
         private $freeTimePeriod = array();
         private $reviews = array();
+
+        public function __constructor(){
+                $this->freeTimePeriod = array();
+                $this->reviews = array();
+        }
         
         public function getKeeperId()
         {

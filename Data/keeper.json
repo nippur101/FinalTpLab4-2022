@@ -1,20 +1,98 @@
 [
     {
-        "userId": null,
-        "firstName": null,
-        "lastName": null,
-        "email": null,
-        "password": null,
-        "userType": null,
+        "userId": 10,
+        "firstName": "Beta",
+        "lastName": "Tester",
+        "email": "beta@tester",
+        "password": "tester",
+        "userType": "1",
         "address": "Avellaneda 1245",
         "petSize": "Mediano",
-        "stayCost": "460",
+        "stayCost": "123",
         "freeTimePeriod": [
             {
-                "dateStart": "2022-11-01",
-                "dateFinal": "2022-11-02"
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
             }
         ],
-        "reviews": []
+        "reviews": null
+    },
+    {
+        "userId": 11,
+        "firstName": "Agustin",
+        "lastName": "Battaglia",
+        "email": "elbati@bati",
+        "password": "bati",
+        "userType": "1",
+        "address": null,
+        "petSize": null,
+        "stayCost": null,
+        "freeTimePeriod": [
+            {
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
+            },
+            {
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
+            },
+            {
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
+            }
+        ],
+        "reviews": null
+    },
+    {
+        "userId": 12,
+        "firstName": "Batti",
+        "lastName": "Dos",
+        "email": "b@2",
+        "password": "b2",
+        "userType": "1",
+        "address": null,
+        "petSize": null,
+        "stayCost": null,
+        "freeTimePeriod": [
+            {
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
+            },
+            {
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
+            },
+            {
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
+            },
+            {
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
+            },
+            {
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
+            }
+        ],
+        "reviews": null
+    },
+    {
+        "userId": 13,
+        "firstName": "Batti ",
+        "lastName": "Tres",
+        "email": "bati@3",
+        "password": "b3",
+        "userType": "1",
+        "address": null,
+        "petSize": null,
+        "stayCost": null,
+        "freeTimePeriod": [
+            {
+                "dateStart": "2022-11-09",
+                "dateFinal": "2022-11-17"
+            }
+        ],
+        "reviews": null
     }
 ]
