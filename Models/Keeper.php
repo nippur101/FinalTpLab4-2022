@@ -8,18 +8,11 @@
         private $stayCost;
         private $freeTimePeriod;
         private $reviews;
-        /*
-        function __construct($firstName,$lastName,$email,$password,$address,$petSize,$stayCost,$freeTimePeriod){
-            $this->firstName=$firstName;
-            $this->lastName=$lastName;
-            $this->email=$email;
-            $this->password=$password;
-            $this->address=$address;
-            $this->petSize=$petSize;
-            $this->stayCost=$stayCost;
-
+        
+        function __construct(){
+           $this->freeTimePeriod=array();
         }
-        */
+        
         
         public function getKeeperId()
         {

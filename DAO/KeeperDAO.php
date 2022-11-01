@@ -46,7 +46,7 @@ class KeeperDAO{
      
         $this->add($keeper);
        
-        $this->SaveData();
+        
 
     }
     public function Remove($id) {
@@ -99,6 +99,7 @@ class KeeperDAO{
     public function retrieveData(){
 
         $this->keeperList = array();
+        $freeTimeArray=array();
 
             if(file_exists('Data/keeper.json'))
             {
@@ -117,7 +118,17 @@ class KeeperDAO{
                     $keeper->setAddress($valuesArray["address"]);
                     $keeper->setPetSize($valuesArray["petSize"]);
                     $keeper->setStayCost($valuesArray["stayCost"]);
-                    $keeper->setFreeTimePeriod($valuesArray["freeTimePeriod"]);
+                    if($valuesArray["freeTimePeriod"]!=null){
+                        foreach($valuesArray["freeTimePeriod"] as $time){
+                            $freeTime=new FreeTimePeriod();
+                            $freeTime->setStartDate($time["startDate"]);
+                            $freeTime->setFinalDate($time["finalDate"]);
+
+
+                            array_push($freeTimeArray,$freeTime);
+                        }
+                    }
+                    $keeper->setFreeTimePeriod($freeTimeArray);
                     $keeper->setReviews($valuesArray["reviews"]);
                     array_push($this->keeperList, $keeper);
                 }
@@ -141,19 +152,28 @@ class KeeperDAO{
             $valuesArray["address"] = $keeper->getAddress();
             $valuesArray["petSize"] = $keeper->getPetSize();
             $valuesArray["stayCost"] = $keeper->getStayCost();
-            $valuesArray["freeTimePeriod"] = $keeper->getFreeTimePeriod();
             $valuesArray["reviews"] = $keeper->getReviews();
+            //$valuesArray["freeTimePeriod"] = $keeper->getFreeTimePeriod();
+            if($keeper->getFreeTimePeriod()!=null){
+                foreach($keeper->getFreeTimePeriod() as $time){
+                    $valuesTime["startDate"]=$time->getStartDate();
+                    $valuesTime["finalDate"]=$time->getFinalDate();
+                    array_push($arrayTime,$valuesTime);
+                }
+            $valuesArray["freeTimePeriod"][]=$arrayTime;
+        }
             array_push($arrayToEncode, $valuesArray);
 
         }
 
-        $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
+        $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT , JSON_NUMERIC_CHECK | JSON_FORCE_OBJECT);
         file_put_contents('Data/keeper.json', $jsonContent);
-    }
+    
+}
 
     public function OcupedTimePeriod($startDate,$finalDate){
-        $val=true;
-        $keeper=$_SESSION["loggedUser"] ;/*
+        $val=false;
+        $keeper=$_SESSION["loggedUser"] ;
         if($keeper->getFreeTimePeriod()!=null){
             foreach($keeper->getFreeTimePeriod() as $ocuped){
                 if(($ocuped->getStartDate()<$startDate && $ocuped->getFinalDate()<$finalDate)||
@@ -162,7 +182,7 @@ class KeeperDAO{
                 }
 
             }
-        }*/
+        }
         return $val;
     }
 

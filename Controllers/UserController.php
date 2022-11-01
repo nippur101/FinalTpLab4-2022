@@ -98,7 +98,7 @@ class UserController{
                     $keeper->setFreeTimePeriod(null);
                     $keeper->setReviews(null);
                     $this->keeperDAO->Add($keeper);
-                    $_SESSION["loggedUser"] =$keeper;
+                    $_SESSION["loggedUser"] =serialize($keeper);
                     require_once(VIEWS_PATH."validate-session.php");
                     require_once(VIEWS_PATH."keeper-profile.php");
                 }
@@ -114,7 +114,7 @@ class UserController{
                     $owner->setPhone(null);
                     $owner->setPets(null);
                     $this->ownerDAO->Add($owner);
-                    $_SESSION["loggedUser"] =$owner;
+                    $_SESSION["loggedUser"] =serialize($owner);
                     
                     require_once(VIEWS_PATH."validate-session.php");
                     require_once(VIEWS_PATH."owner-profile.php");

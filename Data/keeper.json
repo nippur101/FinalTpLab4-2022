@@ -9,7 +9,6 @@
         "address": null,
         "petSize": null,
         "stayCost": null,
-        "freeTimePeriod": null,
         "reviews": null
     },
     {
@@ -22,7 +21,6 @@
         "address": null,
         "petSize": null,
         "stayCost": null,
-        "freeTimePeriod": [],
         "reviews": null
     },
     {
@@ -35,7 +33,6 @@
         "address": null,
         "petSize": null,
         "stayCost": null,
-        "freeTimePeriod": null,
         "reviews": null
     }
 ]
