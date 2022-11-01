@@ -131,6 +131,24 @@ class PetsDAO {
         }
         return $id + 1;
     }
+
+    public function Remove($id) {
+        $this->RetrieveData();
+
+        $newList = array();
+
+        foreach($this->petsList as $pets) {
+            if($pets->getPetId() != $id) {
+                array_push($newList, $pets);
+            }
+        }
+
+        $this->petsList = $newList;
+
+        $this->SavePets();
+    }
+
+
 }
 
 ?>
