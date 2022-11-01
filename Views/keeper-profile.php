@@ -1,8 +1,12 @@
 <?php
     require_once(VIEWS_PATH."header.php");
     require_once(VIEWS_PATH."nav.php");
-    $user = $_SESSION["loggedUser"] ; 
-?>
+    $user = $_SESSION["loggedUser"] ;
+    
+    $todaysDate = date("Y")."-".date("m")."-".date("d");
+    $tomorrowDate = date("Y")."-".date("m")."-".date("d", strtotime("+1 day"));
+    
+?> 
 
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -36,11 +40,11 @@
                <form action="<?php echo FRONT_ROOT."Keeper/TimePeriod" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
                <div class="form-group">
                     <label for="">Periodo de Tiempo Desde</label>
-                    <input type="date" name="startDate" class="form-control form-control-lg" >
+                    <input type="date" name="startDate" value="<?php echo $todaysDate; ?>" class="form-control form-control-lg" >
                </div>
                <div class="form-group">
                     <label for="">Hasta</label>
-                    <input type="date" name="finalDate" class="form-control form-control-lg" >
+                    <input type="date" name="finalDate" value="<?php echo $tomorrowDate; ?>" class="form-control form-control-lg" >
                </div>
                <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar</button> <br>
                </table>

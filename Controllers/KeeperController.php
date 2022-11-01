@@ -16,6 +16,12 @@ class KeeperController{
             $this->freeTimePeriod=new FreeTimePeriod();
         }
 
+        public function ShowCalendarView(){
+            $keeper= $_SESSION["loggedUser"] ; 
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."calendar.php");
+        }
+
         public function CheckAndPushData(){ //la idea de esta funcion es poder convertir el user a un owner para empezar a laburarlo, 
                                             // tanto owner como user laburan con la misma id
             
@@ -36,7 +42,7 @@ class KeeperController{
                 $time=new FreeTimePeriod;
                 $time->setStartDate($startDate);
                 $time->setFinalDate($finalDate);
-               $keeper->setFreeTimePeriod( $this->freeTimePeriod->Add($time));
+                $keeper->setFreeTimePeriod( $this->freeTimePeriod->Add($time));
 
             }
 

@@ -117,18 +117,16 @@ class KeeperDAO{
     }
 
     public function OcupedTimePeriod($startDate,$finalDate){
-        $user = $_SESSION["loggedUser"] ; //esto no se si funciona xd
-        $keeper = $this->keeperDAO->GetKeeper($user->getUserID());
+        $keeper = $_SESSION["loggedUser"];
         
+        $val = false;
+
         if($keeper->getFreeTimePeriod()!=null){
             foreach($keeper->getFreeTimePeriod() as $ocuped){
                 if(($ocuped->getStartDate()<$startDate && $ocuped->getFinalDate()<$finalDate)||
                 ($ocuped->getStartDate()>$startDate && $ocuped->getFinalDate()<$finalDate) ){
                     $val=true;
-                }{
-                    $val=false;
                 }
-
             }
         }
         return $val;

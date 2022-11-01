@@ -3,16 +3,22 @@ include 'Models\calendar.php';
 include_once('header.php'); 
 include_once('nav.php');
 
-$calendar = new Calendar('2021-02-02');
-$calendar->add_event('Birthday', '2021-02-03', 1, 'green');
-$calendar->add_event('Doctors', '2021-02-04', 1, 'red');
-$calendar->add_event('Holiday', '2021-02-16', 7);
+$calendar = new Calendar(date("Y-m-d"));
+
+if($keeper->getFreeTimePeriod()!=null){
+    foreach($keeper->getFreeTimePeriod() as $event){
+        $tempDate1 = new DateTime($event->getStartDate());
+        $tempDate2 = new DateTime($event->getFinalDate());
+        $diff = $date1->diff($date2);
+        $calendar->add_event("Free", $tempDate1, $diff, 'green');
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Event Calendar</title>
+		<title>Calendario de <?php echo $keeper->getFirstName() . " " . $keeper->getLastName(); ?> </title>
 	</head>
 	<body>
         <style>
@@ -98,7 +104,7 @@ $calendar->add_event('Holiday', '2021-02-16', 7);
         </style>
 	    <nav class="navtop">
 	    	<div>
-	    		<h1>Event Calendar</h1>
+	    		<h1>Calendario de <?php echo $keeper->getFirstName() . " " . $keeper->getLastName(); ?></h1>
 	    	</div>
 	    </nav>
 		<div class="content home">
