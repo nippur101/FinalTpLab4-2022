@@ -33,16 +33,27 @@ class KeeperController{
                 //ACA LO LLEVA A COMPLETAR PERFIL
             }
         }
+
+        public function AddTimePeriod($startDate,$finalDate){
+            $keeper = ($_SESSION["loggedUser"]);
+            var_dump($keeper);
+            $newTime = new FreeTimePeriod();
+            $newTime->setStartDate($startDate);
+            $newTime->setFinalDate($finalDate);
+
+            $this->keeperDAO->addFreePeriodOfTime($newTime,$keeper);
+            var_dump($keeper);
+            $this->ShowCalendarView();
+        }
+
+        
         public function TimePeriod($startDate,$finalDate){
             $keeper= $_SESSION["loggedUser"] ; 
-            
-          
-            
-            
+
                 if($this->keeperDAO->OcupedTimePeriod($startDate,$finalDate) || $keeper->getFreeTimePeriod()==null){
                     $timeArray=array();
                     if($keeper->getFreeTimePeriod()!=null){
-                    $timeArray=$keeper->getFreeTimePeriod();
+                        $timeArray=$keeper->getFreeTimePeriod();
                     }
                     $time=new FreeTimePeriod();
                     $time->setStartDate($startDate);
@@ -55,11 +66,8 @@ class KeeperController{
                     echo "<script> if(confirm('Periodo de Tiempo ocupado!')); </script>";
                 }
 
-            
-
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."keeper-profile.php");
-          
         }
  
         public function AddSecondInfo($address, $petSize,$stayCost ){

@@ -38,17 +38,10 @@ class KeeperDAO{
     }
 
     public function addFreePeriodOfTime($time,$keeper){
-        $this->retrieveData();
-        $keeper->setFreeTimePeriod($time);
-
-       
-        $this->Remove($keeper->getUserID());
-     
-        $this->add($keeper);
-       
-        $this->SaveData();
-
+        $keeper->AddTimePeriod($time);
+        $this->Update($keeper);
     }
+    
     public function Remove($id) {
         $this->RetrieveData();
 
@@ -68,7 +61,7 @@ class KeeperDAO{
 
 
     public function Update(Keeper $keeper){
-        $this->RetrieveData();
+        //$this->RetrieveData();
 
         $newList = array();
 
@@ -117,7 +110,12 @@ class KeeperDAO{
                     $keeper->setAddress($valuesArray["address"]);
                     $keeper->setPetSize($valuesArray["petSize"]);
                     $keeper->setStayCost($valuesArray["stayCost"]);
-                    $keeper->setFreeTimePeriod($valuesArray["freeTimePeriod"]);
+                    foreach($valuesArray["freeTimePeriod"] as $value){
+                        $time = new FreeTimePeriod();
+                        $time->setStartDate($value["dateStart"]);
+                        $time->setFinalDate($value["dateFinal"]);
+                        $keeper->AddTimePeriod($time);
+                    }
                     $keeper->setReviews($valuesArray["reviews"]);
                     array_push($this->keeperList, $keeper);
                 }
@@ -125,7 +123,7 @@ class KeeperDAO{
     }
 
     public function SaveData(){
-        $this->RetrieveData();
+
         $arrayToEncode = array();
         $arrayTime=array();
         
@@ -141,7 +139,11 @@ class KeeperDAO{
             $valuesArray["address"] = $keeper->getAddress();
             $valuesArray["petSize"] = $keeper->getPetSize();
             $valuesArray["stayCost"] = $keeper->getStayCost();
-            $valuesArray["freeTimePeriod"] = $keeper->getFreeTimePeriod();
+            foreach($keeper->getFreeTimePeriod() as $time){
+                $arrayTime["dateStart"]=$time->getStartDate();
+                $arrayTime["dateFinal"]=$time->getFinalDate();
+                $valuesArray["freeTimePeriod"][]=$arrayTime;
+            }
             $valuesArray["reviews"] = $keeper->getReviews();
             array_push($arrayToEncode, $valuesArray);
 
@@ -157,13 +159,20 @@ class KeeperDAO{
         $val = false;
 
         if($keeper->getFreeTimePeriod()!=null){
-            foreach($keeper->getFreeTimePeriod() as $ocuped){
+            foreach($keeper->getFreeTimePeriod() as $time){
+                if($time->getStartDate() == $startDate && $time->getFinalDate() == $finalDate){
+                    $val = true;
+                }
+            }
+            /*
+            foreach(($keeper->getFreeTimePeriod()) as $ocuped){
                 if(($ocuped->getStartDate()<$startDate && $ocuped->getFinalDate()<$finalDate)||
                 ($ocuped->getStartDate()>$startDate && $ocuped->getFinalDate()<$finalDate) ){
                     $val=true;
                 }
             }
-        }*/
+            */
+        }
         return $val;
     }
 

@@ -21,6 +21,11 @@ class UserController{
         
     }
 
+    public function Destroy(){
+        session_destroy();
+        header("location: ".FRONT_ROOT."Home/Index");
+    }
+
     public function Login($mail, $password)
     {
         $user = $this->userDAO->validUser($mail, $password);
@@ -32,8 +37,11 @@ class UserController{
 
             if($user->getUserType() == 1)
             {
-                
-                $_SESSION["loggedUser"] = $this->keeperDAO->GetKeeper($user->getUserID());
+                $prueba = $this->keeperDAO->GetKeeper($user->getUserID());
+                $prueba2 = array();
+                $prueba->setFreeTimePeriod($prueba2);
+                $_SESSION["loggedUser"] = $prueba;
+
                 $_SESSION["typeUser"] = 1;
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."logged-keeper.php");
@@ -96,7 +104,8 @@ class UserController{
                     $keeper->setReviews(null);
                     $this->keeperDAO->Add($keeper);
 
-                    $_SESSION["loggedUser"] = $keeper;
+                    
+                    $_SESSION["loggedUser"] = ($keeper);
                     $_SESSION["typeUser"] = 1;
                     require_once(VIEWS_PATH."validate-session.php");
                     require_once(VIEWS_PATH."keeper-profile.php");
@@ -115,7 +124,7 @@ class UserController{
                     $this->ownerDAO->Add($owner);
                     $_SESSION["loggedUser"] =$owner;
                     
-                    $_SESSION["loggedUser"] = $owner;
+                    $_SESSION["loggedUser"] = ($owner);
                     $_SESSION["typeUser"] = 2;
                     require_once(VIEWS_PATH."validate-session.php");
                     require_once(VIEWS_PATH."owner-profile.php");

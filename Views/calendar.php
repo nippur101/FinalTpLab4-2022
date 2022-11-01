@@ -5,14 +5,7 @@ include_once('nav.php');
 
 $calendar = new Calendar(date("Y-m-d"));
 
-if($keeper->getFreeTimePeriod()!=null){
-    foreach($keeper->getFreeTimePeriod() as $event){
-        $tempDate1 = new DateTime($event->getStartDate());
-        $tempDate2 = new DateTime($event->getFinalDate());
-        $diff = $date1->diff($date2);
-        $calendar->add_event("Free", $tempDate1, $diff, 'green');
-    }
-}
+
 ?>
 <!DOCTYPE html>
 <html>

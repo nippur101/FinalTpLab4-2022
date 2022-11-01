@@ -62,5 +62,13 @@
         "email": "j@v",
         "password": "1234",
         "userType": "2"
+    },
+    {
+        "userId": 9,
+        "firstName": "Master",
+        "lastName": "Keeper",
+        "email": "master@keeper.com",
+        "password": "mk",
+        "userType": "1"
     }
 ]
