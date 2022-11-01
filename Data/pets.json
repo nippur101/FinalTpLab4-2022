@@ -21,23 +21,22 @@
     },
     {
         "petId": 3,
+        "name": "fachero",
+        "vaccinationPlan": "https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg",
+        "petType": "Mediano",
+        "raze": "perro",
+        "video": "https:\/\/www.youtube.com\/embed\/rsTLyukvxGU",
+        "image": "https:\/\/olondriz.com\/wp-content\/uploads\/2020\/04\/ambar-perrito-1-1024x899.jpg",
+        "owner": 6
+    },
+    {
+        "petId": 4,
         "name": "lesard101",
         "vaccinationPlan": "https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg",
         "petType": "Pequenio",
         "raze": "perro",
         "video": "https:\/\/www.youtube.com\/embed\/rsTLyukvxGU",
         "image": "https:\/\/olondriz.com\/wp-content\/uploads\/2020\/04\/ambar-perrito-1-1024x899.jpg",
-        "owner": 4
-    },
-    {
-        "petId": 4,
-        "name": "fachero",
-        "vaccinationPlan": "https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg",
-        "petType": "Grande",
-        "raze": "perro",
-        "video": "https:\/\/www.youtube.com\/embed\/rsTLyukvxGU",
-        "image": "https:\/\/olondriz.com\/wp-content\/uploads\/2020\/04\/ambar-perrito-1-1024x899.jpg",
         "owner": 5
     }
-    
 ]
