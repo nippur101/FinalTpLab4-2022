@@ -26,6 +26,7 @@
         "reviews": null
     },
     {
+<<<<<<< Updated upstream
         "userId": 6,
         "firstName": "El",
         "lastName": "KEeper",
@@ -44,12 +45,20 @@
         "lastName": "Keeper 2",
         "email": "k2@k2.com",
         "password": "k",
+=======
+        "userId": 7,
+        "firstName": "curt",
+        "lastName": "Cobain",
+        "email": "c@c",
+        "password": "1234",
+>>>>>>> Stashed changes
         "userType": "1",
         "address": null,
         "petSize": null,
         "stayCost": null,
         "freeTimePeriod": null,
         "reviews": null
+<<<<<<< Updated upstream
     },
     {
         "userId": 8,
@@ -76,5 +85,7 @@
         "stayCost": "12",
         "freeTimePeriod": null,
         "reviews": null
+=======
+>>>>>>> Stashed changes
     }
 ]

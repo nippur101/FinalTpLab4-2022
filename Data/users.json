@@ -41,6 +41,7 @@
     },
     {
         "userId": 6,
+<<<<<<< Updated upstream
         "firstName": "El",
         "lastName": "KEeper",
         "email": "k@k.com",
@@ -77,6 +78,20 @@
         "lastName": "3",
         "email": "k@k",
         "password": "k",
+=======
+        "firstName": "luca",
+        "lastName": "Prodan",
+        "email": "L@P",
+        "password": "1234",
+        "userType": "2"
+    },
+    {
+        "userId": 7,
+        "firstName": "curt",
+        "lastName": "Cobain",
+        "email": "c@c",
+        "password": "1234",
+>>>>>>> Stashed changes
         "userType": "1"
     }
 ]

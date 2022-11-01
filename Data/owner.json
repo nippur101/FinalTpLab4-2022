@@ -1,5 +1,15 @@
 [
     {
+        "userId": 6,
+        "firstName": "luca",
+        "lastName": "Prodan",
+        "email": "L@P",
+        "phone": null,
+        "password": "1234",
+        "userType": "2",
+        "pets": 3
+    },
+    {
         "userId": 5,
         "firstName": "joaquin",
         "lastName": "Macedo",
@@ -7,6 +17,7 @@
         "phone": null,
         "password": "1234",
         "userType": "2",
+<<<<<<< Updated upstream
         "pets": 5
     },
     {
@@ -18,5 +29,8 @@
         "password": "o",
         "userType": "2",
         "pets": null
+=======
+        "pets": 4
+>>>>>>> Stashed changes
     }
 ]
