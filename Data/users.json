@@ -38,5 +38,29 @@
         "email": "j@m",
         "password": "1234",
         "userType": "2"
+    },
+    {
+        "userId": 6,
+        "firstName": "Fredi",
+        "lastName": "Mercury",
+        "email": "f@m",
+        "password": "1234",
+        "userType": "1"
+    },
+    {
+        "userId": 7,
+        "firstName": "Antonio",
+        "lastName": "Banderas",
+        "email": "a@ba",
+        "password": "1234",
+        "userType": "1"
+    },
+    {
+        "userId": 8,
+        "firstName": "Julieta",
+        "lastName": "Venegas",
+        "email": "j@v",
+        "password": "1234",
+        "userType": "2"
     }
 ]

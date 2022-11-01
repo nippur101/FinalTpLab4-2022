@@ -34,7 +34,7 @@
                </form>
 
                
-               <form action="<?php echo FRONT_ROOT."Keeper/TimePeriod" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
+               <form action="<?php echo FRONT_ROOT."Keeper/TimePeriod" ?>" id="freeTime" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
                <div class="form-group">
                     <label for="">Periodo de Tiempo Desde</label>
                     <input type="date" name="startDate" class="form-control form-control-lg" >
@@ -43,7 +43,7 @@
                     <label for="">Hasta</label>
                     <input type="date" name="finalDate" class="form-control form-control-lg" >
                </div>
-               <button class="btn btn-primary btn-block btn-lg" type="submit">Agregar</button> <br>
+               <button class="btn btn-primary btn-block btn-lg" form="freeTime" type="submit">Agregar</button> <br>
                </table>
                </form>
           </div>

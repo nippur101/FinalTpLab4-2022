@@ -38,7 +38,7 @@ use Models\Pets;
                                         <th><img width="200" height="150" class="image-item" src="<?php echo  $pets->getImage();?>" ></th>
                                         <th><?php echo $pets->getRaze();?></th>
                                         <th> <iframe width="200" height="150" src="<?php echo $pets->getVideo();?>" ></iframe></th>
-                                        <th><?php echo $pets->getPetType();?>Mediano</th>
+                                        <th><?php echo $pets->getPetType();?></th>
                                         
                                         
                               </tr>

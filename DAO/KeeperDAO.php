@@ -5,6 +5,7 @@ namespace DAO;
 use Models\Keeper as Keeper;
 
 use DAO\UserDAO as UserDAO;
+use Models\FreeTimePeriod;
 
 class KeeperDAO{
     private $keeperList = array();
@@ -38,6 +39,36 @@ class KeeperDAO{
 
         return $keeperR;
     }
+
+    public function addFreePeriodOfTime($time,$keeper){
+        $this->retrieveData();
+        $keeper->setFreeTimePeriod($time);
+
+       
+        $this->Remove($keeper->getUserID());
+     
+        $this->add($keeper);
+       
+        $this->SaveData();
+
+    }
+    public function Remove($id) {
+        $this->RetrieveData();
+
+        $newList = array();
+
+        foreach($this->keeperList as $keeper) {
+            if($keeper->getUserID() != $id) {
+                array_push($newList, $keeper);
+            }
+        }
+
+        $this->keeperList = $newList;
+
+        $this->SaveData();
+    }
+
+
 
     public function Update(Keeper $keeper){
         $this->retrieveData();
@@ -83,7 +114,10 @@ class KeeperDAO{
     }
 
     public function SaveData(){
+        $this->RetrieveData();
         $arrayToEncode = array();
+        $arrayTime=array();
+        
 
         foreach($this->keeperList as $keeper){
 
@@ -101,6 +135,7 @@ class KeeperDAO{
             $valuesArray["freeTimePeriod"] = $keeper->getFreeTimePeriod();
             $valuesArray["reviews"] = $keeper->getReviews();
             array_push($arrayToEncode, $valuesArray);
+
         }
 
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -109,21 +144,17 @@ class KeeperDAO{
 
 
     public function OcupedTimePeriod($startDate,$finalDate){
-        $user = $_SESSION["loggedUser"] ; //esto no se si funciona xd
-        $keeper = new Keeper();
-        $keeper = $this->keeperDAO->GetKeeper($user->getUserID());
-        
+        $val=true;
+        $keeper=$_SESSION["loggedUser"] ;/*
         if($keeper->getFreeTimePeriod()!=null){
             foreach($keeper->getFreeTimePeriod() as $ocuped){
                 if(($ocuped->getStartDate()<$startDate && $ocuped->getFinalDate()<$finalDate)||
                 ($ocuped->getStartDate()>$startDate && $ocuped->getFinalDate()<$finalDate) ){
                     $val=true;
-                }{
-                    $val=false;
                 }
 
             }
-        }
+        }*/
         return $val;
     }
 

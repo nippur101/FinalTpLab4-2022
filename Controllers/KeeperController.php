@@ -4,7 +4,7 @@ namespace Controllers;
 
 use DAO\KeeperDAO;
 use Models\Keeper as Keeper;
-use Models\FreeTimePeriod ;
+use Models\FreeTimePeriod as FreeTimePeriod;
 
 class KeeperController{
     
@@ -32,13 +32,24 @@ class KeeperController{
             
           
             
-            if($this->keeperDAO->OcupedTimePeriod($startDate,$finalDate)){
-                $time=new FreeTimePeriod;
-                $time->setStartDate($startDate);
-                $time->setFinalDate($finalDate);
-               $keeper->setFreeTimePeriod( $this->freeTimePeriod->Add($time));
+            
+                if($this->keeperDAO->OcupedTimePeriod($startDate,$finalDate) || $keeper->getFreeTimePeriod()==null){
+                    $timeArray=array();
+                    if($keeper->getFreeTimePeriod()!=null){
+                    $timeArray=$keeper->getFreeTimePeriod();
+                    }
+                    $time=new FreeTimePeriod();
+                    $time->setStartDate($startDate);
+                    $time->setFinalDate($finalDate);
+                    array_push($timeArray,$time);
+                    
+                    $this->keeperDAO->addFreePeriodOfTime($timeArray,$keeper);
+                    echo "<script> if(confirm('Periodo Creado!')); </script>";
+                }else{
+                    echo "<script> if(confirm('Periodo de Tiempo ocupado!')); </script>";
+                }
 
-            }
+            
 
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."keeper-profile.php");
