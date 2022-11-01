@@ -6,10 +6,16 @@
           <li class="nav-item">
           <?php if(isset($_SESSION["loggedUser"])) { ?>
                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/ShowProfile" ?>">Perfil</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Owner/CheckAndPushData" ?>">Perfil</a>
                </li>
                <li class="nav-item">
                     <a class="nav-link" href="<?php echo FRONT_ROOT."Home/Logout" ?>">Cerrar Sesión</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/OwnerList" ?>">Listar Owners</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/KeeperList" ?>">Listar Keepers</a>
                </li>
           <?php }else{
                ?>

@@ -42,7 +42,7 @@ class UserDAO {
     public function validUser($mail, $password){
 
         $userList = $this->getAll();
-
+        $userR=null;
         foreach($userList as $user){
 
             if($user->getEmail() == $mail && $user->getPassword() == $password){

@@ -4,7 +4,13 @@
    class FreeTimePeriod{
     private $startDate;
     private $finalDate;
-    
+    /*
+    public function __construct($startDate,$finalDate)
+    {
+        $this->startDate=$startDate;
+        $this->finalDate=$finalDate;
+    }
+    */
 
     public function getStartDate()
     {
