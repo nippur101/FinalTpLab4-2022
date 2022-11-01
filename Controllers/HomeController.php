@@ -20,7 +20,6 @@
 
         public function Create()
         {   
-            require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."create-account.php");
         } 
         public function CreatePets()

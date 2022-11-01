@@ -1,13 +1,16 @@
 <?php
     require_once(VIEWS_PATH."header.php");
     require_once(VIEWS_PATH."nav.php");
+    use DAO\PetsDAO;
+    use Models\Pets;
+
+    $user = $_SESSION["loggedUser"];
 ?>
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-               <h2 class="mb-4"><?php $user = $_SESSION["loggedUser"] ; 
-                echo "Owner: ". $user->getFirstName()."  ".$user->getLastName().":" ?> </h2>
-                 <form action="<?php echo FRONT_ROOT."Home/CreatePets" ?>" method="POST" >
+               <h2 class="mb-4"><?php echo "Owner: ". $user->getFirstName()."  ".$user->getLastName().":" ?> </h2>
+               <form action="<?php echo FRONT_ROOT."Home/CreatePets" ?>" method="POST" >
                <table class="table bg-light-alpha">
                     <thead>
                          <th>ID</th>
@@ -19,15 +22,9 @@
                          <th>Tipo</th>
                     </thead>
                     <tbody>                         
-                         <?php use DAO\PetsDAO;
-use Models\Pets;
-
+                         <?php 
                          $petsDAO=new PetsDAO();
-                           $user = $_SESSION["loggedUser"] ;
-                           
-                         function getPetList($user){
 
-                         }
                          foreach($petsDAO->getAll() as $pets) {
                               if($pets->getOwner()==$user->getUserID()){                              ?>
                               <tr>

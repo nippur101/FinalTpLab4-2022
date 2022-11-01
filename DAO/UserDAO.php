@@ -43,6 +43,8 @@ class UserDAO {
 
         $userList = $this->getAll();
 
+        $userR = null;
+
         foreach($userList as $user){
 
             if($user->getEmail() == $mail && $user->getPassword() == $password){

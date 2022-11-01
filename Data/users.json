@@ -38,5 +38,45 @@
         "email": "j@m",
         "password": "1234",
         "userType": "2"
+    },
+    {
+        "userId": 6,
+        "firstName": "El",
+        "lastName": "KEeper",
+        "email": "k@k.com",
+        "password": "k",
+        "userType": "1"
+    },
+    {
+        "userId": 7,
+        "firstName": "El",
+        "lastName": "Keeper 2",
+        "email": "k2@k2.com",
+        "password": "k",
+        "userType": "1"
+    },
+    {
+        "userId": 8,
+        "firstName": "El ",
+        "lastName": "Keeper 3",
+        "email": "k3@k3.com",
+        "password": "k",
+        "userType": "1"
+    },
+    {
+        "userId": 9,
+        "firstName": "El ",
+        "lastName": "Owner",
+        "email": "o@o.com",
+        "password": "o",
+        "userType": "2"
+    },
+    {
+        "userId": 10,
+        "firstName": "El Keeper",
+        "lastName": "3",
+        "email": "k@k",
+        "password": "k",
+        "userType": "1"
     }
 ]

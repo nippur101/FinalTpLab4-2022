@@ -54,6 +54,9 @@ class KeeperController{
             $keeper->setPetSize($petSize);
             $this->keeperDAO->Update($keeper);
 
+            echo "<script> if(confirm('Datos actualizados!')); </script>";
+            $this->CheckAndPushData();
+
 
         }
 

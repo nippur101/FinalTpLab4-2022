@@ -8,5 +8,15 @@
         "password": "1234",
         "userType": "2",
         "pets": 5
+    },
+    {
+        "userId": 9,
+        "firstName": "El ",
+        "lastName": "Owner",
+        "email": "o@o.com",
+        "phone": null,
+        "password": "o",
+        "userType": "2",
+        "pets": null
     }
 ]

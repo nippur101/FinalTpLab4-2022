@@ -118,7 +118,6 @@ class KeeperDAO{
 
     public function OcupedTimePeriod($startDate,$finalDate){
         $user = $_SESSION["loggedUser"] ; //esto no se si funciona xd
-        $keeper = new Keeper();
         $keeper = $this->keeperDAO->GetKeeper($user->getUserID());
         
         if($keeper->getFreeTimePeriod()!=null){

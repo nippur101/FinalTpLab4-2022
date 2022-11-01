@@ -1,19 +1,18 @@
 <?php
     require_once(VIEWS_PATH."header.php");
     require_once(VIEWS_PATH."nav.php");
-   
+    $user = $_SESSION["loggedUser"] ; 
 ?>
 
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-               <h2 class="mb-4"><?php   $user = $_SESSION["loggedUser"] ; 
-                echo "Keeper: ".$user->getFirstName()."  ".$user->getLastName().":" ?> </h2>
+               <h2 class="mb-4"><?php echo "Keeper: ".$user->getFirstName()."  ".$user->getLastName().":" ?> </h2>
      
                  <form action="<?php echo FRONT_ROOT."Keeper/AddSecondInfo" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
                  <div class="form-group">
                     <label for="">Direccion</label>
-                    <input type="text" name="address" class="form-control form-control-lg" placeholder="Direccion" required>
+                    <input type="text" name="address" class="form-control form-control-lg" placeholder="<?php echo $keeper->getAddress(); ?>" required>
                     
                </div>
                <div class="form-group">
@@ -27,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Tarifa</label>
-                    <input type="text" name="stayCost" class="form-control form-control-lg" placeholder="Tarifa" required>
+                    <input type="text" name="stayCost" class="form-control form-control-lg" placeholder="<?php echo $keeper->getStayCost(); ?>" required>
                     
                </div>
                <button class="btn btn-primary btn-block btn-lg" type="submit">Aceptar</button> <br>

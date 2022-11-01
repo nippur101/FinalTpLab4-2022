@@ -1,18 +1,5 @@
 [
     {
-        "userId": 10,
-        "firstName": "isma",
-        "lastName": "serea",
-        "email": "is@be",
-        "password": "1234",
-        "userType": "1",
-        "address": null,
-        "petSize": null,
-        "stayCost": null,
-        "freeTimePeriod": null,
-        "reviews": null
-    },
-    {
         "userId": 13,
         "firstName": "ale",
         "lastName": "gime",
@@ -35,6 +22,58 @@
         "address": null,
         "petSize": null,
         "stayCost": null,
+        "freeTimePeriod": null,
+        "reviews": null
+    },
+    {
+        "userId": 6,
+        "firstName": "El",
+        "lastName": "KEeper",
+        "email": "k@k.com",
+        "password": "k",
+        "userType": "1",
+        "address": null,
+        "petSize": null,
+        "stayCost": null,
+        "freeTimePeriod": null,
+        "reviews": null
+    },
+    {
+        "userId": 7,
+        "firstName": "El",
+        "lastName": "Keeper 2",
+        "email": "k2@k2.com",
+        "password": "k",
+        "userType": "1",
+        "address": null,
+        "petSize": null,
+        "stayCost": null,
+        "freeTimePeriod": null,
+        "reviews": null
+    },
+    {
+        "userId": 8,
+        "firstName": "El ",
+        "lastName": "Keeper 3",
+        "email": "k3@k3.com",
+        "password": "k",
+        "userType": "1",
+        "address": null,
+        "petSize": null,
+        "stayCost": null,
+        "freeTimePeriod": null,
+        "reviews": null
+    },
+    {
+        "userId": 10,
+        "firstName": "El Keeper",
+        "lastName": "3",
+        "email": "k@k",
+        "password": "k",
+        "userType": "1",
+        "address": "Avellaneda 1245",
+        "petSize": "Mediano",
+        "stayCost": "12",
         "freeTimePeriod": null,
         "reviews": null
     }

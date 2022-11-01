@@ -27,25 +27,22 @@ class UserController{
 
         if($user != NULL)
         {
-          // $_SESSION["loggedUser"] = $user;
-
             $firstName = $user->getFirstName();
             $lastName = $user->getLastName();
 
             if($user->getUserType() == 1)
             {
-                $_SESSION["loggedUser"] =$this->keeperDAO->GetKeeper($user->getUserID());
-               
+                
+                $_SESSION["loggedUser"] = $this->keeperDAO->GetKeeper($user->getUserID());
+                $_SESSION["typeUser"] = 1;
                 require_once(VIEWS_PATH."validate-session.php");
                 require_once(VIEWS_PATH."logged-keeper.php");
-              
-
             }
             else
             {
                 $_SESSION["loggedUser"] =$this->ownerDAO->GetOwner($user->getUserID());
+                $_SESSION["typeUser"] = 2;
                 require_once(VIEWS_PATH."validate-session.php");
-                
                 require_once(VIEWS_PATH."logged-owner.php");
             }
         }
@@ -98,6 +95,9 @@ class UserController{
                     $keeper->setFreeTimePeriod(null);
                     $keeper->setReviews(null);
                     $this->keeperDAO->Add($keeper);
+
+                    $_SESSION["loggedUser"] = $keeper;
+                    $_SESSION["typeUser"] = 1;
                     require_once(VIEWS_PATH."validate-session.php");
                     require_once(VIEWS_PATH."keeper-profile.php");
                 }
@@ -114,6 +114,8 @@ class UserController{
                     $owner->setPets(null);
                     $this->ownerDAO->Add($owner);
                     
+                    $_SESSION["loggedUser"] = $owner;
+                    $_SESSION["typeUser"] = 2;
                     require_once(VIEWS_PATH."validate-session.php");
                     require_once(VIEWS_PATH."owner-profile.php");
                 }
