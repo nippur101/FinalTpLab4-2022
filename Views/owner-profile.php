@@ -46,6 +46,13 @@ use Models\Pets;
                     <button  type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar Mascota</button>
                </table>
                </form>
+               <form action="<?php echo FRONT_ROOT."Pets/deletePets" ?>" method="POST" id="deletePet" class="login-form bg-dark-alpha p-5 bg-light">
+                    <div class="form-group">
+                         <label for="">Id Mascota a Borrar</label>
+                         <input type="text" name="petsId" class="form-control form-control-lg" placeholder="Id Mascota">
+                    </div>
+                    <button  type="submit" name="" form="deletePet" class="btn btn-dark ml-auto d-block">Borrar Mascota</button>
+               </form>
           </div>
      </section>
 </main>
