@@ -12,12 +12,20 @@
                     <li class="nav-item">
                          <a class="nav-link" href="<?php echo FRONT_ROOT."Keeper/ShowCalendarView" ?>">Calendario</a>
                     </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/OwnerList" ?>">Listar Owners</a>
+               </li>
                <?php }elseif($_SESSION["typeUser"] == 2){ ?>
-               
+                    <li class="nav-item">
+                         <a class="nav-link" href="<?php echo FRONT_ROOT."Home/KeeperList" ?>">Listar Keepers</a>
+                    </li>
                <?php } ?>
                <li class="nav-item">
-                         <a class="nav-link" href="<?php echo FRONT_ROOT."Home/Logout" ?>">Cerrar Sesión</a>
-                    </li>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Owner/CheckAndPushData" ?>">Perfil</a>
+               </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="<?php echo FRONT_ROOT."Home/Logout" ?>">Cerrar Sesión</a>
+               </li>
           <?php }else{
                ?>
                <li class="nav-item">

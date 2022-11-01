@@ -33,6 +33,16 @@
             require_once(VIEWS_PATH."validate-session.php");
             require_once(VIEWS_PATH."logout.php");
         } 
+        public function OwnerList()
+        {
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."owner-list.php");
+        } 
+        public function KeeperList()
+        {
+            require_once(VIEWS_PATH."validate-session.php");
+            require_once(VIEWS_PATH."keeper-list.php");
+        } 
         
        
     }

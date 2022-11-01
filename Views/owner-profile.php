@@ -34,7 +34,7 @@
                                         <th><img width="200" height="150" class="image-item" src="<?php echo  $pets->getImage();?>" ></th>
                                         <th><?php echo $pets->getRaze();?></th>
                                         <th> <iframe width="200" height="150" src="<?php echo $pets->getVideo();?>" ></iframe></th>
-                                        <th><?php echo $pets->getPetType();?>Mediano</th>
+                                        <th><?php echo $pets->getPetType();?></th>
                                         
                                         
                               </tr>
@@ -42,6 +42,13 @@
                     </tbody>
                     <button  type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar Mascota</button>
                </table>
+               </form>
+               <form action="<?php echo FRONT_ROOT."Pets/deletePets" ?>" method="POST" id="deletePet" class="login-form bg-dark-alpha p-5 bg-light">
+                    <div class="form-group">
+                         <label for="">Id Mascota a Borrar</label>
+                         <input type="text" name="petsId" class="form-control form-control-lg" placeholder="Id Mascota">
+                    </div>
+                    <button  type="submit" name="" form="deletePet" class="btn btn-dark ml-auto d-block">Borrar Mascota</button>
                </form>
           </div>
      </section>

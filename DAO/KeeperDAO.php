@@ -4,6 +4,7 @@ namespace DAO;
 
 use Models\Keeper as Keeper;
 use DAO\UserDAO as UserDAO;
+use Models\FreeTimePeriod;
 
 class KeeperDAO{
     private $keeperList = array();
@@ -35,6 +36,36 @@ class KeeperDAO{
 
         return $keeperR;
     }
+
+    public function addFreePeriodOfTime($time,$keeper){
+        $this->retrieveData();
+        $keeper->setFreeTimePeriod($time);
+
+       
+        $this->Remove($keeper->getUserID());
+     
+        $this->add($keeper);
+       
+        $this->SaveData();
+
+    }
+    public function Remove($id) {
+        $this->RetrieveData();
+
+        $newList = array();
+
+        foreach($this->keeperList as $keeper) {
+            if($keeper->getUserID() != $id) {
+                array_push($newList, $keeper);
+            }
+        }
+
+        $this->keeperList = $newList;
+
+        $this->SaveData();
+    }
+
+
 
     public function Update(Keeper $keeper){
         $this->RetrieveData();
@@ -94,7 +125,10 @@ class KeeperDAO{
     }
 
     public function SaveData(){
+        $this->RetrieveData();
         $arrayToEncode = array();
+        $arrayTime=array();
+        
 
         foreach($this->keeperList as $keeper){
             
@@ -110,6 +144,7 @@ class KeeperDAO{
             $valuesArray["freeTimePeriod"] = $keeper->getFreeTimePeriod();
             $valuesArray["reviews"] = $keeper->getReviews();
             array_push($arrayToEncode, $valuesArray);
+
         }
 
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -128,7 +163,7 @@ class KeeperDAO{
                     $val=true;
                 }
             }
-        }
+        }*/
         return $val;
     }
 

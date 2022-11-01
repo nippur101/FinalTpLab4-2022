@@ -48,7 +48,12 @@ class PetsController{
         require_once(VIEWS_PATH."validate-session.php");
         require_once(VIEWS_PATH."owner-profile.php");
     }
-   
+    public function deletePets($petsId){
+        $this->petsDAO->Remove($petsId);
+        require_once(VIEWS_PATH."validate-session.php");
+        require_once(VIEWS_PATH."owner-profile.php");
+
+    }
 
 
 }

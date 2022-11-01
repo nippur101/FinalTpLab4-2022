@@ -7,16 +7,16 @@
         "phone": null,
         "password": "1234",
         "userType": "2",
-        "pets": 5
+        "pets": 4
     },
     {
-        "userId": 9,
-        "firstName": "El ",
-        "lastName": "Owner",
-        "email": "o@o.com",
+        "userId": 8,
+        "firstName": "Julieta",
+        "lastName": "Venegas",
+        "email": "j@v",
         "phone": null,
-        "password": "o",
+        "password": "1234",
         "userType": "2",
-        "pets": null
+        "pets": 6
     }
 ]

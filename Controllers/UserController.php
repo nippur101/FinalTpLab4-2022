@@ -113,6 +113,7 @@ class UserController{
                     $owner->setPhone(null);
                     $owner->setPets(null);
                     $this->ownerDAO->Add($owner);
+                    $_SESSION["loggedUser"] =$owner;
                     
                     $_SESSION["loggedUser"] = $owner;
                     $_SESSION["typeUser"] = 2;
