@@ -8,7 +8,7 @@ $tomorrowDate = date("Y") . "-" . date("m") . "-" . date("d", strtotime("+1 day"
 
 ?>
 
-<main class="py-5">
+<main class="d-flex align-items-center justify-content-center height-100">
      <section id="listado" class="mb-5">
           <div class="container">
                <h2 class="mb-4"><?php echo $keeper->getFirstName() . "  " . $keeper->getLastName() . ":" ?> </h2>

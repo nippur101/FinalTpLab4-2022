@@ -12,9 +12,6 @@
                     <li class="nav-item">
                          <a class="nav-link" href="<?php echo FRONT_ROOT."Keeper/ShowCalendarView" ?>">Calendario</a>
                     </li>
-                    <li class="nav-item">
-                         <a class="nav-link" href="<?php echo FRONT_ROOT."Home/OwnerList" ?>">Listar Owners</a>
-                    </li>
                <?php }elseif($_SESSION["typeUser"] == 2){ ?>
                     <li class="nav-item">
                          <a class="nav-link" href="<?php echo FRONT_ROOT."Keeper/KeeperList" ?>">Listar Keepers</a>
