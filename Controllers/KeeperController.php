@@ -25,15 +25,11 @@ class KeeperController
     }
 
     public function CheckAndPushData()
-    { //la idea de esta funcion es poder convertir el user a un owner para empezar a laburarlo, 
-        // tanto owner como user laburan con la misma id
-
+    {
         $keeper = $_SESSION["loggedUser"];
-        if ($keeper != NULL) { //ACA SE FIJA SI TENIAMOS INFO, SI TENIAMOS ESTA TODO OK VA A MIRAR LOS KEEPER
+        if ($keeper != NULL) { 
             require_once(VIEWS_PATH . "validate-session.php");
             require_once(VIEWS_PATH . "keeper-profile.php");
-        } else {
-            //ACA LO LLEVA A COMPLETAR PERFIL
         }
     }
 

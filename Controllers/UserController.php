@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Controllers;
 
@@ -9,7 +9,8 @@ use Models\User as User;
 use Models\Keeper as Keeper;
 use Models\Owner;
 
-class UserController{
+class UserController
+{
 
     private $userDAO;
 
@@ -18,65 +19,59 @@ class UserController{
         $this->userDAO = new UserDAO();
         $this->keeperDAO = new KeeperDAO();
         $this->ownerDAO = new OwnerDAO();
-        
     }
 
-    public function Destroy(){
+    public function Destroy()
+    {
         session_destroy();
-        header("location: ".FRONT_ROOT."Home/Index");
+        header("location: " . FRONT_ROOT . "Home/Index");
     }
 
     public function Login($mail, $password)
     {
         $user = $this->userDAO->validUser($mail, $password);
 
-        if($user != NULL)
-        {
+        if ($user != NULL) {
             $firstName = $user->getFirstName();
             $lastName = $user->getLastName();
 
-            if($user->getUserType() == 1)
-            {
-                
+            if ($user->getUserType() == 1) {
+
                 $_SESSION["loggedUser"] = $this->keeperDAO->GetKeeper($user->getUserID());
 
                 $_SESSION["typeUser"] = 1;
-                require_once(VIEWS_PATH."validate-session.php");
-                require_once(VIEWS_PATH."logged-keeper.php");
-            }
-            else
-            {
-                $_SESSION["loggedUser"] =$this->ownerDAO->GetOwner($user->getUserID());
+                require_once(VIEWS_PATH . "validate-session.php");
+                require_once(VIEWS_PATH . "logged-keeper.php");
+            } else {
+                $_SESSION["loggedUser"] = $this->ownerDAO->GetOwner($user->getUserID());
                 $_SESSION["typeUser"] = 2;
-                require_once(VIEWS_PATH."validate-session.php");
-                require_once(VIEWS_PATH."logged-owner.php");
+                require_once(VIEWS_PATH . "validate-session.php");
+                require_once(VIEWS_PATH . "logged-owner.php");
             }
-        }
-        else
-        {
+        } else {
             echo "<script> if(confirm('Error de credenciales!')); </script>";
-            require_once(VIEWS_PATH."validate-session.php");
-            require_once(VIEWS_PATH."index.php");
+            require_once(VIEWS_PATH . "validate-session.php");
+            require_once(VIEWS_PATH . "index.php");
         }
     }
 
-    public function CreateAccount(){
+    public function CreateAccount()
+    {
 
-        require_once(VIEWS_PATH."create-account.php");
-
+        require_once(VIEWS_PATH . "create-account.php");
     }
 
-    public function CreatePets(){
+    public function CreatePets()
+    {
 
-        require_once(VIEWS_PATH."validate-session.php");
-        require_once(VIEWS_PATH."create-pets.php");
-
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "create-pets.php");
     }
-    
+
     public function Create($firstName, $lastName, $mail, $password1, $password2, $type)
     {
-        if(!($this->userDAO->alreadyExistUser($mail))){
-            if($password1 == $password2){
+        if (!($this->userDAO->alreadyExistUser($mail))) {
+            if ($password1 == $password2) {
                 $user = new User();
                 $user->setFirstName($firstName);
                 $user->setLastName($lastName);
@@ -86,9 +81,8 @@ class UserController{
                 $user->setUserID($this->userDAO->NewID());
                 $this->userDAO->Add($user);
                 echo "<script> if(confirm('Usuario creado con exito!')); </script>";
-                if($user->getUserType() == 1)
-                {
-                    $keeper=new Keeper();
+                if ($user->getUserType() == 1) {
+                    $keeper = new Keeper();
                     $keeper->setFirstName($firstName);
                     $keeper->setLastName($lastName);
                     $keeper->setEmail($mail);
@@ -102,15 +96,13 @@ class UserController{
                     $keeper->setReviews(null);
                     $this->keeperDAO->Add($keeper);
 
-                    
+
                     $_SESSION["loggedUser"] = ($keeper);
                     $_SESSION["typeUser"] = 1;
-                    require_once(VIEWS_PATH."validate-session.php");
-                    require_once(VIEWS_PATH."keeper-profile.php");
-                }
-                else
-                {
-                    $owner=new Owner();
+                    require_once(VIEWS_PATH . "validate-session.php");
+                    require_once(VIEWS_PATH . "keeper-profile.php");
+                } else {
+                    $owner = new Owner();
                     $owner->setFirstName($firstName);
                     $owner->setLastName($lastName);
                     $owner->setEmail($mail);
@@ -120,26 +112,22 @@ class UserController{
                     $owner->setPhone(null);
                     $owner->setPets(null);
                     $this->ownerDAO->Add($owner);
-                    $_SESSION["loggedUser"] =$owner;
-                    
+                    $_SESSION["loggedUser"] = $owner;
+
                     $_SESSION["loggedUser"] = ($owner);
                     $_SESSION["typeUser"] = 2;
-                    require_once(VIEWS_PATH."validate-session.php");
-                    require_once(VIEWS_PATH."owner-profile.php");
+                    require_once(VIEWS_PATH . "validate-session.php");
+                    require_once(VIEWS_PATH . "owner-profile.php");
                 }
-            }
-            else{
+            } else {
                 echo "<script> if(confirm('Las contraseñas no coinciden!')); </script>";
-                require_once(VIEWS_PATH."validate-session.php");
-                require_once(VIEWS_PATH."create-account.php");
+                require_once(VIEWS_PATH . "validate-session.php");
+                require_once(VIEWS_PATH . "create-account.php");
             }
-        }
-        else{
+        } else {
             echo "<script> if(confirm('El usuario ya existe!')); </script>";
-            require_once(VIEWS_PATH."validate-session.php");
-            require_once(VIEWS_PATH."create-account.php");
+            require_once(VIEWS_PATH . "validate-session.php");
+            require_once(VIEWS_PATH . "create-account.php");
         }
     }
-
-
 }
