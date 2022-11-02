@@ -1,70 +1,6 @@
 [
     {
         "userId": 1,
-        "firstName": "Francisco",
-        "lastName": "Pediconi",
-        "email": "a@a.com",
-        "password": "a",
-        "userType": "2"
-    },
-    {
-        "userId": 2,
-        "firstName": "Eliza",
-        "lastName": "Gomez",
-        "email": "e@g",
-        "password": "1234",
-        "userType": "1"
-    },
-    {
-        "userId": 3,
-        "firstName": "Javier",
-        "lastName": "Macedo",
-        "email": "a@j",
-        "password": "1234",
-        "userType": "2"
-    },
-    {
-        "userId": 4,
-        "firstName": "Javier",
-        "lastName": "Macedo",
-        "email": "a@b",
-        "password": "1234",
-        "userType": "2"
-    },
-    {
-        "userId": 5,
-        "firstName": "joaquin",
-        "lastName": "Macedo",
-        "email": "j@m",
-        "password": "1234",
-        "userType": "2"
-    },
-    {
-        "userId": 6,
-        "firstName": "Fredi",
-        "lastName": "Mercury",
-        "email": "f@m",
-        "password": "1234",
-        "userType": "1"
-    },
-    {
-        "userId": 7,
-        "firstName": "Antonio",
-        "lastName": "Banderas",
-        "email": "a@ba",
-        "password": "1234",
-        "userType": "1"
-    },
-    {
-        "userId": 8,
-        "firstName": "Julieta",
-        "lastName": "Venegas",
-        "email": "j@v",
-        "password": "1234",
-        "userType": "2"
-    },
-    {
-        "userId": 9,
         "firstName": "Master",
         "lastName": "Keeper",
         "email": "master@keeper.com",
@@ -72,35 +8,35 @@
         "userType": "1"
     },
     {
-        "userId": 10,
-        "firstName": "Beta",
-        "lastName": "Tester",
-        "email": "beta@tester",
-        "password": "tester",
+        "userId": 2,
+        "firstName": "Master",
+        "lastName": "Owner",
+        "email": "master@owner.com",
+        "password": "mo",
+        "userType": "2"
+    },
+    {
+        "userId": 3,
+        "firstName": "Senior",
+        "lastName": "Keeper",
+        "email": "senior@keeper",
+        "password": "sk",
         "userType": "1"
     },
     {
-        "userId": 11,
-        "firstName": "Agustin",
-        "lastName": "Battaglia",
-        "email": "elbati@bati",
-        "password": "bati",
-        "userType": "1"
+        "userId": 4,
+        "firstName": "Senior",
+        "lastName": "Owner",
+        "email": "senior@owner",
+        "password": "so",
+        "userType": "2"
     },
     {
-        "userId": 12,
-        "firstName": "Batti",
-        "lastName": "Dos",
-        "email": "b@2",
-        "password": "b2",
-        "userType": "1"
-    },
-    {
-        "userId": 13,
-        "firstName": "Batti ",
-        "lastName": "Tres",
-        "email": "bati@3",
-        "password": "b3",
+        "userId": 5,
+        "firstName": "Junior",
+        "lastName": "Keeper",
+        "email": "junior@keeper",
+        "password": "jk",
         "userType": "1"
     }
 ]

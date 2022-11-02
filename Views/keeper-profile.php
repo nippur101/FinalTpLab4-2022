@@ -11,7 +11,7 @@ $tomorrowDate = date("Y") . "-" . date("m") . "-" . date("d", strtotime("+1 day"
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-               <h2 class="mb-4"><?php echo "Keeper: " . $user->getFirstName() . "  " . $user->getLastName() . ":" ?> </h2>
+               <h2 class="mb-4"><?php echo $keeper->getFirstName() . "  " . $keeper->getLastName() . ":" ?> </h2>
 
                <form action="<?php echo FRONT_ROOT . "Keeper/AddSecondInfo" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
                     <div class="form-group">

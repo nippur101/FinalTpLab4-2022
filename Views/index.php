@@ -1,4 +1,5 @@
-<?php include_once('header.php');
+<?php 
+include_once('header.php');
 include_once('nav.php'); ?>
 
 <main class="d-flex align-items-center justify-content-center height-100">
@@ -18,11 +19,6 @@ include_once('nav.php'); ?>
                </div>
 
                <button class="btn btn-primary btn-block btn-lg" type="submit">Iniciar Sesión</button> <br>
-
-          </form>
-          <form action="<?php echo FRONT_ROOT . "User/Destroy" ?>" method="" class="login-form bg-dark-alpha p-5 bg-light">
-
-               <button class="btn btn-secondary btn-block btn-lg" id="crtAcc">MUERTEEEE</button><br>
 
           </form>
           <form action="<?php echo FRONT_ROOT . "User/CreateAccount" ?>" method="" class="login-form bg-dark-alpha p-5 bg-light">

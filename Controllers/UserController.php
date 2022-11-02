@@ -72,50 +72,25 @@ class UserController
     {
         if (!($this->userDAO->alreadyExistUser($mail))) {
             if ($password1 == $password2) {
-                $user = new User();
-                $user->setFirstName($firstName);
-                $user->setLastName($lastName);
-                $user->setEmail($mail);
-                $user->setPassword($password1);
-                $user->setUserType($type);
-                $user->setUserID($this->userDAO->NewID());
+
+                $user = $this->userDAO->ReturnDefaultUser($firstName, $lastName, $mail, $password1, $type);
                 $this->userDAO->Add($user);
                 echo "<script> if(confirm('Usuario creado con exito!')); </script>";
+
                 if ($user->getUserType() == 1) {
-                    $keeper = new Keeper();
-                    $keeper->setFirstName($firstName);
-                    $keeper->setLastName($lastName);
-                    $keeper->setEmail($mail);
-                    $keeper->setPassword($password1);
-                    $keeper->setUserType($type);
-                    $keeper->setUserID($user->getUserID());
-                    $keeper->setAddress(null);
-                    $keeper->setPetSize(null);
-                    $keeper->setStayCost(null);
-                    $keeper->setFreeTimePeriod(null);
-                    $keeper->setReviews(null);
+                    $keeper = $this->keeperDAO->ReturnDefaultKeeper($user);
                     $this->keeperDAO->Add($keeper);
 
-
                     $_SESSION["loggedUser"] = ($keeper);
-                    $_SESSION["typeUser"] = 1;
+                    $_SESSION["typeUser"] = $keeper->getUserType();
                     require_once(VIEWS_PATH . "validate-session.php");
                     require_once(VIEWS_PATH . "keeper-profile.php");
                 } else {
-                    $owner = new Owner();
-                    $owner->setFirstName($firstName);
-                    $owner->setLastName($lastName);
-                    $owner->setEmail($mail);
-                    $owner->setPassword($password1);
-                    $owner->setUserType($type);
-                    $owner->setUserID($user->getUserID());
-                    $owner->setPhone(null);
-                    $owner->setPets(null);
+                    $owner = $this->ownerDAO->ReturnDefaultOwner($user);
                     $this->ownerDAO->Add($owner);
-                    $_SESSION["loggedUser"] = $owner;
 
                     $_SESSION["loggedUser"] = ($owner);
-                    $_SESSION["typeUser"] = 2;
+                    $_SESSION["typeUser"] = $owner->getUserType();
                     require_once(VIEWS_PATH . "validate-session.php");
                     require_once(VIEWS_PATH . "owner-profile.php");
                 }

@@ -9,7 +9,6 @@ use Models\FreeTimePeriod;
 class KeeperDAO
 {
     private $keeperList = array();
-    private $userList = array();
 
     public function getAll()
     {
@@ -22,6 +21,23 @@ class KeeperDAO
         $this->RetrieveData();
 
         array_push($this->keeperList, $keeper);
+
+        $this->SaveData();
+    }
+
+    public function Remove($id)
+    {
+        $this->RetrieveData();
+
+        $newList = array();
+
+        foreach ($this->keeperList as $keeper) {
+            if ($keeper->getUserID() != $id) {
+                array_push($newList, $keeper);
+            }
+        }
+
+        $this->keeperList = $newList;
 
         $this->SaveData();
     }
@@ -46,40 +62,43 @@ class KeeperDAO
         $this->Update($keeper);
     }
 
-    public function Remove($id)
+
+
+    public function Update(Keeper $keeper)
     {
         $this->RetrieveData();
 
         $newList = array();
 
-        foreach ($this->keeperList as $keeper) {
-            if ($keeper->getUserID() != $id) {
-                array_push($newList, $keeper);
+        foreach ($this->keeperList as $keeperR) {
+            if ($keeperR->getUserID() != $keeper->getUserID()) {
+                array_push($newList, $keeperR);
             }
         }
+
+        array_push($newList, $keeper);
 
         $this->keeperList = $newList;
 
         $this->SaveData();
     }
 
-
-
-    public function Update(Keeper $keeper)
+    public function ReturnDefaultKeeper($userObject)
     {
-        $newList = array();
+        $keeper = new Keeper();
+        $keeper->setFirstName($userObject->getFirstName());
+        $keeper->setLastName($userObject->getLastName());
+        $keeper->setEmail($userObject->getEmail());
+        $keeper->setPassword($userObject->getPassword());
+        $keeper->setUserType($userObject->getUserType());
+        $keeper->setUserID($userObject->getUserID());
+        $keeper->setAddress("Incompleta");
+        $keeper->setPetSize("Incompleta");
+        $keeper->setStayCost("Incompleta");
+        $keeper->setFreeTimePeriod(array());
+        $keeper->setReviews(array());
 
-        foreach ($this->keeperList as $keeperL) {
-            if ($keeperL->getUserID() != $keeper->getUserID()) {
-                array_push($newList, $keeperL);
-            }
-        }
-
-        $this->keeperList = $newList;
-        array_push($this->keeperList, $keeper);
-
-        $this->SaveData();
-
+        return $keeper;
     }
 
     public function retrieveData()
@@ -164,6 +183,23 @@ class KeeperDAO
                 ($time->getStartDate() > $dateStart && $time->getFinalDate() < $dateFinal)
             ) {
                 $avaiable = false;
+            }
+        }
+        return $avaiable;
+    }
+
+    public function IsKeeperInTime($dateStart, $dateFinal, $keeper)
+    {
+        $this->RetrieveData();
+        $avaiable = null;
+        foreach ($keeper->getFreeTimePeriod() as $time) {
+            if (($time->getStartDate() == $dateStart && $time->getFinalDate() == $dateFinal) ||
+                ($time->getStartDate() == $dateStart && $time->getFinalDate() > $dateFinal) ||
+                ($time->getStartDate() < $dateStart && $time->getFinalDate() == $dateFinal) ||
+                ($time->getStartDate() < $dateStart && $time->getFinalDate() > $dateFinal) ||
+                ($time->getStartDate() > $dateStart && $time->getFinalDate() < $dateFinal)
+            ) {
+                $avaiable = $time;
             }
         }
         return $avaiable;

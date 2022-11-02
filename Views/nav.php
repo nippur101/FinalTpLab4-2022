@@ -17,7 +17,7 @@
                     </li>
                <?php }elseif($_SESSION["typeUser"] == 2){ ?>
                     <li class="nav-item">
-                         <a class="nav-link" href="<?php echo FRONT_ROOT."Home/KeeperList" ?>">Listar Keepers</a>
+                         <a class="nav-link" href="<?php echo FRONT_ROOT."Keeper/KeeperList" ?>">Listar Keepers</a>
                     </li>
                     <li class="nav-item">
                          <a class="nav-link" href="<?php echo FRONT_ROOT."Owner/ShowProfileView" ?>">Perfil</a>

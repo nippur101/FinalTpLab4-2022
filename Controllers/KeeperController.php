@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use DAO\KeeperDAO;
-use Models\Keeper as Keeper;
+use DateTime;
 use Models\FreeTimePeriod as FreeTimePeriod;
 
 class KeeperController
@@ -27,10 +27,8 @@ class KeeperController
     public function CheckAndPushData()
     {
         $keeper = $_SESSION["loggedUser"];
-        if ($keeper != NULL) { 
-            require_once(VIEWS_PATH . "validate-session.php");
-            require_once(VIEWS_PATH . "keeper-profile.php");
-        }
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "keeper-profile.php");
     }
 
     public function AddTimePeriod($startDate, $finalDate)
@@ -64,10 +62,10 @@ class KeeperController
             $time->setFinalDate($finalDate);
 
             $this->keeperDAO->addFreePeriodOfTime($time, $keeper);
-            echo "<script> if(confirm('Periodo Creado!')); </script>";
+            echo "<script> if(confirm('Periodo agregado!')); </script>";
             $this->ShowCalendarView();
         } else {
-            echo "<script> if(confirm('Periodo de Tiempo ocupado!')); </script>";
+            echo "<script> if(confirm('Periodo de ya ocupado!')); </script>";
             $this->CheckAndPushData();
         }
 
@@ -77,15 +75,58 @@ class KeeperController
 
     public function AddSecondInfo($address, $petSize, $stayCost)
     {
-
-
         $keeper = $_SESSION["loggedUser"];
         $keeper->setAddress($address);
         $keeper->setStayCost($stayCost);
         $keeper->setPetSize($petSize);
-        $this->keeperDAO->Update($keeper);
+        $this->keeperDAO->Remove($keeper->getUserID());
+        $this->keeperDAO->Add($keeper);
 
         echo "<script> if(confirm('Datos actualizados!')); </script>";
         $this->CheckAndPushData();
+    }
+
+    public function KeeperList()
+    {
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "keeper-list-prev.php");
+    }
+
+    public function ReturnKeepersInTime($startDate, $finalDate){
+        $keeperList = $this->keeperDAO->GetAll();
+        $keepersInTime = array();
+        $eventsOfKeepers = array();
+        $from = $startDate;
+        $to = $finalDate;
+        foreach ($keeperList as $keeper) {
+            $timeFree = $this->keeperDAO->IsKeeperInTime($startDate, $finalDate, $keeper);
+            if ($timeFree != null) {
+                array_push($keepersInTime, $keeper);
+                $eventOfKeepers[$keeper->getUserID()] = $timeFree;
+            }
+        }
+        
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "keeper-list.php");
+    }
+
+    public function HireKeeper($keeperID, $startDate, $finalDate){
+        $keeper = $this->keeperDAO->GetKeeper($keeperID);
+        $event = $this->keeperDAO->IsKeeperInTime($startDate, $finalDate, $keeper);
+        $needed = new FreeTimePeriod();
+        $needed->setStartDate($startDate);
+        $needed->setFinalDate($finalDate);
+
+        $keeperDateStart = new DateTime($event->getStartDate());
+        $keeperDateFinal = new DateTime($event->getFinalDate());
+        $keeperInterval = $keeperDateStart->diff($keeperDateFinal);
+        
+        $requestedDateStart = new DateTime($needed->getStartDate());
+        $requestedDateFinal = new DateTime($needed->getFinalDate());
+        $requestedInterval = $requestedDateStart->diff($requestedDateFinal);
+        
+        require_once(VIEWS_PATH . "validate-session.php");
+        require_once(VIEWS_PATH . "confirm-reserve.php");
+
     }
 }

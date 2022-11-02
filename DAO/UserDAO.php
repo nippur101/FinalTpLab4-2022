@@ -56,6 +56,21 @@ class UserDAO
         return $userR;
     }
 
+    public function ReturnDefaultUser($firstName, $lastName, $mail, $password1, $type)
+    {
+
+        $user = new User();
+
+        $user->setFirstName($firstName);
+        $user->setLastName($lastName);
+        $user->setEmail($mail);
+        $user->setPassword($password1);
+        $user->setUserType($type);
+        $user->setUserID($this->NewID());
+
+        return $user;
+    }
+
     public function alreadyExistUser($mail)
     {
 
