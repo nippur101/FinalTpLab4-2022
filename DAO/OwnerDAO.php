@@ -78,9 +78,6 @@ class OwnerDAO {
 
                 foreach($arrayToDecode as $valuesArray)
                 {
-                   
-                    //$email,$password,$firstName,$lastName,$phone,$pets
-                    
                     $owner = new Owner();
 
                     $owner->setUserID($valuesArray["userId"]);
@@ -91,8 +88,7 @@ class OwnerDAO {
                     $owner->setPhone($valuesArray["phone"]);
                     $owner->setUserType($valuesArray["userType"]);
                     $owner->setPets($valuesArray["pets"]);
-                    
-
+                
                     array_push($this->ownerList, $owner);
                 }
             }
@@ -124,5 +120,3 @@ class OwnerDAO {
     }
 
 }
-
-?>
