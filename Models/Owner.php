@@ -11,10 +11,7 @@
            
             $this->pets=array();
            
-        }
-        
-
-       
+        }   
 
         public function getPhone()
         {
