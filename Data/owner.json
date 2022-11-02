@@ -1,15 +1,5 @@
 [
     {
-        "userId": 2,
-        "firstName": "Master",
-        "lastName": "Owner",
-        "email": "master@owner.com",
-        "phone": null,
-        "password": "mo",
-        "userType": "2",
-        "pets": null
-    },
-    {
         "userId": 4,
         "firstName": "Senior",
         "lastName": "Owner",
@@ -18,5 +8,15 @@
         "password": "so",
         "userType": "2",
         "pets": []
+    },
+    {
+        "userId": 2,
+        "firstName": "Master",
+        "lastName": "Owner",
+        "email": "master@owner.com",
+        "phone": null,
+        "password": "mo",
+        "userType": "2",
+        "pets": 1
     }
 ]

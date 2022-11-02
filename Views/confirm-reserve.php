@@ -7,10 +7,10 @@ include_once('nav.php'); ?>
                <h2>Confirmar reserva</h2>
           </header>
 
-          <form action="<?php echo FRONT_ROOT . "Reserve/Generate" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
+          <form action="<?php echo FRONT_ROOT . "Reserve/GenerateReserve" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
                <div class="form-group">
-                    <label for="">El keeper:</label>
-                    <input type="text" name="keeperName" value="<?php echo $keeper->getFirstName() . " " . $keeper->getLastName(); ?>" class="form-control form-control-lg" disabled>
+                    <label for="">El keeper: <?php echo $keeper->getFirstName() . " " . $keeper->getLastName(); ?> de id:</label>
+                    <input type="text" name="keeperId" value="<?php echo $keeper->getUserId();?>" class="form-control form-control-lg" disabled>
 
                     <label for="">Estara disponible desde:</label>
                     <input type="date" name="keeperStartDate" value="<?php echo $event->getStartDate(); ?>" class="form-control form-control-lg" disabled>
@@ -35,6 +35,9 @@ include_once('nav.php'); ?>
 
                     <label for="">Resultando en un total de:</label>
                     <input type="text" name="totalStayCost" value="<?php echo ($keeperInterval->format('%a') * $keeper->getStayCost()) ?>" class="form-control form-control-lg" disabled>
+               
+                    <label for="">La reserva es para <?php echo $petToKeep->getName() ?> de id:</label>
+                    <input type="text" name="petId" value="<?php echo $petToKeep->getPetId(); ?>" class="form-control form-control-lg" disabled>
                </div>
                <div class="form-group">
                     <h3>¿Desea confirmar la reserva?</h3>

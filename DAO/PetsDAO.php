@@ -35,6 +35,17 @@ class PetsDAO
         $this->SavePets();
     }
 
+    public function ReturnOwnerPets($ownerId){
+        $this->retrieveData();
+        $ownerPets = array();
+        foreach($this->petsList as $pet){
+            if($pet->getOwner() == $ownerId){
+                array_push($ownerPets, $pet);
+            }
+        }
+        return $ownerPets;
+    }
+
     public function validPet($name, $owner)
     {
         $check = true;
@@ -48,6 +59,19 @@ class PetsDAO
             }
         }
         return $check;
+    }
+
+    public function GetPet($id)
+    {
+        $this->retrieveData();
+        $petR = null;
+        foreach ($this->petsList as $pets) {
+            if ($pets->getPetId() == $id) {
+                $petR = $pets;
+            }
+        }
+
+        return $petR;
     }
 
     public function alreadyExistPets($owner, $name)

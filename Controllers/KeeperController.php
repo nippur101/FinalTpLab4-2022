@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use DAO\KeeperDAO;
+use DAO\PetsDAO;
 use DateTime;
 use Models\FreeTimePeriod as FreeTimePeriod;
 
@@ -10,10 +11,12 @@ class KeeperController
 {
 
     private $keeperDAO;
+    private $petDAO;
 
     public function __construct()
     {
         $this->keeperDAO = new KeeperDAO();
+        $this->petDAO = new PetsDAO();
         $this->freeTimePeriod = new FreeTimePeriod();
     }
 
@@ -86,23 +89,28 @@ class KeeperController
         $this->CheckAndPushData();
     }
 
-    public function KeeperList()
+    public function KeeperList($petId)
     {
+        $petToKeep = $this->petDAO->GetPet($petId);
+
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "keeper-list-prev.php");
     }
 
-    public function ReturnKeepersInTime($startDate, $finalDate){
+    public function ReturnKeepersInTime($petId, $startDate, $finalDate){
         $keeperList = $this->keeperDAO->GetAll();
         $keepersInTime = array();
         $eventsOfKeepers = array();
         $from = $startDate;
         $to = $finalDate;
+        $petToKeep = $this->petDAO->GetPet($petId);
         foreach ($keeperList as $keeper) {
             $timeFree = $this->keeperDAO->IsKeeperInTime($startDate, $finalDate, $keeper);
             if ($timeFree != null) {
-                array_push($keepersInTime, $keeper);
-                $eventOfKeepers[$keeper->getUserID()] = $timeFree;
+                if($keeper->getPetSize() == $petToKeep->getPetType()){
+                    array_push($keepersInTime, $keeper);
+                    $eventOfKeepers[$keeper->getUserID()] = $timeFree;
+                }
             }
         }
         
@@ -110,12 +118,14 @@ class KeeperController
         require_once(VIEWS_PATH . "keeper-list.php");
     }
 
-    public function HireKeeper($keeperID, $startDate, $finalDate){
+    public function HireKeeper($petId, $keeperID, $startDate, $finalDate){
         $keeper = $this->keeperDAO->GetKeeper($keeperID);
         $event = $this->keeperDAO->IsKeeperInTime($startDate, $finalDate, $keeper);
         $needed = new FreeTimePeriod();
         $needed->setStartDate($startDate);
         $needed->setFinalDate($finalDate);
+
+        $petToKeep = $this->petDAO->GetPet($petId);
 
         $keeperDateStart = new DateTime($event->getStartDate());
         $keeperDateFinal = new DateTime($event->getFinalDate());

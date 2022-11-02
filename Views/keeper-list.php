@@ -6,7 +6,7 @@ require_once(VIEWS_PATH . "nav.php");
 <main class="py-5">
      <section id="listado" class="mb-5">
           <div class="container">
-               <h2 class="mb-4">Listado de keepers en fecha solicitada:</h2>
+               <h2 class="mb-4">Listado de keepers para cuidar a <?php echo $petToKeep->getName() . "(" . $petToKeep->getPetType() . ")"; ?> </h2>
                <form action="" method="POST">
                     <table class="table bg-light-alpha">
                          <thead>
@@ -46,6 +46,9 @@ require_once(VIEWS_PATH . "nav.php");
                <form action="<?php echo FRONT_ROOT . "Keeper/HireKeeper" ?>" method="POST" class="mb-5">
                     <div class="container">
                          <h2 class="mb-4">Contratar keeper:</h2>
+                         <label for="">Para <?php echo $petToKeep->getName(); ?> de id:</label>
+                         <input type="text" name="petId" class="form-control form-control-lg" value="<?php echo $petToKeep->getPetId(); ?>">
+
                          <label for="">Id del Keeper?</label>
                          <input type="text" name="id" class="form-control form-control-lg" placeholder="Ingresar id" required>
 
