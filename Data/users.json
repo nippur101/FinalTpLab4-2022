@@ -38,5 +38,13 @@
         "email": "junior@keeper",
         "password": "jk",
         "userType": "1"
+    },
+    {
+        "userId": 6,
+        "firstName": "Javier",
+        "lastName": "Macedo",
+        "email": "j@m",
+        "password": "1234",
+        "userType": "2"
     }
 ]
