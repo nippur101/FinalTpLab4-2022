@@ -6,8 +6,11 @@ use Models\User;
 
 class UserPDO
 {
-
+  
+    private $connection;
+    private $tableName = "_User";
     private $userList = array();
+
 
     public function getAll()
     {
@@ -35,7 +38,7 @@ class UserPDO
                     array_push($this->userList, $user);
                 }
 
-                return $this->$userList;
+                return $this->userList;
                
             }
             catch(Exception $ex)
@@ -50,10 +53,10 @@ class UserPDO
 
         try
         {
-            $query = "INSERT INTO ".$this->tableName." (userId, firstName, lastName,email,_password,userType) 
+            $query = "INSERT INTO ".$this->tableName." (userId,firstName, lastName,email,_password,userType) 
             VALUES (:userId, :firstName, :lastName :email, :_password, :userType);";
 
-            $valuesArray["userId"] = $user->getUserId();
+            $valuesArray["userId"] = "defalut";
             $valuesArray["firstName"] = $user->getFirstName();
             $valuesArray["lastName"] = $user->getLastName();
             $valuesArray["email"] = $user->getEmail();
