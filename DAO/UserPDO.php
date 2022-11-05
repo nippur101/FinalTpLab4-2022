@@ -53,10 +53,9 @@ class UserPDO
 
         try
         {
-            $query = "INSERT INTO ".$this->tableName." (userId,firstName, lastName,email,_password,userType) 
-            VALUES (:userId, :firstName, :lastName :email, :_password, :userType);";
-
-            $valuesArray["userId"] = "defalut";
+            $query = "INSERT INTO ".$this->tableName." (_User.firstName, _User.lastName, _User.email, _User._password, _User.userType) VALUES ( :firstName, :lastName :email, :_password, :userType);";
+            
+           // $valuesArray["userId"] = NULL;
             $valuesArray["firstName"] = $user->getFirstName();
             $valuesArray["lastName"] = $user->getLastName();
             $valuesArray["email"] = $user->getEmail();
@@ -69,6 +68,7 @@ class UserPDO
         }
         catch(Exception $ex)
         {
+            var_dump($query);
             throw $ex;
         }
         
