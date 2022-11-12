@@ -1,86 +1,20 @@
 [
     {
-        "userId": 3,
-        "firstName": "Senior",
-        "lastName": "Keeper",
-        "email": "senior@keeper",
-        "password": "sk",
-        "userType": "1",
-        "address": "Avellaneda 1245",
-        "petSize": "Mediano",
-        "stayCost": "1",
-        "reviews": null
-    },
-    {
         "userId": 1,
-        "firstName": "Master",
-        "lastName": "Keeper",
-        "email": "master@keeper.com",
-        "password": "mk",
-        "userType": "1",
-        "address": "Avellaneda 1245",
-        "petSize": "Mediano",
-        "stayCost": "460",
-        "reviews": null,
-        "freeTimePeriod": [
-            {
-                "dateStart": "2022-11-10",
-                "dateFinal": "2022-11-28"
-            },
-            {
-                "dateStart": "2022-11-10",
-                "dateFinal": "2022-11-26"
-            },
-            {
-                "dateStart": "2022-11-10",
-                "dateFinal": "2022-11-28"
-            },
-            {
-                "dateStart": "2022-11-02",
-                "dateFinal": "2022-11-03"
-            }
-        ]
-    },
-    {
-        "userId": 5,
-        "firstName": "Junior",
-        "lastName": "Keeper",
-        "email": "junior@keeper",
-        "password": "jk",
+        "firstName": "Keeper",
+        "lastName": "Prueba",
+        "email": "prueba@keeper",
+        "password": "pk",
         "userType": "1",
         "address": "Calle Falsa 123",
-        "petSize": "Pequenio",
+        "petSize": "Mediano",
         "stayCost": "460",
-        "reviews": [],
         "freeTimePeriod": [
             {
-                "dateStart": "2022-11-10",
-                "dateFinal": "2022-11-28"
-            },
-            {
-                "dateStart": "2022-11-10",
-                "dateFinal": "2022-11-26"
-            },
-            {
-                "dateStart": "2022-11-10",
-                "dateFinal": "2022-11-28"
-            },
-            {
                 "dateStart": "2022-11-02",
-                "dateFinal": "2022-11-03"
-            },
-            {
-                "dateStart": "2022-11-10",
-                "dateFinal": "2022-11-28"
-            },
-            {
-                "dateStart": "2022-11-10",
-                "dateFinal": "2022-11-26"
-            },
-            {
-                "dateStart": "2022-11-04",
-                "dateFinal": "2022-11-05"
+                "dateFinal": "2022-11-17"
             }
-        ]
+        ],
+        "reviews": []
     }
 ]

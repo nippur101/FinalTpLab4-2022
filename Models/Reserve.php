@@ -8,6 +8,8 @@
         private $amountPaid;
         private $keeper;
         private $pets;
+        private $keeperReviewStatus;
+        private $paymentReviewStatus;
         private $totalCost;
                
         public function getReserveId()
@@ -103,8 +105,28 @@
 
                 return $this;
         }
+
+        public function getKeeperReviewStatus()
+        {
+                return $this->keeperReviewStatus;
+        }
+
+        public function getPaymentReviewStatus()
+        {
+                return $this->paymentReviewStatus;
+        }
+
+        public function setKeeperReviewStatus($keeperReviewStatus)
+        {
+                $this->keeperReviewStatus = $keeperReviewStatus;
+
+                return $this;
+        }
+
+        public function setPaymentReviewStatus($paymentReviewStatus)
+        {
+                $this->paymentReviewStatus = $paymentReviewStatus;
+
+                return $this;
+        }
     }
-    
-
-
-?>

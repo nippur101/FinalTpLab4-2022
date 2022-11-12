@@ -1,21 +1,11 @@
 [
     {
-        "userId": 4,
-        "firstName": "Senior",
-        "lastName": "Owner",
-        "email": "senior@owner",
-        "phone": "Incompleta",
-        "password": "so",
-        "userType": "2",
-        "pets": []
-    },
-    {
         "userId": 2,
-        "firstName": "Master",
-        "lastName": "Owner",
-        "email": "master@owner.com",
-        "phone": null,
-        "password": "mo",
+        "firstName": "Owner",
+        "lastName": "Prueba",
+        "email": "prueba@owner",
+        "phone": "Incompleta",
+        "password": "po",
         "userType": "2",
         "pets": 1
     },

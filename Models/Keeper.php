@@ -99,6 +99,11 @@
 
                 return $this;
         }
+
+        public function __toString()
+        {
+                return $this->getKeeperId() . " - " . $this->getAddress() . " - " . $this->getPetSize() . " - " . $this->getStayCost();
+        }
     }
 
 

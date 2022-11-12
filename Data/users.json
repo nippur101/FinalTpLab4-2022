@@ -1,18 +1,18 @@
 [
     {
         "userId": 1,
-        "firstName": "Master",
-        "lastName": "Keeper",
-        "email": "master@keeper.com",
-        "password": "mk",
+        "firstName": "Keeper",
+        "lastName": "Prueba",
+        "email": "prueba@keeper",
+        "password": "pk",
         "userType": "1"
     },
     {
         "userId": 2,
-        "firstName": "Master",
-        "lastName": "Owner",
-        "email": "master@owner.com",
-        "password": "mo",
+        "firstName": "Owner",
+        "lastName": "Prueba",
+        "email": "prueba@owner",
+        "password": "po",
         "userType": "2"
     },
     {

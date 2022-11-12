@@ -26,15 +26,64 @@ class ReserveDAO
         $this->SaveReserve();
     }
 
-    public function validReserve($starDate, $finalDate)
+    public function GetByKeeper($keeper)
     {
+        $this->RetrieveData();
 
+        $reserveList = array();
 
+        foreach ($this->reserveList as $reserve) {
+            if ($reserve->getKeeper()->getUserID() == $keeper->getUserID()) {
+                array_push($reserveList, $reserve);
+            }
+        }
 
-        $check = false;
+        return $reserveList;
+    }
 
+    public function GetPetsWithoutReserve($petList)
+    {
+        $this->RetrieveData();
 
-        return $check;
+        $petListWithoutReserve = array();
+
+        foreach ($petList as $pet) {
+            $flag = true;
+            foreach ($this->reserveList as $reserve) {
+                if ($reserve->getPets()->getPetID() == $pet->getPetID()) {
+                    $flag = false;
+                }
+            }
+            if ($flag) {
+                array_push($petListWithoutReserve, $pet);
+            }
+        }
+
+        return $petListWithoutReserve;
+    }
+
+    public function GetReserve($reserveId)
+    {
+        $this->RetrieveData();
+
+        foreach ($this->reserveList as $reserve) {
+            if ($reserve->getReserveID() == $reserveId) {
+                return $reserve;
+            }
+        }
+    }
+
+    public function Update(Reserve $reserve)
+    {
+        $this->RetrieveData();
+
+        foreach ($this->reserveList as $reserveValue) {
+            if ($reserveValue->getReserveID() == $reserve->getReserveID()) {
+                $reserveValue = $reserve;
+            }
+        }
+
+        $this->SaveReserve();
     }
 
     public function retrieveData()

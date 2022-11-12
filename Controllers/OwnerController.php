@@ -4,6 +4,7 @@ namespace Controllers;
 
 use DAO\OwnerDAO;
 use DAO\PetsDAO;
+use DAO\ReserveDAO;
 use Models\Owner as Owner;
 
 class OwnerController
@@ -11,11 +12,13 @@ class OwnerController
 
     private $ownerDAO;
     private $petDAO;
+    private $reserveDAO;
 
     public function __construct()
     {
         $this->ownerDAO = new OwnerDAO();
         $this->petDAO = new PetsDAO();
+        $this->reserveDAO = new ReserveDAO();
     }
 
     public function ShowProfileView()
@@ -33,6 +36,7 @@ class OwnerController
         $petList = $this->petDAO->ReturnOwnerPets($owner->getUserID());
 
         if($petList != NULL){
+            $petList = $this->reserveDAO->GetPetsWithoutReserve($petList);
             require_once(VIEWS_PATH . "validate-session.php");
             require_once(VIEWS_PATH . "keeper-list-owner-pet.php");
         }else{
