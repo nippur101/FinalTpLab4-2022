@@ -12,6 +12,7 @@ class PetsDAO
 {
 
     private $petsList = array();
+
     private $connection;
     
     private $tableName = "Pets";
@@ -42,13 +43,41 @@ class PetsDAO
     }
 
     public function ReturnOwnerPets($ownerId){
-        $this->retrieveData();
         $ownerPets = array();
-        foreach($this->petsList as $pet){
-            if($pet->getOwner() == $ownerId){
-                array_push($ownerPets, $pet);
+        try
+            {
+                $query = "SELECT * FROM ".$this->tableName."
+                WHERE ownerId=".$ownerId;
+
+                $this->connection = Connection::GetInstance();
+
+                $ownerPets = $this->connection->Execute($query);
+                
+                foreach ($ownerPets as $pets)
+                {                
+                    $pets = new Pets();
+    
+                    $pets->setPetId($ownerPets["petId"]);
+                    $pets->setName($ownerPets["_name"]);
+                    $pets->setVaccinationPlan($ownerPets["vaccinationPlan"]);
+                    $pets->setRaze($ownerPets["raze"]);
+                    $pets->setPetType($ownerPets["petType"]);
+                    $pets->setVideo($ownerPets["video"]);
+                    $pets->setImage($ownerPets["image"]);
+                    $pets->setOwner($ownerPets["ownerId"]);
+    
+    
+                    array_push($ownerPets, $pets);
+                }   
+
+
+                return $ownerPets;
+               
             }
-        }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         return $ownerPets;
     }
 
@@ -113,7 +142,7 @@ class PetsDAO
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
-                foreach ($resultSet as $valuesArray) {
+              
 
                   
                     
@@ -134,8 +163,6 @@ class PetsDAO
                         }
                     
     
-                    array_push($this->petsList, $pets);
-                }
 
                 return $this->petsList;
                
@@ -213,11 +240,20 @@ class PetsDAO
         $this->SavePets();
     }
 
-    public function recuperarMascotas($ownerId){
-        $query = "SELECT * FROM ".$this->tableName."INER JOING _owner AS o ON o.petsId=Pets.petsId where ownerId=$ownerId";
+    
 
-        $this->connection = Connection::GetInstance();
-
-        $resultSet = $this->connection->Execute($query);
+    private function setPet($valuesArray){
+        $pets = new Pets();
+    
+        $pets->setPetId($valuesArray["petId"]);
+        $pets->setName($valuesArray["name"]);
+        $pets->setVaccinationPlan($valuesArray["vaccinationPlan"]);
+        $pets->setRaze($valuesArray["raze"]);
+        $pets->setPetType($valuesArray["petType"]);
+        $pets->setVideo($valuesArray["video"]);
+        $pets->setImage($valuesArray["image"]);
+        $pets->setOwner($valuesArray["owner"]);
+        return
+        
     }
 }

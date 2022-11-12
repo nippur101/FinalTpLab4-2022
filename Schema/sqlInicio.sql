@@ -113,7 +113,49 @@ REFERENCES pethero.Pets(petsId),
 FOREIGN KEY(keeperId )
 REFERENCES pethero.Keeper(keeperId))engine = InnoDB;
 
+insert into Pets values (default,"https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg","Dalmata","Mediano",
+"https:\/\/images.hola.com\/imagenes\/estar-bien\/20200828174216\/razas-perro-dalmata-gt\/0-859-148\/dalmata-t.jpg","Firulais","https:\/\/www.youtube.com\/watch?v=bju7O_qv7l4");
+
+insert into Pets values (default,"https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg","Caniche","Pequenio",
+"https:\/\/images.hola.com\/imagenes\/estar-bien\/20200828174216\/razas-perro-dalmata-gt\/0-859-148\/dalmata-t.jpg","Tito","https:\/\/www.youtube.com\/watch?v=bju7O_qv7l4");
+
+insert into Pets values (default,"https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg","Pastor Aleman","Grande",
+"https:\/\/images.hola.com\/imagenes\/estar-bien\/20200828174216\/razas-perro-dalmata-gt\/0-859-148\/dalmata-t.jpg","Albondiga","https:\/\/www.youtube.com\/watch?v=bju7O_qv7l4");
+
+/*
+update _Owner
+set petsId=1
+where ownerId =2;
+*/
+
+alter table Pets add column ownerId int;
+
+alter table Pets add constraint FK_Pets__Owner foreign key (ownerId) references pethero._Owner(ownerId);
+
+ALTER TABLE `pethero`.`_Owner` 
+DROP FOREIGN KEY `_Owner_ibfk_1`;
+
+ALTER TABLE `pethero`.`_Owner` 
+DROP COLUMN `petsId`,
+DROP INDEX `petsId` ;
 
 
+#AGREGAR OWNER A PET
+#===========================================================================================================================================
+ALTER TABLE Pets
+DROP FOREIGN KEY  FK_Pets__Owner;
+
+update Pets
+set ownerId=1
+where petsId =4; 
+
+ALTER TABLE Pets ADD CONSTRAINT FK_Pets__Owner FOREIGN KEY Pets (ownerId) REFERENCES _Owner (userId);
+#===========================================================================================================================================
 
 
+#BUSCAR PET POR ID DE USER-OWNER
+#======================================
+select p.petsId from Pets as p
+where p.ownerId=2;
+
+#=====================================
