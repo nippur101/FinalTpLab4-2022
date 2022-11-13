@@ -1,25 +1,20 @@
 <?php
     namespace Models;
+
+    use Models\FreeTimePeriod as FreeTimePeriod;
     
     class Keeper extends User{
         private $keeperId;
         private $address;
         private $petSize;
         private $stayCost;
-        private $freeTimePeriod;
-        private $reviews;
-        /*
-        function __construct($firstName,$lastName,$email,$password,$address,$petSize,$stayCost,$freeTimePeriod){
-            $this->firstName=$firstName;
-            $this->lastName=$lastName;
-            $this->email=$email;
-            $this->password=$password;
-            $this->address=$address;
-            $this->petSize=$petSize;
-            $this->stayCost=$stayCost;
+        private $freeTimePeriod = array();
+        private $reviews = array();
 
+        public function __constructor(){
+                $this->freeTimePeriod = array();
+                $this->reviews = array();
         }
-        */
         
         public function getKeeperId()
         {
@@ -75,6 +70,10 @@
                 return $this;
         }
 
+        public function AddTimePeriod(FreeTimePeriod $freeTimePeriod){
+            array_push($this->freeTimePeriod, $freeTimePeriod);
+        }
+        
       
         public function getFreeTimePeriod()
         {

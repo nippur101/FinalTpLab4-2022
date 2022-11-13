@@ -1,41 +1,86 @@
 [
     {
-        "userId": 6,
-        "firstName": "Fredi",
-        "lastName": "Mercury",
-        "email": "f@m",
-        "password": "1234",
+        "userId": 3,
+        "firstName": "Senior",
+        "lastName": "Keeper",
+        "email": "senior@keeper",
+        "password": "sk",
         "userType": "1",
-        "address": null,
-        "petSize": null,
-        "stayCost": null,
-        "freeTimePeriod": null,
+        "address": "Avellaneda 1245",
+        "petSize": "Mediano",
+        "stayCost": "1",
         "reviews": null
     },
     {
-        "userId": 7,
-        "firstName": "Antonio",
-        "lastName": "Banderas",
-        "email": "a@ba",
-        "password": "1234",
+        "userId": 1,
+        "firstName": "Master",
+        "lastName": "Keeper",
+        "email": "master@keeper.com",
+        "password": "mk",
         "userType": "1",
-        "address": null,
-        "petSize": null,
-        "stayCost": null,
-        "freeTimePeriod": [],
-        "reviews": null
+        "address": "Avellaneda 1245",
+        "petSize": "Mediano",
+        "stayCost": "460",
+        "reviews": null,
+        "freeTimePeriod": [
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-26"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-02",
+                "dateFinal": "2022-11-03"
+            }
+        ]
     },
     {
-        "userId": 2,
-        "firstName": "Eliza",
-        "lastName": "Gomez",
-        "email": "e@g",
-        "password": "1234",
+        "userId": 5,
+        "firstName": "Junior",
+        "lastName": "Keeper",
+        "email": "junior@keeper",
+        "password": "jk",
         "userType": "1",
-        "address": null,
-        "petSize": null,
-        "stayCost": null,
-        "freeTimePeriod": null,
-        "reviews": null
+        "address": "Calle Falsa 123",
+        "petSize": "Pequenio",
+        "stayCost": "460",
+        "reviews": [],
+        "freeTimePeriod": [
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-26"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-02",
+                "dateFinal": "2022-11-03"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-26"
+            },
+            {
+                "dateStart": "2022-11-04",
+                "dateFinal": "2022-11-05"
+            }
+        ]
     }
 ]

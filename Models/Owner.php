@@ -11,10 +11,11 @@
            
             $this->pets=array();
            
-        }
-        
+        }   
 
-       
+        public function addPets(Pets $pet){
+            array_push($this->petsList, $pet);
+        }
 
         public function getPhone()
         {
