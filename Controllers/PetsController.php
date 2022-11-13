@@ -39,7 +39,7 @@ class PetsController
             $pets->setImage($image);
             $pets->setOwner($owner->getUserID());
             $this->petsDAO->Add($pets);
-            $this->ownerDAO->addPetOwner($pets, $owner);
+           
             echo "<script> if(confirm('La Mascota se ha creado con exito!')); </script>";
         } else {
             echo "<script> if(confirm('La mascota ya existe!')); </script>";

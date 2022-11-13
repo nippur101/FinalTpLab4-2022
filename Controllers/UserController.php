@@ -82,6 +82,10 @@ class UserController
                 $this->userDAO->Add($user);
                 echo "<script> if(confirm('Usuario creado con exito!')); </script>";
 
+                $this->userDAO->retrieveUserId($mail,$password1,$user);
+                var_dump($user);
+
+
                 if ($user->getUserType() == 1) {
                     $keeper = $this->keeperDAO->ReturnDefaultKeeper($user);
                     $this->keeperDAO->Add($keeper);

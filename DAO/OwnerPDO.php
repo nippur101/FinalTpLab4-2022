@@ -20,46 +20,14 @@ class OwnerPDO
     }
 
     public function Add(Owner $owner)
-    {
-       
+    {   
         try
         {
-            $query = "INSERT INTO ".$this->tableName." (userId, firstName, lastName, email, _password, userType) VALUES (:userId, :firstName, :lastName :email, :_password, :userType);";
+            $query = "CALL addOwner(".$owner->getUserID().",'".$owner->getPhone()."');";
             
-                $arrayPets=array();
-
-     
-
-                $valuesArray["userId"] =NULL;
-                $valuesArray["firstName"] = $owner->getFirstName();
-                $valuesArray["lastName"] = $owner->getLastName();
-                $valuesArray["email"] = $owner->getEmail();
-                $valuesArray["phone"] = $owner->getPhone();
-                $valuesArray["password"] = $owner->getPassword();
-                $valuesArray["userType"] = $owner->getUserType();
-                //$valuesArray["pets"] = $owner->getPets();
-                if ($owner->getPets() != null) {
-                    foreach ($owner->getPets() as $pets) {
-                        $arrayPets["petId"] = $pets->getPetId();
-                        $arrayPets["name"] = $pets->getName();
-                        $arrayPets["vaccinationPlan"] = $pets->getVaccinationPlan();
-                        $arrayPets["petType"] = $pets->getPetType();
-                        $arrayPets["raze"] = $pets->getRaze();
-                        $arrayPets["video"] = $pets->getVideo();
-                        $arrayPets["image"] = $pets->getImage();
-                        $arrayPets["owner"] = $pets->getOwner();
-                        $valuesArray["pets"][] = $arrayPets;
-                    }
-                }
-    
-            
-
-
-
-
             $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query, $valuesArray);
+            $this->connection->ExecuteNonQuery($query);
         }
         catch(Exception $ex)
         {
@@ -112,20 +80,14 @@ class OwnerPDO
 
         $this->SaveOwner();
     }
-
+*/
     public function addPetOwner($pet, $owner)
     {
-        $this->retrieveData();
-        $owner->setPets($pet->getPetId());
+        
+        $pet->setOwner($owner->getUserID);
 
-
-        $this->Remove($owner->getUserID());
-
-        $this->add($owner);
-
-        $this->SaveOwner();
     }
-*/
+
     public function retrieveData()
     {
 

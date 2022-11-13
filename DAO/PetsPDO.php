@@ -18,7 +18,7 @@ class PetsPDO
     private $tableName = "Pets";
     public function __construct()
     {
-        $this->ownerDAO = new OwnerPDO();
+       
 
       //  $this->ownerDAO = new OwnerDAO();
     }
@@ -32,15 +32,15 @@ class PetsPDO
     }
 
     public function Add(Pets $pets)
-    {
+    {/*
+        $ownerDAO = new OwnerPDO();
         $owner = $_SESSION["loggedUser"];
-        $this->ownerDAO->addPetOwner($pets, $owner);
+        $ownerDAO->addPetOwner($pets, $owner);
+*/
+        $this->SavePets($pets);
+       
 
-        $this->RetrieveData();
 
-        array_push($this->petsList, $pets);
-
-        $this->SavePets();
     }
 
     public function ReturnOwnerPets($ownerId){
@@ -178,34 +178,18 @@ class PetsPDO
     {
         try
         {
-            $query = "INSERT INTO ".$this->tableName." (petId, petId, vaccinationPlan, petType, raze,video,image,owner)
-             VALUES ( :petId, :petId, :vaccinationPlan, :petType, :raze,:video,:image,:owner);";
-            
-            $valuesArray["petId"] = $pets->getPetId();
-            $valuesArray["name"] = $pets->getName();
-            $valuesArray["vaccinationPlan"] = $pets->getVaccinationPlan();
-            $valuesArray["petType"] = $pets->getPetType();
-            $valuesArray["raze"] = $pets->getRaze();
-            $valuesArray["video"] = $pets->getVideo();
-            $valuesArray["image"] = $pets->getImage();
-            $valuesArray["owner"] = $pets->getOwner();
+            $query = "CALL addPet ('".$pets->getName()."','".$pets->getVaccinationPlan()."','".$pets->getRaze()."','".$pets->getPetType()."','".$pets->getVideo()."','".$pets->getImage()."',".$pets->getOwner().");";
+           
 
             $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query, $valuesArray);
+            $this->connection->ExecuteNonQuery($query);
 
         }
         catch(Exception $ex)
         {
             var_dump($query);
             throw $ex;
-        }
-
-        foreach ($this->petsList as $pets) {
-            
-
-
-            array_push($arrayToEncode, $valuesArray);
         }
 
        
