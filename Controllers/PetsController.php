@@ -6,6 +6,7 @@ use DAO\PetsDAO;
 use Models\Pets as Pets;
 use Models\Owner as Owner;
 use DAO\OwnerDAO;
+use DAO\PetsPDO;
 
 class PetsController
 {
@@ -15,8 +16,11 @@ class PetsController
 
     public function __construct()
     {
-        $this->petsDAO = new PetsDAO();
-        $this->ownerDAO = new OwnerDAO();
+       // $this->petsDAO = new PetsDAO();
+        //$this->ownerDAO = new OwnerDAO();
+
+        $this->petsDAO = new PetsPDO();
+        $this->ownerDAO = new PetsPDO();
     }
 
     public function CreatePets($name, $vaccinationPlan, $raze, $petType, $video, $image)

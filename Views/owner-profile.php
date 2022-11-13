@@ -3,8 +3,9 @@ require_once(VIEWS_PATH . "header.php");
 require_once(VIEWS_PATH . "nav.php");
 
 use DAO\PetsDAO;
+use DAO\PetsPDO;
 
-$petsDAO = new PetsDAO();
+$petsDAO = new PetsPDO();
 $user = $_SESSION["loggedUser"];
 ?>
 <main class="py-5">

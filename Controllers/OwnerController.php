@@ -5,6 +5,8 @@ namespace Controllers;
 use DAO\OwnerDAO;
 use DAO\PetsDAO;
 use Models\Owner as Owner;
+use DAO\OwnerPDO;
+use DAO\PetsPDO;
 
 class OwnerController
 {
@@ -14,8 +16,11 @@ class OwnerController
 
     public function __construct()
     {
-        $this->ownerDAO = new OwnerDAO();
-        $this->petDAO = new PetsDAO();
+      //  $this->ownerDAO = new OwnerDAO();
+        //$this->petDAO = new PetsDAO();
+
+        $this->ownerDAO = new OwnerPDO();
+        $this->petDAO = new PetsPDO();
     }
 
     public function ShowProfileView()

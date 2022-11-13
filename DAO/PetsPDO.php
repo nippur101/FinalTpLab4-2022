@@ -1,14 +1,14 @@
 <?php
 
 namespace DAO;
-namespace DAO;
+
 use \Exception as Exception;
 use DAO\OwnerPDO;
 use DAO\OwnerDAO;
 use Models\Pets;
 use Models\Owner;
 
-class PetsDAO
+class PetsPDO
 {
 
     private $petsList = array();
@@ -18,8 +18,9 @@ class PetsDAO
     private $tableName = "Pets";
     public function __construct()
     {
-        $this->ownerPDO = new OwnerPDO();
-        $this->ownerDAO = new OwnerDAO();
+        $this->ownerDAO = new OwnerPDO();
+
+      //  $this->ownerDAO = new OwnerDAO();
     }
 
     public function getAll()
@@ -46,25 +47,24 @@ class PetsDAO
         $ownerPets = array();
         try
             {
-                $query = "SELECT * FROM ".$this->tableName."
-                WHERE ownerId=".$ownerId;
+                $query = "CALL ownerPets(".$ownerId.")";
 
                 $this->connection = Connection::GetInstance();
 
                 $ownerPets = $this->connection->Execute($query);
                 
-                foreach ($ownerPets as $pets)
+                foreach ($ownerPets as $pet)
                 {                
                     $pets = new Pets();
     
-                    $pets->setPetId($ownerPets["petId"]);
-                    $pets->setName($ownerPets["_name"]);
-                    $pets->setVaccinationPlan($ownerPets["vaccinationPlan"]);
-                    $pets->setRaze($ownerPets["raze"]);
-                    $pets->setPetType($ownerPets["petType"]);
-                    $pets->setVideo($ownerPets["video"]);
-                    $pets->setImage($ownerPets["image"]);
-                    $pets->setOwner($ownerPets["ownerId"]);
+                    $pets->setPetId($pet["petsId"]);
+                    $pets->setName($pet["_name"]);
+                    $pets->setVaccinationPlan($pet["vaccinationPlan"]);
+                    $pets->setRaze($pet["raze"]);
+                    $pets->setPetType($pet["petType"]);
+                    $pets->setVideo($pet["video"]);
+                    $pets->setImage($pet["image"]);
+                    $pets->setOwner($pet["ownerId"]);
     
     
                     array_push($ownerPets, $pets);
@@ -144,19 +144,19 @@ class PetsDAO
                 $resultSet = $this->connection->Execute($query);
               
 
-                  
+                
                     
                     foreach ($resultSet as $valuesArray) {
                             $pets = new Pets();
     
-                            $pets->setPetId($valuesArray["petId"]);
-                            $pets->setName($valuesArray["name"]);
+                            $pets->setPetId($valuesArray["petsId"]);
+                            $pets->setName($valuesArray["_name"]);
                             $pets->setVaccinationPlan($valuesArray["vaccinationPlan"]);
                             $pets->setRaze($valuesArray["raze"]);
                             $pets->setPetType($valuesArray["petType"]);
                             $pets->setVideo($valuesArray["video"]);
                             $pets->setImage($valuesArray["image"]);
-                            $pets->setOwner($valuesArray["owner"]);
+                            $pets->setOwner($valuesArray["ownerId"]);
             
             
                             array_push($this->petsList, $pets);
@@ -242,18 +242,4 @@ class PetsDAO
 
     
 
-    private function setPet($valuesArray){
-        $pets = new Pets();
-    
-        $pets->setPetId($valuesArray["petId"]);
-        $pets->setName($valuesArray["name"]);
-        $pets->setVaccinationPlan($valuesArray["vaccinationPlan"]);
-        $pets->setRaze($valuesArray["raze"]);
-        $pets->setPetType($valuesArray["petType"]);
-        $pets->setVideo($valuesArray["video"]);
-        $pets->setImage($valuesArray["image"]);
-        $pets->setOwner($valuesArray["owner"]);
-        return
-        
-    }
 }

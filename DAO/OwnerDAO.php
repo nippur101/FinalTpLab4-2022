@@ -120,9 +120,10 @@ class OwnerDAO
             $valuesArray["firstName"] = $owner->getFirstName();
             $valuesArray["lastName"] = $owner->getLastName();
             $valuesArray["email"] = $owner->getEmail();
-            $valuesArray["phone"] = $owner->getPhone();
+           
             $valuesArray["password"] = $owner->getPassword();
             $valuesArray["userType"] = $owner->getUserType();
+            $valuesArray["phone"] = $owner->getPhone();
             $valuesArray["pets"] = $owner->getPets();
 
 

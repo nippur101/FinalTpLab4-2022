@@ -159,3 +159,25 @@ select p.petsId from Pets as p
 where p.ownerId=2;
 
 #=====================================
+
+
+
+
+
+#PROCEDURE
+#===================================================
+CREATE DEFINER=`root`@`%` PROCEDURE `eliminatePet`(in petId int)
+BEGIN
+	ALTER TABLE Pets
+	DROP FOREIGN KEY  FK_Pets__Owner;
+	delete from Pets
+	where petsId =petId;
+	ALTER TABLE Pets ADD CONSTRAINT FK_Pets__Owner FOREIGN KEY Pets (ownerId) REFERENCES _Owner (userId);
+END
+
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`%` PROCEDURE `ownerPets`(in oId int)
+BEGIN
+SELECT * FROM Pets WHERE ownerId=oId;
+END
+#===========================================================================================================================================

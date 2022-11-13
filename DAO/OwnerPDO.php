@@ -10,6 +10,8 @@ class OwnerPDO
     private $connection;
     private $ownerList = array();
     private $tableName = "_Owner";
+
+    
     public function getAll()
     {
         $this->retrieveData();
@@ -128,44 +130,39 @@ class OwnerPDO
     {
 
         $this->ownerList = array();
+        $petList=array();
+        $petsPDO=new PetsPDO();
+        $userList=array();
+        $userPDO=new UserPDO();
 
         try
             {
+                $userList=$userPDO->getAll();
               
                 $query = "SELECT * FROM ".$this->tableName;
 
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
+
                 foreach ($resultSet as $valuesArray) {
 
                     $owner = new Owner();
                     $owner->setUserId($valuesArray["userId"]);
-                    $owner->setFirstName($valuesArray["firstName"]);
-                    $owner->setLastName($valuesArray["lastName"]);
-                    $owner->setEmail($valuesArray["email"]);
-                    $owner->setPassword($valuesArray["_password"]);
-                    $owner->setUserType($valuesArray["userType"]);
                     $owner->setPhone($valuesArray["phone"]);
-                   // $owner->setPets($valuesArray["pets"]);
-                    if (isset($valuesArray["pets"])) {
-                        foreach ($valuesArray["pets"] as $value) {
-                            $pets = new Pets();
-    
-                            $pets->setPetId($value["petId"]);
-                            $pets->setName($value["name"]);
-                            $pets->setVaccinationPlan($value["vaccinationPlan"]);
-                            $pets->setRaze($value["raze"]);
-                            $pets->setPetType($value["petType"]);
-                            $pets->setVideo($value["video"]);
-                            $pets->setImage($value["image"]);
-                            $pets->setOwner($value["owner"]);
-            
-            
-                            $owner->addPets( $pets);
-                        }
+                
+                foreach($userList as $user){
+                    if($owner->getUserID()==$user->getUserID()){
+                        $owner->setFirstName($user->getFirstName());
+                        $owner->setLastName($user->getLastName());
+                        $owner->setEmail($user->getEmail());
+                        $owner->setPassword($user->getPassword());
+                        $owner->setUserType($user->getUserType());
                     }
     
+                }
+                    $petList= $petsPDO->ReturnOwnerPets($owner->getUserID());
+                    $owner->setPets($petList);
                     array_push($this->ownerList, $owner);
                 }
 

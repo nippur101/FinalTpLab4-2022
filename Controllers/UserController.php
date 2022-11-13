@@ -5,6 +5,8 @@ namespace Controllers;
 use DAO\UserPDO;
 use DAO\KeeperDAO;
 use DAO\OwnerDAO;
+use DAO\OwnerPDO;
+use DAO\UserDAO;
 use Models\User as User;
 use Models\Keeper as Keeper;
 use Models\Owner;
@@ -17,8 +19,11 @@ class UserController
     public function __construct()
     {
         $this->userDAO = new UserPDO();
+       // $this->keeperDAO = new KeeperPDO();
+        $this->ownerDAO = new OwnerPDO();
+       // $this->userDAO = new UserDAO();
         $this->keeperDAO = new KeeperDAO();
-        $this->ownerDAO = new OwnerDAO();
+       // $this->ownerDAO = new OwnerDAO();
     }
 
     public function Destroy()
