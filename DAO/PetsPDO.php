@@ -209,19 +209,21 @@ class PetsPDO
     }
     public function Remove($id)
     {
-        $this->RetrieveData();
+        try
+        {
+            $query = "CALL eliminatePet (".$id.");";
+           
 
-        $newList = array();
+            $this->connection = Connection::GetInstance();
 
-        foreach ($this->petsList as $pets) {
-            if ($pets->getPetId() != $id) {
-                array_push($newList, $pets);
-            }
+            $this->connection->ExecuteNonQuery($query);
+
         }
-
-        $this->petsList = $newList;
-
-        $this->SavePets();
+        catch(Exception $ex)
+        {
+            var_dump($query);
+            throw $ex;
+        }
     }
 
     
