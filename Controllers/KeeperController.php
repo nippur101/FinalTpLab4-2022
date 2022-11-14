@@ -3,7 +3,9 @@
 namespace Controllers;
 
 use DAO\KeeperDAO;
+use DAO\KeeperPDO;
 use DAO\PetsDAO;
+use DAO\PetsPDO;
 use DateTime;
 use Models\FreeTimePeriod as FreeTimePeriod;
 
@@ -15,9 +17,15 @@ class KeeperController
 
     public function __construct()
     {
-        $this->keeperDAO = new KeeperDAO();
-        $this->petDAO = new PetsDAO();
+        $this->keeperDAO = new KeeperPDO();
+        $this->petDAO = new PetsPDO();
+        
+        //$this->keeperDAO = new KeeperDAO();
+        //$this->petDAO = new PetsDAO();
         $this->freeTimePeriod = new FreeTimePeriod();
+
+       
+       
     }
 
     public function ShowCalendarView()
