@@ -55,7 +55,7 @@ class KeeperPDO
     }
     public function Remove($id)
     {
-        $this->RetrieveData();
+       /* $this->RetrieveData();
 
         $newList = array();
 
@@ -68,6 +68,7 @@ class KeeperPDO
         $this->keeperList = $newList;
 
         $this->SaveData();
+        */
     }
 
     public function GetKeeper($userID)
@@ -83,15 +84,25 @@ class KeeperPDO
 
         return $keeperR;
     }
-/*
+
     public function addFreePeriodOfTime($time, $keeper)
     {
-        $keeper->AddTimePeriod($time);
-        $this->Update($keeper);
-    }
+        try
+        {
+            $query = "CALL addFreeTimePeriod('".$time->getStartDate()."','".$time->getFinalDate()."',".$keeper->getUserID().");";
+          
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query);
+        }
+        catch(Exception $ex)
+        {
+           
+            throw $ex;
+        }  }
 
 
-
+/*
     public function Update(Keeper $keeper)
     {
         $this->RetrieveData();
