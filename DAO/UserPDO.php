@@ -17,7 +17,6 @@ class UserPDO
 
         try
             {
-                $studentList = array();
 
                 $query = "SELECT * FROM ".$this->tableName;
 
