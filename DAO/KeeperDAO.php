@@ -137,6 +137,12 @@ class KeeperDAO
         }
     }
 
+    public function updateKeeper($keeper){
+        $this->Remove($keeper->getUserID());
+        $this->Add($keeper);
+
+    }
+
     public function SaveData()
     {
 
@@ -223,3 +229,4 @@ class KeeperDAO
         return $val;
     }
 }
+?>

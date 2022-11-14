@@ -135,3 +135,4 @@ class OwnerDAO
         file_put_contents('Data/owner.json', $jsonContent);
     }
 }
+?>

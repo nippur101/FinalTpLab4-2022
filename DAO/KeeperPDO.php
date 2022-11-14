@@ -38,6 +38,21 @@ class KeeperPDO
         }
     }
 
+    public function updateKeeper($keeper){
+        try
+        {
+            $query = "CALL updateKeeper('".$keeper->getAddress()."','".$keeper->getPetSize()."',".$keeper->getStayCost().");";
+          
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query);
+        }
+        catch(Exception $ex)
+        {
+           
+            throw $ex;
+        }
+    }
     public function Remove($id)
     {
         $this->RetrieveData();
@@ -279,3 +294,4 @@ class KeeperPDO
         return $val;
     }
 }
+?>

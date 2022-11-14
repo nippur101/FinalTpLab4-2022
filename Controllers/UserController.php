@@ -4,13 +4,14 @@ namespace Controllers;
 
 use DAO\UserPDO;
 use DAO\KeeperDAO;
-use DAO\KeeperPDO;
 use DAO\OwnerDAO;
-use DAO\OwnerPDO;
-use DAO\UserDAO;
 use Models\User as User;
 use Models\Keeper as Keeper;
 use Models\Owner;
+use DAO\KeeperPDO;
+use DAO\OwnerPDO;
+use DAO\UserDAO;
+
 
 class UserController
 {
@@ -25,6 +26,7 @@ class UserController
        // $this->userDAO = new UserDAO();
         //$this->keeperDAO = new KeeperDAO();
        // $this->ownerDAO = new OwnerDAO();
+        
     }
 
     public function Destroy()
@@ -83,22 +85,16 @@ class UserController
                 $this->userDAO->Add($user);
                 echo "<script> if(confirm('Usuario creado con exito!')); </script>";
 
-                //$this->userDAO->retrieveUserId($mail,$password1,$user);
-                //var_dump($user);
-
-
                 if ($user->getUserType() == 1) {
                     $keeper = $this->keeperDAO->ReturnDefaultKeeper($user);
                     $this->userDAO->retrieveUserId($mail,$password1,$keeper);
                     $this->keeperDAO->Add($keeper);
-
 
                     $_SESSION["loggedUser"] = ($keeper);
                     $_SESSION["typeUser"] = $keeper->getUserType();
                     require_once(VIEWS_PATH . "validate-session.php");
                     require_once(VIEWS_PATH . "keeper-profile.php");
                 } else {
-
                     $owner = $this->ownerDAO->ReturnDefaultOwner($user);
                     $this->userDAO->retrieveUserId($mail,$password1,$owner);
                     $this->ownerDAO->Add($owner);

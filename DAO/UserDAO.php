@@ -134,3 +134,4 @@ class UserDAO
         file_put_contents('Data/users.json', $jsonContent);
     }
 }
+?>

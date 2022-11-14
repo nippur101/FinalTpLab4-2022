@@ -90,9 +90,8 @@ class KeeperController
         $keeper->setAddress($address);
         $keeper->setStayCost($stayCost);
         $keeper->setPetSize($petSize);
-        $this->keeperDAO->Remove($keeper->getUserID());
-        $this->keeperDAO->Add($keeper);
-
+        $this->keeperDAO->updateKeeper($keeper);
+        
         echo "<script> if(confirm('Datos actualizados!')); </script>";
         $this->CheckAndPushData();
     }
