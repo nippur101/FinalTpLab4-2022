@@ -74,6 +74,15 @@
             array_push($this->freeTimePeriod, $freeTimePeriod);
         }
         
+        public function RemoveTimePeriod($startDate, $finalDate){
+                $i = 0;
+                foreach($this->freeTimePeriod as $freeTimePeriod){
+                        if($freeTimePeriod->getStartDate() == $startDate && $freeTimePeriod->getFinalDate() == $finalDate){
+                        unset($this->freeTimePeriod[$i]);
+                        }
+                        $i++;
+                }
+        }
       
         public function getFreeTimePeriod()
         {

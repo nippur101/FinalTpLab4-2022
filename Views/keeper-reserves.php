@@ -2,12 +2,6 @@
 require_once(VIEWS_PATH . "header.php");
 require_once(VIEWS_PATH . "nav.php");
 
-use DAO\OwnerDAO;
-use DAO\PetsDAO;
-
-$user = $_SESSION["loggedUser"];
-$ownerDAO = new OwnerDAO();
-$petsDAO = new PetsDAO();
 ?>
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -22,7 +16,7 @@ $petsDAO = new PetsDAO();
                               <th>Pet Name</th>
                               <th>Pet Size</th>
                               <th>Total Payment</th>
-                              <th>Approved</th>
+                              <th>Status</th>
                               <th>Paid out</th>
                          </thead>
                          <tbody>
@@ -39,8 +33,29 @@ $petsDAO = new PetsDAO();
                                              ?></td>
                                              <td><?php echo $pet->getPetType(); ?></td>
                                              <td><?php echo $reserve->getTotalCost(); ?></td>
-                                             <td><?php echo $reserve->getKeeperReviewStatus(); ?></td>
-                                             <td><?php echo $reserve->getPaymentReviewStatus(); ?></td>
+                                             <td><?php
+                                                  switch ($reserve->getKeeperReviewStatus()) {
+                                                       case 0:
+                                                           echo "Unseen";
+                                                           break;
+                                                       case 1:
+                                                           echo "Approved";
+                                                           break;
+                                                       case 2:
+                                                           echo "Rejected";
+                                                           break;
+                                                  } 
+                                             ?></td>
+                                             <td><?php 
+                                                  switch ($reserve->getPaymentReviewStatus()) {
+                                                       case 0:
+                                                           echo "No";
+                                                           break;
+                                                       case 1:
+                                                           echo "Yes";
+                                                           break;
+                                                  } 
+                                             ?></td>
                                              <td><a href="../Reserve/ConfirmReserve?reserveId=<?php echo $reserve->getReserveId();?>">Confirm</a></td>
                                              <td><a href="../Reserve/RefuseReserve?reserveId=<?php echo $reserve->getReserveId();?>">Refuse</a></td>
                                         </tr>
