@@ -4,6 +4,7 @@
    class FreeTimePeriod{
     private $startDate;
     private $finalDate;
+    private $keeperID;
     /*
     public function __construct($startDate,$finalDate)
     {
@@ -11,6 +12,16 @@
         $this->finalDate=$finalDate;
     }
     */
+
+    public function getKeeperID()
+    {
+        return $this->keeperID;
+    }
+
+    public function setKeeperID($keeperID)
+    {
+        $this->keeperID = $keeperID;
+    }
 
     public function getStartDate()
     {

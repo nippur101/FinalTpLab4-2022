@@ -1,13 +1,6 @@
 <?php
 require_once(VIEWS_PATH . "header.php");
 require_once(VIEWS_PATH . "nav.php");
-
-use DAO\OwnerDAO;
-use DAO\PetsDAO;
-
-$user = $_SESSION["loggedUser"];
-$ownerDAO = new OwnerDAO();
-$petsDAO = new PetsDAO();
 ?>
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -33,8 +26,11 @@ $petsDAO = new PetsDAO();
                                         <td><?php echo $reserve->getReserveID(); ?></td>
                                         <td><?php echo $reserve->getStartDate(); ?></td>
                                         <td><?php echo $reserve->getFinalDate(); ?></td>
-                                        <td><?php echo $reserve->getPets()->getName(); ?></td>
-                                        <td><?php echo $reserve->getPets()->getSize(); ?></td>
+                                        <td><?php 
+                                             $pet = $pet_DAO->GetPet($reserve->getPets());
+                                             echo $pet->getName(); 
+                                        ?></td>
+                                        <td><?php echo $pet->getPetType(); ?></td>
                                         <td><?php echo $reserve->getTotalCost(); ?></td>
                                         <td><?php echo $reserve->getKeeperReviewStatus(); ?></td>
                                         <td><?php echo $reserve->getPaymentReviewStatus(); ?></td>
@@ -50,7 +46,14 @@ $petsDAO = new PetsDAO();
                     <div>
                          <label for="">Reserve ID</label>
                          <input type="text" name="reserveId" value="">
-                         <button type="submit" name="" class="btn btn-red ml-auto d-block">Refuse</button>
+                         <button type="submit" name="" class="btn btn-dark ml-auto d-block">Delete</button>
+                    </div>
+               </form>
+               <form action="<?php echo FRONT_ROOT . "Reserve/PaidOut" ?>" method="POST">
+                    <div>
+                         <label for="">Reserve ID</label>
+                         <input type="text" name="reserveId" value="">
+                         <button type="submit" name="" class="btn btn-dark ml-auto d-block">Go to pay</button>
                     </div>
                </form>
           </div>

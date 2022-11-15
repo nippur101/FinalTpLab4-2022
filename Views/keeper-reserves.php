@@ -28,19 +28,22 @@ $petsDAO = new PetsDAO();
                          <tbody>
                               <?php
                               foreach ($reserves as $reserve) {
-                              ?>
-                                   <tr>
-                                        <td><?php echo $reserve->getReserveID(); ?></td>
-                                        <td><?php echo $reserve->getStartDate(); ?></td>
-                                        <td><?php echo $reserve->getFinalDate(); ?></td>
-                                        <td><?php echo $reserve->getPets()->getName(); ?></td>
-                                        <td><?php echo $reserve->getPets()->getSize(); ?></td>
-                                        <td><?php echo $reserve->getTotalCost(); ?></td>
-                                        <td><?php echo $reserve->getKeeperReviewStatus(); ?></td>
-                                        <td><?php echo $reserve->getPaymentReviewStatus(); ?></td>
-                                   </tr>
-                              <?php
-                              }
+                                   ?>
+                                        <tr>
+                                             <td><?php echo $reserve->getReserveID(); ?></td>
+                                             <td><?php echo $reserve->getStartDate(); ?></td>
+                                             <td><?php echo $reserve->getFinalDate(); ?></td>
+                                             <td><?php 
+                                                  $pet = $pet_DAO->GetPet($reserve->getPets());
+                                                  echo $pet->getName(); 
+                                             ?></td>
+                                             <td><?php echo $pet->getPetType(); ?></td>
+                                             <td><?php echo $reserve->getTotalCost(); ?></td>
+                                             <td><?php echo $reserve->getKeeperReviewStatus(); ?></td>
+                                             <td><?php echo $reserve->getPaymentReviewStatus(); ?></td>
+                                        </tr>
+                                   <?php
+                                   }
                               ?>
                          </tbody>
                          <button type="submit" name="" class="btn btn-dark ml-auto d-block">Refresh</button>

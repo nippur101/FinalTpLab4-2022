@@ -71,6 +71,7 @@ class KeeperController
             $time = new FreeTimePeriod();
             $time->setStartDate($startDate);
             $time->setFinalDate($finalDate);
+            $time->setKeeperID($keeper->getUserID());
 
             $this->keeperDAO->addFreePeriodOfTime($time, $keeper);
             echo "<script> if(confirm('Periodo agregado!')); </script>";

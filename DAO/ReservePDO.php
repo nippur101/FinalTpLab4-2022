@@ -17,28 +17,37 @@ class ReservePDO {
             foreach ($resultSet as $valuesArray) {
                 $reserve = new Reserve();
                 $reserve->setReserveId($valuesArray["reserveId"]);
-                $reserve->setPets($valuesArray["petId"]);
+                $reserve->setPets($valuesArray["petsId"]);
                 $reserve->setKeeper($valuesArray["keeperId"]);
                 $reserve->setStartDate($valuesArray["startDate"]);
                 $reserve->setFinalDate($valuesArray["finalDate"]);
-                $reserve->setTotalCost($valuesArray["price"]);
+                $reserve->setTotalCost($valuesArray["totalCost"]);
                 $reserve->setAmountPaid($valuesArray["amountPaid"]);
+                $reserve->setOwner($valuesArray["ownerId"]);
                 $reserve->setKeeperReviewStatus($valuesArray["reviewStatus"]);
                 $reserve->setPaymentReviewStatus($valuesArray["paymentStatus"]);
                 array_push($this->reserveList, $reserve);
             }
-            return $this->reserveList;
         }
         catch(Exception $ex){
             throw $ex;
         }
     }
 
-    public function Add(Reserve $reserve){
+    public function AddReserve($reserve){
         try{
-            $query = "CALL addReserve(".$reserve->getKeeper().",".$reserve->getPets().",'".$reserve->getStartDate()."','".$reserve->getFinalDate()."',".$reserve->getTotalCost().",".$reserve->getAmountPaid().",".$reserve->getKeeperReviewStatus().",".$reserve->getPaymentReviewStatus().");";
+            $query = "INSERT INTO ".$this->tableName." (petsId, keeperId, startDate, finalDate, totalCost, amountPaid, ownerId, reviewStatus, paymentStatus) VALUES (:petsId, :keeperId, :startDate, :finalDate, :totalCost, :amountPaid, :ownerId, :reviewStatus, :paymentStatus)";
+            $parameters["petsId"] = $reserve->getPets();
+            $parameters["keeperId"] = $reserve->getKeeper();
+            $parameters["startDate"] = $reserve->getStartDate();
+            $parameters["finalDate"] = $reserve->getFinalDate();
+            $parameters["totalCost"] = $reserve->getTotalCost();
+            $parameters["amountPaid"] = $reserve->getAmountPaid();
+            $parameters["ownerId"] = $reserve->getOwner();
+            $parameters["reviewStatus"] = $reserve->getKeeperReviewStatus();
+            $parameters["paymentStatus"] = $reserve->getPaymentReviewStatus();
             $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($query);
+            $this->connection->ExecuteNonQuery($query, $parameters);
         }
         catch(Exception $ex){
             throw $ex;
@@ -121,7 +130,7 @@ class ReservePDO {
     public function Update(Reserve $reserve)
     {
         try{
-            $query = "UPDATE ".$this->tableName." SET keeperId = ".$reserve->getKeeper().", petId = ".$reserve->getPets().", startDate = '".$reserve->getStartDate()."', finalDate = '".$reserve->getFinalDate()."', price = ".$reserve->getTotalCost().", amountPaid = ".$reserve->getAmountPaid().", reviewStatus = ".$reserve->getKeeperReviewStatus().", paymentStatus = ".$reserve->getPaymentReviewStatus()." WHERE reserveId = ".$reserve->getReserveId();
+            $query = "UPDATE ".$this->tableName." SET keeperId = ".$reserve->getKeeper().", petsId = ".$reserve->getPets().", startDate = '".$reserve->getStartDate()."', finalDate = '".$reserve->getFinalDate()."', totalCost = ".$reserve->getTotalCost().", amountPaid = ".$reserve->getAmountPaid().", reviewStatus = ".$reserve->getKeeperReviewStatus().", paymentStatus = ".$reserve->getPaymentReviewStatus()." WHERE reserveId = ".$reserve->getReserveId();
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($query);
         }

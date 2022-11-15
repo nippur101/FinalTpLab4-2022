@@ -8,6 +8,7 @@ use DAO\ReserveDAO;
 use Models\Owner as Owner;
 use DAO\OwnerPDO;
 use DAO\PetsPDO;
+use DAO\ReservePDO;
 
 class OwnerController
 {
@@ -23,7 +24,7 @@ class OwnerController
 
         $this->ownerDAO = new OwnerPDO();
         $this->petDAO = new PetsPDO();
-        $this->reserveDAO = new ReserveDAO();
+        $this->reserveDAO = new ReservePDO();
     }
 
     public function ShowProfileView()

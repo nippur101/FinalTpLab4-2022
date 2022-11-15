@@ -18,6 +18,15 @@ include_once('nav.php'); ?>
                     <label for="">Hasta:</label>
                     <input type="date" name="keeperFinalDate" value="<?php echo $event->getFinalDate(); ?>" class="form-control form-control-lg">
 
+                    <label for="">Con cada dia a un costo de:</label>
+                    <input type="text" name="keeperStayCost" value="<?php echo $keeper->getStayCost(); ?>" class="form-control form-control-lg">
+
+                    <label for="">Resultando en un total de:</label>
+                    <input type="text" name="totalStayCost" value="<?php echo ($keeperInterval->format('%a') * $keeper->getStayCost()) ?>" class="form-control form-control-lg">
+               
+                    <label for="">La reserva es para <?php echo $petToKeep->getName() ?> de id:</label>
+                    <input type="text" name="petId" value="<?php echo $petToKeep->getPetId(); ?>" class="form-control form-control-lg">
+
                     <label for="">Tu lo necesitas desde:</label>
                     <input type="date" name="neededStartDate" value="<?php echo $needed->getStartDate(); ?>" class="form-control form-control-lg">
 
@@ -29,15 +38,6 @@ include_once('nav.php'); ?>
 
                     <label for="">Y tu necesitas:</label>
                     <input type="text" name="neededAvaiableDays" value="<?php echo $requestedInterval->format('%a') . " dias"; ?>" class="form-control form-control-lg">
-
-                    <label for="">Con cada dia a un costo de:</label>
-                    <input type="text" name="keeperStayCost" value="<?php echo $keeper->getStayCost(); ?>" class="form-control form-control-lg">
-
-                    <label for="">Resultando en un total de:</label>
-                    <input type="text" name="totalStayCost" value="<?php echo ($keeperInterval->format('%a') * $keeper->getStayCost()) ?>" class="form-control form-control-lg">
-               
-                    <label for="">La reserva es para <?php echo $petToKeep->getName() ?> de id:</label>
-                    <input type="text" name="petId" value="<?php echo $petToKeep->getPetId(); ?>" class="form-control form-control-lg">
                </div>
                <div class="form-group">
                     <h3>¿Desea confirmar la reserva?</h3>

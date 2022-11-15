@@ -1,6 +1,7 @@
 <?php
 
 namespace DAO;
+
 use \Exception as Exception;
 use Models\Pets;
 use Models\Keeper as Keeper;
@@ -12,6 +13,7 @@ class KeeperPDO
     private $keeperList = array();
     private $connection;
     private $tableName = "Keeper";
+    private $tableName2 = "FreeTimePeriod";
 
 
     public function getAll()
@@ -22,53 +24,39 @@ class KeeperPDO
 
     public function Add(Keeper $keeper)
     {
-        
-        try
-        {
-            $query = "CALL addKeeper('".$keeper->getAddress()."','".$keeper->getPetSize()."',".$keeper->getStayCost().",".$keeper->getUserID().");";
-          
+        try {
+            $query = "INSERT INTO " . $this->tableName . " (address, petSize, stayCost, userID) VALUES (:address, :petSize, :stayCost, :userID);";
+            $parameters["address"] = $keeper->getAddress();
+            $parameters["petSize"] = $keeper->getPetSize();
+            $parameters["stayCost"] = $keeper->getStayCost();
+            $parameters["userID"] = $keeper->getUserID();
             $this->connection = Connection::GetInstance();
-
-            $this->connection->ExecuteNonQuery($query);
-        }
-        catch(Exception $ex)
-        {
-           
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        } catch (Exception $ex) {
             throw $ex;
         }
     }
 
-    public function updateKeeper($keeper){
-        try
-        {
-            $query = "CALL updateKeeper('".$keeper->getAddress()."','".$keeper->getPetSize()."',".$keeper->getStayCost().");";
-          
+    public function updateKeeper(Keeper $keeper)
+    {
+        try {
+            $query = "UPDATE " . $this->tableName . " SET address = '" . $keeper->getAddress() . "', petSize = '" . $keeper->getPetSize() . "', stayCost = " . $keeper->getStayCost() . " WHERE userID = " . $keeper->getUserID() . ";";
             $this->connection = Connection::GetInstance();
-
             $this->connection->ExecuteNonQuery($query);
-        }
-        catch(Exception $ex)
-        {
-           
+        } catch (Exception $ex) {
             throw $ex;
         }
     }
+
     public function Remove($id)
     {
-       /* $this->RetrieveData();
-
-        $newList = array();
-
-        foreach ($this->keeperList as $keeper) {
-            if ($keeper->getUserID() != $id) {
-                array_push($newList, $keeper);
-            }
+        try {
+            $query = "DELETE FROM " . $this->tableName . " WHERE userID = " . $id;
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query);
+        } catch (Exception $ex) {
+            throw $ex;
         }
-
-        $this->keeperList = $newList;
-
-        $this->SaveData();
-        */
     }
 
     public function GetKeeper($userID)
@@ -85,44 +73,7 @@ class KeeperPDO
         return $keeperR;
     }
 
-    public function addFreePeriodOfTime($time, $keeper)
-    {
-        $keeper->AddTimePeriod($time);
-        try
-        {
-            $query = "CALL addFreeTimePeriod('".$time->getStartDate()."','".$time->getFinalDate()."',".$keeper->getUserID().");";
-          
-            $this->connection = Connection::GetInstance();
-
-            $this->connection->ExecuteNonQuery($query);
-        }
-        catch(Exception $ex)
-        {
-           
-            throw $ex;
-        }  }
-
-
-/*
-    public function Update(Keeper $keeper)
-    {
-        $this->RetrieveData();
-
-        $newList = array();
-
-        foreach ($this->keeperList as $keeperR) {
-            if ($keeperR->getUserID() != $keeper->getUserID()) {
-                array_push($newList, $keeperR);
-            }
-        }
-
-        array_push($newList, $keeper);
-
-        $this->keeperList = $newList;
-
-        $this->SaveData();
-    }
-    */
+    
 
     public function ReturnDefaultKeeper($userObject)
     {
@@ -145,117 +96,81 @@ class KeeperPDO
     public function retrieveData()
     {
 
-        $userList=array();
-        $userPDO=new UserPDO();
-    
-            try
-                {
-                    $userList=$userPDO->getAll();
-    
-                    $query = "SELECT * FROM ".$this->tableName;
-    
-                    $this->connection = Connection::GetInstance();
-    
-                    $resultSet = $this->connection->Execute($query);
-                    foreach ($resultSet as $valuesArray) {
-    
-                        $keeper = new Keeper();
-                        $keeper->setUserId($valuesArray["userId"]);
-                        $keeper->setAddress($valuesArray["address"]);
-                        $keeper->setPetSize($valuesArray["petsize"]);
-                        $keeper->setStayCost($valuesArray["stayCost"]);
-                        $keeper->setReviews($valuesArray["reviews"]);
-                        $this->KeeperFreeTimePeriod($keeper);
-                        
-                    
+        $userList = array();
+        $userPDO = new UserPDO();
 
-                        foreach($userList as $user){
-                            if($keeper->getUserID()==$user->getUserID()){
-                                $keeper->setFirstName($user->getFirstName());
-                                $keeper->setLastName($user->getLastName());
-                                $keeper->setEmail($user->getEmail());
-                                $keeper->setPassword($user->getPassword());
-                                $keeper->setUserType($user->getUserType());
-                            }
-            
-                        }
-                        array_push($this->keeperList, $keeper);
+        try {
+            $userList = $userPDO->getAll();
+
+            $query = "SELECT * FROM " . $this->tableName;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+            foreach ($resultSet as $valuesArray) {
+
+                $keeper = new Keeper();
+                $keeper->setUserId($valuesArray["userId"]);
+                $keeper->setAddress($valuesArray["address"]);
+                $keeper->setPetSize($valuesArray["petsize"]);
+                $keeper->setStayCost($valuesArray["stayCost"]);
+                $keeper->setReviews($valuesArray["reviews"]);
+
+                $keeper->setFreeTimePeriod($this->GetFromTableKeeperFreeTimePeriod($keeper->getUserID()));
+
+                foreach ($userList as $user) {
+                    if ($keeper->getUserID() == $user->getUserID()) {
+                        $keeper->setFirstName($user->getFirstName());
+                        $keeper->setLastName($user->getLastName());
+                        $keeper->setEmail($user->getEmail());
+                        $keeper->setPassword($user->getPassword());
+                        $keeper->setUserType($user->getUserType());
                     }
-    
-                    return $this->keeperList;
-                   
                 }
-                catch(Exception $ex)
-                {
-                    throw $ex;
-                }
-        
-    }
-
-
-    public function KeeperFreeTimePeriod($keeper){
-        try
-                {
-                   
-    
-                    $query = "CALL keeperFreeTimeperiod(".$keeper->getUserID().");";
-    
-                    $this->connection = Connection::GetInstance();
-    
-                    $resultSet = $this->connection->Execute($query);
-
-                    if (isset($resultSet["freeTimePeriod"])) {
-                        foreach ($resultSet["freeTimePeriod"] as $value) {
-                            $time = new FreeTimePeriod();
-                            $time->setStartDate($value["dateStart"]);
-                            $time->setFinalDate($value["dateFinal"]);
-                            $keeper->AddTimePeriod($time);
-                        }
-                    }
-                }catch(Exception $ex)
-                {
-                    throw $ex;
-                }
-    }
-
-
-    
-/*
-
-    public function SaveData()
-    {
-
-        $arrayToEncode = array();
-        $arrayTime = array();
-
-
-        foreach ($this->keeperList as $keeper) {
-
-            $valuesArray["userId"] = $keeper->getUserId();
-            $valuesArray["firstName"] = $keeper->getFirstName();
-            $valuesArray["lastName"] = $keeper->getLastName();
-            $valuesArray["email"] = $keeper->getEmail();
-            $valuesArray["password"] = $keeper->getPassword();
-            $valuesArray["userType"] = $keeper->getUserType();
-            $valuesArray["address"] = $keeper->getAddress();
-            $valuesArray["petSize"] = $keeper->getPetSize();
-            $valuesArray["stayCost"] = $keeper->getStayCost();
-            if ($keeper->getFreeTimePeriod() != null) {
-                foreach ($keeper->getFreeTimePeriod() as $time) {
-                    $arrayTime["dateStart"] = $time->getStartDate();
-                    $arrayTime["dateFinal"] = $time->getFinalDate();
-                    $valuesArray["freeTimePeriod"][] = $arrayTime;
-                }
+                array_push($this->keeperList, $keeper);
             }
 
-            $valuesArray["reviews"] = $keeper->getReviews();
-            array_push($arrayToEncode, $valuesArray);
+            return $this->keeperList;
+        } catch (Exception $ex) {
+            throw $ex;
         }
-
-        $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-        file_put_contents('Data/keeper.json', $jsonContent);
     }
-*/
+
+    public function addFreePeriodOfTime(FreeTimePeriod $freeTimePeriod)
+    {
+        try {
+            $query = "INSERT INTO " . $this->tableName2 . " (keeperId, startDate, finalDate) VALUES (:keeperId, :startDate, :finalDate);";
+            $parameters["keeperId"] = $freeTimePeriod->getKeeperID();
+            $parameters["startDate"] = $freeTimePeriod->getStartDate();
+            $parameters["finalDate"] = $freeTimePeriod->getFinalDate();
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+            $this->retrieveData();
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
+    public function GetFromTableKeeperFreeTimePeriod($keeperID)
+    {
+        $freeTimePeriodList = array();
+        try {
+            $query = "SELECT * FROM " . $this->tableName2 . " WHERE keeperId = " . $keeperID;
+            $this->connection = Connection::GetInstance();
+            $resultSet = $this->connection->Execute($query);
+            foreach ($resultSet as $valuesArray) {
+                $freeTimePeriod = new FreeTimePeriod();
+                $freeTimePeriod->setKeeperID($valuesArray["keeperId"]);
+                $freeTimePeriod->setStartDate($valuesArray["startDate"]);
+                $freeTimePeriod->setFinalDate($valuesArray["finalDate"]);
+                array_push($freeTimePeriodList, $freeTimePeriod);
+            }
+            return $freeTimePeriodList;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
     public function IsAvaiableTime($dateStart, $dateFinal, $keeper)
     {
         $this->RetrieveData();
@@ -308,4 +223,3 @@ class KeeperPDO
         return $val;
     }
 }
-?>
