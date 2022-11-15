@@ -2,17 +2,7 @@
 include 'Models\calendar.php';
 include_once('header.php');
 include_once('nav.php');
-
-$calendar = new Calendar(date("Y-m-d"));
-
-if ($keeper->getFreeTimePeriod() != null) {
-    foreach ($keeper->getFreeTimePeriod() as $event) {
-        $time1 = new DateTime($event->getStartDate());
-        $time2 = new DateTime($event->getFinalDate());
-        $interval = $time1->diff($time2);
-        $calendar->add_event('Free', $time1->format('Y-m-d'), $interval->format('%a'), 'green');
-    }
-}
+include_once('calendar-logic.php');
 ?>
 <!DOCTYPE html>
 <html>

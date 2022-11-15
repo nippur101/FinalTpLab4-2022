@@ -40,19 +40,16 @@ class UserController
         $user = $this->userDAO->validUser($mail, $password);
 
         if ($user != NULL) {
-            $firstName = $user->getFirstName();
-            $lastName = $user->getLastName();
-
             if ($user->getUserType() == 1) {
-
                 $_SESSION["loggedUser"] = $this->keeperDAO->GetKeeper($user->getUserID());
-
                 $_SESSION["typeUser"] = 1;
+                $keeper = $_SESSION["loggedUser"];
                 require_once(VIEWS_PATH . "validate-session.php");
                 require_once(VIEWS_PATH . "logged-keeper.php");
             } else {
                 $_SESSION["loggedUser"] = $this->ownerDAO->GetOwner($user->getUserID());
                 $_SESSION["typeUser"] = 2;
+                $owner = $_SESSION["loggedUser"];
                 require_once(VIEWS_PATH . "validate-session.php");
                 require_once(VIEWS_PATH . "logged-owner.php");
             }

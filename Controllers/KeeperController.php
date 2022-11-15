@@ -6,6 +6,7 @@ use DAO\KeeperDAO;
 use DAO\KeeperPDO;
 use DAO\PetsDAO;
 use DAO\PetsPDO;
+use DAO\ReservePDO;
 use DateTime;
 use Models\FreeTimePeriod as FreeTimePeriod;
 
@@ -14,11 +15,13 @@ class KeeperController
 
     private $keeperDAO;
     private $petDAO;
+    private $reserveDAO;
 
     public function __construct()
     {
         $this->keeperDAO = new KeeperPDO();
         $this->petDAO = new PetsPDO();
+        $this->reserveDAO = new ReservePDO();
         
         //$this->keeperDAO = new KeeperDAO();
         //$this->petDAO = new PetsDAO();
@@ -31,6 +34,7 @@ class KeeperController
     public function ShowCalendarView()
     {
         $keeper = $_SESSION["loggedUser"];
+        $HiredTimePeriod = $this->reserveDAO->GetReservesConfirmedByKeeper($keeper->getUserId());
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "calendar.php");
     }
@@ -60,27 +64,30 @@ class KeeperController
     {
         $keeper = $_SESSION["loggedUser"];
 
-        if ($this->keeperDAO->IsAvaiableTime($startDate, $finalDate, $keeper) || $keeper->getFreeTimePeriod() == null) {
+        if($this->keeperDAO->IsValidDate($startDate, $finalDate)){
+            if ($this->keeperDAO->IsAvaiableTime($startDate, $finalDate, $keeper) || $keeper->getFreeTimePeriod() == null) {
 
-            if ($keeper->getFreeTimePeriod() == NULL || $keeper->getFreeTimePeriod() == []) {
-                $oldTime = $this->keeperDAO->GetKeeper($keeper->getUserID());
-                $newTime = array();
-                $oldTime->setFreeTimePeriod($newTime);
-            }
-
-            $time = new FreeTimePeriod();
-            $time->setStartDate($startDate);
-            $time->setFinalDate($finalDate);
-            $time->setKeeperID($keeper->getUserID());
-
-            $this->keeperDAO->addFreePeriodOfTime($time, $keeper);
-            echo "<script> if(confirm('Periodo agregado!')); </script>";
-            $this->ShowCalendarView();
-        } else {
-            echo "<script> if(confirm('Periodo de ya ocupado!')); </script>";
-            $this->CheckAndPushData();
+                if ($keeper->getFreeTimePeriod() == NULL || $keeper->getFreeTimePeriod() == []) {
+                    $oldTime = $this->keeperDAO->GetKeeper($keeper->getUserID());
+                    $newTime = array();
+                    $oldTime->setFreeTimePeriod($newTime);
+                }
+    
+                $time = new FreeTimePeriod();
+                $time->setStartDate($startDate);
+                $time->setFinalDate($finalDate);
+                $time->setKeeperID($keeper->getUserID());
+    
+                $this->keeperDAO->addFreePeriodOfTime($time, $keeper);
+                echo "<script> if(confirm('Periodo agregado!')); </script>";
+                //$this->ShowCalendarView();
+                header("location: " . FRONT_ROOT . "Keeper/ShowCalendarView");
+            } else {
+                echo "<script> if(confirm('Periodo de ya ocupado!')); </script>";
+                $this->CheckAndPushData();
+            }    
         }
-
+        
         require_once(VIEWS_PATH . "validate-session.php");
         require_once(VIEWS_PATH . "keeper-profile.php");
     }

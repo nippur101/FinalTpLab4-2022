@@ -136,8 +136,18 @@ class KeeperPDO
         }
     }
 
-    public function addFreePeriodOfTime(FreeTimePeriod $freeTimePeriod)
+    public function IsValidDate($startDate, $finalDate){
+        $isValid = true;
+        $keeperList = $this->getAll();
+        if($startDate > $finalDate){
+            $isValid = false;
+        }
+        return $isValid;
+    }
+
+    public function addFreePeriodOfTime(FreeTimePeriod $freeTimePeriod, $keeper)
     {
+        $keeper->AddTimePeriod($freeTimePeriod);
         try {
             $query = "INSERT INTO " . $this->tableName2 . " (keeperId, startDate, finalDate) VALUES (:keeperId, :startDate, :finalDate);";
             $parameters["keeperId"] = $freeTimePeriod->getKeeperID();
@@ -221,5 +231,21 @@ class KeeperPDO
             }
         }
         return $val;
+    }
+
+    public function RemoveFreeTimePeriod($keeper, $startDate, $finalDate)
+    {
+        $keeper->RemoveTimePeriod($startDate, $finalDate);
+        try {
+            $query = "DELETE FROM " . $this->tableName2 . " WHERE keeperId = :keeperId AND startDate = :startDate AND finalDate = :finalDate";
+            $parameters["keeperId"] = $keeper->getUserID();
+            $parameters["startDate"] = $startDate;
+            $parameters["finalDate"] = $finalDate;
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($query, $parameters);
+            $this->retrieveData();
+        } catch (Exception $ex) {
+            throw $ex;
+        }
     }
 }

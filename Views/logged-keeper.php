@@ -4,7 +4,7 @@
 <main class="d-flex align-items-center justify-content-center height-100" >
      <div class="content">
           <header class="text-center">
-               <h2>Bienvenido <?php echo ($firstName." ".$lastName) ?></h2>
+               <h2>Bienvenido <?php echo ($keeper->GetFirstName() . " " . $keeper->GetLastName()) ?></h2>
           </header>
 
           <form action="<?php echo FRONT_ROOT."Keeper/CheckAndPushData" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">

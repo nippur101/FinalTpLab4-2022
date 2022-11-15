@@ -60,7 +60,7 @@ class ReserveController
         $reserve = $this->reserveDAO->GetReserve($reserveId);
         $reserve->setKeeperReviewStatus(APPROVED);
         $this->reserveDAO->Update($reserve);
-        $this->RetrievePendingReserves();
+        header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
     }
 
     public function RefuseReserve($reserveId)
@@ -68,7 +68,7 @@ class ReserveController
         $reserve = $this->reserveDAO->GetReserve($reserveId);
         $reserve->setKeeperReviewStatus(REJECTED);
         $this->reserveDAO->Update($reserve);
-        $this->RetrievePendingReserves();
+        header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
     }
 
     public function RetrieveMadedReserves()
@@ -82,7 +82,7 @@ class ReserveController
     public function DeleteReserve($reserveId)
     {
         $this->reserveDAO->Delete($reserveId);
-        $this->RetrieveMadedReserves();
+        header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
     }
 
     public function PaidOut($reserveId){
@@ -101,6 +101,7 @@ class ReserveController
     public function FinishPayment($reserveId){
         $reserve = $this->reserveDAO->GetReserve($reserveId);
         $reserve->setPaymentReviewStatus(APPROVED);
+        $this->keeperDAO->RemoveFreeTimePeriod($reserve->getKeeper(), $reserve->getStartDate(), $reserve->getFinalDate());
         $this->reserveDAO->Update($reserve);
         $this->RetrieveMadedReserves();
     }

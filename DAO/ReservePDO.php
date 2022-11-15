@@ -138,5 +138,19 @@ class ReservePDO {
             throw $ex;
         }
     }
+
+    public function GetReservesConfirmedByKeeper($keeperId){
+        $this->GetAll();
+
+        $reserveList = array();
+
+        foreach ($this->reserveList as $reserve) {
+            if ($reserve->getKeeper() == $keeperId && $reserve->getKeeperReviewStatus() == 1 && $reserve->getPaymentReviewStatus() == 1) {
+                array_push($reserveList, $reserve);
+            }
+        }
+
+        return $reserveList;
+    }
 }
 ?>

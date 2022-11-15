@@ -34,6 +34,8 @@ require_once(VIEWS_PATH . "nav.php");
                                         <td><?php echo $reserve->getTotalCost(); ?></td>
                                         <td><?php echo $reserve->getKeeperReviewStatus(); ?></td>
                                         <td><?php echo $reserve->getPaymentReviewStatus(); ?></td>
+                                        <td><a href="../Reserve/DeleteReserve?reserveId=<?php echo $reserve->getReserveId();?>">Cancel</a></td>
+                                        <td><a href="../Reserve/PaidOut?reserveId=<?php echo $reserve->getReserveId();?>">Go pay</a></td>
                                    </tr>
                               <?php
                               }
@@ -41,20 +43,6 @@ require_once(VIEWS_PATH . "nav.php");
                          </tbody>
                          <button type="submit" name="" class="btn btn-dark ml-auto d-block">Refresh</button>
                     </table>
-               </form>
-               <form action="<?php echo FRONT_ROOT . "Reserve/DeleteReserve" ?>" method="POST">
-                    <div>
-                         <label for="">Reserve ID</label>
-                         <input type="text" name="reserveId" value="">
-                         <button type="submit" name="" class="btn btn-dark ml-auto d-block">Delete</button>
-                    </div>
-               </form>
-               <form action="<?php echo FRONT_ROOT . "Reserve/PaidOut" ?>" method="POST">
-                    <div>
-                         <label for="">Reserve ID</label>
-                         <input type="text" name="reserveId" value="">
-                         <button type="submit" name="" class="btn btn-dark ml-auto d-block">Go to pay</button>
-                    </div>
                </form>
           </div>
      </section>

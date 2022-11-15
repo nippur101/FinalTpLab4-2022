@@ -41,6 +41,8 @@ $petsDAO = new PetsDAO();
                                              <td><?php echo $reserve->getTotalCost(); ?></td>
                                              <td><?php echo $reserve->getKeeperReviewStatus(); ?></td>
                                              <td><?php echo $reserve->getPaymentReviewStatus(); ?></td>
+                                             <td><a href="../Reserve/ConfirmReserve?reserveId=<?php echo $reserve->getReserveId();?>">Confirm</a></td>
+                                             <td><a href="../Reserve/RefuseReserve?reserveId=<?php echo $reserve->getReserveId();?>">Refuse</a></td>
                                         </tr>
                                    <?php
                                    }
@@ -48,21 +50,7 @@ $petsDAO = new PetsDAO();
                          </tbody>
                          <button type="submit" name="" class="btn btn-dark ml-auto d-block">Refresh</button>
                     </table>
-               </form>
-               <form action="<?php echo FRONT_ROOT . "Reserve/ConfirmReserve" ?>" method="POST">
-                    <div>
-                         <label for="">Reserve ID</label>
-                         <input type="text" name="reserveId" value="">
-                         <button type="submit" name="" class="btn btn-green ml-auto d-block">Confirm</button>
-                    </div>
-               </form>
-               <form action="<?php echo FRONT_ROOT . "Reserve/RefuseReserve" ?>" method="POST">
-                    <div>
-                         <label for="">Reserve ID</label>
-                         <input type="text" name="reserveId" value="">
-                         <button type="submit" name="" class="btn btn-red ml-auto d-block">Refuse</button>
-                    </div>
-               </form>
+               </form>   
           </div>
      </section>
 </main>

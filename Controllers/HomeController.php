@@ -7,8 +7,27 @@ class HomeController
 
     public function Index($message = "")
     {
-        require_once(VIEWS_PATH . "validate-session.php");
-        require_once(VIEWS_PATH . "index.php");
+        if(isset($_SESSION["loggedUser"]))
+        {
+            if($_SESSION["typeUser"] == 1)
+            {
+                $keeper = $_SESSION["loggedUser"];
+                require_once(VIEWS_PATH . "validate-session.php");
+                require_once(VIEWS_PATH . "logged-keeper.php");
+            }
+            else if($_SESSION["loggedUser"] == 2)
+            {
+                $owner = $_SESSION["loggedUser"];
+                require_once(VIEWS_PATH . "validate-session.php");
+                require_once(VIEWS_PATH . "logged-owner.php");
+            }
+        }
+        else
+        {
+            require_once(VIEWS_PATH . "validate-session.php");
+            require_once(VIEWS_PATH . "index.php");
+        }
+        
     }
 
     public function Create()
@@ -23,8 +42,9 @@ class HomeController
 
     public function Logout()
     {
-        //require_once(VIEWS_PATH . "validate-session.php");
-        require_once(VIEWS_PATH . "logout.php");
+        unset($_SESSION["loggedUser"]);
+        unset($_SESSION["typeUser"]);
+        $this->Index();
     }
     public function OwnerList()
     {
