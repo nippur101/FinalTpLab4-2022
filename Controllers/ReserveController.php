@@ -60,4 +60,18 @@ class ReserveController
         $this->reserveDAO->Update($reserve);
         $this->RetrievePendingReserves();
     }
+
+    public function RetrieveMadedReserves()
+    {
+        $owner = $_SESSION["loggedUser"];
+        $reserves = $this->reserveDAO->GetByOwner($owner);
+        require_once(VIEWS_PATH . "owner-reserves.php");
+    }
+
+    public function DeleteReserve($reserveId)
+    {
+        $reserve = $this->reserveDAO->GetReserve($reserveId);
+        $this->reserveDAO->Delete($reserve);
+        $this->RetrieveMadedReserves();
+    }
 }

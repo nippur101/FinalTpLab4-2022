@@ -26,6 +26,34 @@ class ReserveDAO
         $this->SaveReserve();
     }
 
+    public function GetByOwner($owner)
+    {
+        $this->RetrieveData();
+
+        $reserves = array();
+
+        foreach ($this->reserveList as $reserve) {
+            if ($reserve->getOwner() == $owner) {
+                array_push($reserves, $reserve);
+            }
+        }
+
+        return $reserves;
+    }
+
+    public function Delete($reserveId)
+    {
+        $this->RetrieveData();
+
+        $reserve = $this->GetReserve($reserveId);
+
+        if ($reserve != null) {
+            $key = array_search($reserve, $this->reserveList);
+            unset($this->reserveList[$key]);
+            $this->SaveReserve();
+        }
+    }
+
     public function GetByKeeper($keeper)
     {
         $this->RetrieveData();
