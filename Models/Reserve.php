@@ -8,9 +8,19 @@
         private $amountPaid;
         private $keeper;
         private $pets;
+        private $owner;
         private $keeperReviewStatus;
         private $paymentReviewStatus;
         private $totalCost;
+
+        public function getOwner(){
+                return $this->owner;
+        }
+
+        public function setOwner($owner){
+                $this->owner = $owner;
+                return $this;
+        }
                
         public function getReserveId()
         {

@@ -23,6 +23,7 @@ class OwnerController
 
         $this->ownerDAO = new OwnerPDO();
         $this->petDAO = new PetsPDO();
+        $this->reserveDAO = new ReserveDAO();
     }
 
     public function ShowProfileView()

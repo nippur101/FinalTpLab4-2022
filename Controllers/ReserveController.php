@@ -2,10 +2,10 @@
 
 namespace Controllers;
 
-use DAO\ReserveDAO as ReserveDAO;
-use DAO\KeeperDAO;
-use DAO\PetsDAO;
-use Models\Reserve as Reserve;
+use DAO\ReservePDO;
+use DAO\KeeperPDO;
+use DAO\PetsPDO;
+use Models\Reserve;
 
 const PENDING_APPROVAL = 0;
 const APPROVED = 1;
@@ -19,20 +19,25 @@ class ReserveController
 
     public function __construct()
     {
-        $this->reserveDAO = new ReserveDAO();
-        $this->keeperDAO = new KeeperDAO();
-        $this->petDAO = new PetsDAO();
+        $this->reserveDAO = new ReservePDO();
+        $this->keeperDAO = new KeeperPDO();
+        $this->petDAO = new PetsPDO();
     }
 
     public function GenerateReserve($keeperId, $keeperStartDate, $keeperFinalDate, $keeperStayCost, $totalStayCost, $petId)
     {
         $reserve = new Reserve();
-        $reserve->setKeeper($this->keeperDAO->GetKeeper($keeperId));
+        $reserve->setKeeper($keeperId);
         $reserve->setStartDate($keeperStartDate);
         $reserve->setFinalDate($keeperFinalDate);
         $reserve->setTotalCost($totalStayCost);
         $reserve->setAmountPaid($keeperStayCost);
-        $reserve->setPets($this->petDAO->GetPet($petId));
+        $reserve->setPets($petId);
+
+        $petObject = $this->petDAO->GetPet($petId);
+        $ownerID = $petObject->getOwner();
+        $reserve->setOwner($ownerID);
+
         $reserve->setKeeperReviewStatus(PENDING_APPROVAL);
         $reserve->setPaymentReviewStatus(PENDING_APPROVAL);
         $this->reserveDAO->Add($reserve);

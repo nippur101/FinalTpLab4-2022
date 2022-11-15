@@ -61,7 +61,7 @@ class ReserveDAO
         $reserveList = array();
 
         foreach ($this->reserveList as $reserve) {
-            if ($reserve->getKeeper()->getUserID() == $keeper->getUserID()) {
+            if ($reserve->getKeeper() == $keeper->getUserID()) {
                 array_push($reserveList, $reserve);
             }
         }
@@ -78,7 +78,7 @@ class ReserveDAO
         foreach ($petList as $pet) {
             $flag = true;
             foreach ($this->reserveList as $reserve) {
-                if ($reserve->getPets()->getPetID() == $pet->getPetID()) {
+                if ($reserve->getPets() == $pet->getPetId()) {
                     $flag = false;
                 }
             }

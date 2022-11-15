@@ -51,7 +51,8 @@ class PetsPDO
                 $this->connection = Connection::GetInstance();
 
                 $ownerPets = $this->connection->Execute($query);
-                
+                $ownerList = array();
+
                 foreach ($ownerPets as $pet)
                 {                
                     $pets = new Pets();
@@ -66,18 +67,18 @@ class PetsPDO
                     $pets->setOwner($pet["ownerId"]);
     
     
-                    array_push($ownerPets, $pets);
+                    array_push($ownerList, $pets);
                 }   
 
 
-                return $ownerPets;
+                return $ownerList;
                
             }
             catch(Exception $ex)
             {
                 throw $ex;
             }
-        return $ownerPets;
+        return $ownerList;
     }
 
     public function validPet($name, $owner)

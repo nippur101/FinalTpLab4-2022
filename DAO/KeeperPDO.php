@@ -162,7 +162,7 @@ class KeeperPDO
                         $keeper = new Keeper();
                         $keeper->setUserId($valuesArray["userId"]);
                         $keeper->setAddress($valuesArray["address"]);
-                        $keeper->setPetSize($valuesArray["petSize"]);
+                        $keeper->setPetSize($valuesArray["petsize"]);
                         $keeper->setStayCost($valuesArray["stayCost"]);
                         $keeper->setReviews($valuesArray["reviews"]);
                         $this->KeeperFreeTimePeriod($keeper);
