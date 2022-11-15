@@ -1,14 +1,18 @@
 <?php
 
 namespace DAO;
-
+use \Exception as Exception;
+use Models\Pets;
 use Models\Keeper as Keeper;
 use DAO\UserDAO as UserDAO;
 use Models\FreeTimePeriod;
 
-class KeeperDAO
+class KeeperPDO
 {
     private $keeperList = array();
+    private $connection;
+    private $tableName = "Keeper";
+
 
     public function getAll()
     {
@@ -18,16 +22,40 @@ class KeeperDAO
 
     public function Add(Keeper $keeper)
     {
-        $this->RetrieveData();
+        
+        try
+        {
+            $query = "CALL addKeeper('".$keeper->getAddress()."','".$keeper->getPetSize()."',".$keeper->getStayCost().",".$keeper->getUserID().");";
+          
+            $this->connection = Connection::GetInstance();
 
-        array_push($this->keeperList, $keeper);
-
-        $this->SaveData();
+            $this->connection->ExecuteNonQuery($query);
+        }
+        catch(Exception $ex)
+        {
+           
+            throw $ex;
+        }
     }
 
+    public function updateKeeper($keeper){
+        try
+        {
+            $query = "CALL updateKeeper('".$keeper->getAddress()."','".$keeper->getPetSize()."',".$keeper->getStayCost().");";
+          
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query);
+        }
+        catch(Exception $ex)
+        {
+           
+            throw $ex;
+        }
+    }
     public function Remove($id)
     {
-        $this->RetrieveData();
+       /* $this->RetrieveData();
 
         $newList = array();
 
@@ -40,6 +68,7 @@ class KeeperDAO
         $this->keeperList = $newList;
 
         $this->SaveData();
+        */
     }
 
     public function GetKeeper($userID)
@@ -59,11 +88,22 @@ class KeeperDAO
     public function addFreePeriodOfTime($time, $keeper)
     {
         $keeper->AddTimePeriod($time);
-        $this->Update($keeper);
-    }
+        try
+        {
+            $query = "CALL addFreeTimePeriod('".$time->getStartDate()."','".$time->getFinalDate()."',".$keeper->getUserID().");";
+          
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query);
+        }
+        catch(Exception $ex)
+        {
+           
+            throw $ex;
+        }  }
 
 
-
+/*
     public function Update(Keeper $keeper)
     {
         $this->RetrieveData();
@@ -82,6 +122,7 @@ class KeeperDAO
 
         $this->SaveData();
     }
+    */
 
     public function ReturnDefaultKeeper($userObject)
     {
@@ -94,7 +135,7 @@ class KeeperDAO
         $keeper->setUserID($userObject->getUserID());
         $keeper->setAddress("Incompleta");
         $keeper->setPetSize("Incompleta");
-        $keeper->setStayCost("Incompleta");
+        $keeper->setStayCost(0.0);
         $keeper->setFreeTimePeriod(array());
         $keeper->setReviews(array());
 
@@ -104,44 +145,82 @@ class KeeperDAO
     public function retrieveData()
     {
 
-        $this->keeperList = array();
+        $userList=array();
+        $userPDO=new UserPDO();
+    
+            try
+                {
+                    $userList=$userPDO->getAll();
+    
+                    $query = "SELECT * FROM ".$this->tableName;
+    
+                    $this->connection = Connection::GetInstance();
+    
+                    $resultSet = $this->connection->Execute($query);
+                    foreach ($resultSet as $valuesArray) {
+    
+                        $keeper = new Keeper();
+                        $keeper->setUserId($valuesArray["userId"]);
+                        $keeper->setAddress($valuesArray["address"]);
+                        $keeper->setPetSize($valuesArray["petSize"]);
+                        $keeper->setStayCost($valuesArray["stayCost"]);
+                        $keeper->setReviews($valuesArray["reviews"]);
+                        $this->KeeperFreeTimePeriod($keeper);
+                        
+                    
 
-        if (file_exists('Data/keeper.json')) {
-            $jsonContent = file_get_contents('Data/keeper.json');
-
-            $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-            foreach ($arrayToDecode as $valuesArray) {
-                $keeper = new Keeper();
-                $keeper->setUserId($valuesArray["userId"]);
-                $keeper->setFirstName($valuesArray["firstName"]);
-                $keeper->setLastName($valuesArray["lastName"]);
-                $keeper->setEmail($valuesArray["email"]);
-                $keeper->setPassword($valuesArray["password"]);
-                $keeper->setUserType($valuesArray["userType"]);
-                $keeper->setAddress($valuesArray["address"]);
-                $keeper->setPetSize($valuesArray["petSize"]);
-                $keeper->setStayCost($valuesArray["stayCost"]);
-                if (isset($valuesArray["freeTimePeriod"])) {
-                    foreach ($valuesArray["freeTimePeriod"] as $value) {
-                        $time = new FreeTimePeriod();
-                        $time->setStartDate($value["dateStart"]);
-                        $time->setFinalDate($value["dateFinal"]);
-                        $keeper->AddTimePeriod($time);
+                        foreach($userList as $user){
+                            if($keeper->getUserID()==$user->getUserID()){
+                                $keeper->setFirstName($user->getFirstName());
+                                $keeper->setLastName($user->getLastName());
+                                $keeper->setEmail($user->getEmail());
+                                $keeper->setPassword($user->getPassword());
+                                $keeper->setUserType($user->getUserType());
+                            }
+            
+                        }
+                        array_push($this->keeperList, $keeper);
                     }
+    
+                    return $this->keeperList;
+                   
                 }
-
-                $keeper->setReviews($valuesArray["reviews"]);
-                array_push($this->keeperList, $keeper);
-            }
-        }
+                catch(Exception $ex)
+                {
+                    throw $ex;
+                }
+        
     }
 
-    public function updateKeeper($keeper){
-        $this->Remove($keeper->getUserID());
-        $this->Add($keeper);
 
+    public function KeeperFreeTimePeriod($keeper){
+        try
+                {
+                   
+    
+                    $query = "CALL keeperFreeTimeperiod(".$keeper->getUserID().");";
+    
+                    $this->connection = Connection::GetInstance();
+    
+                    $resultSet = $this->connection->Execute($query);
+
+                    if (isset($resultSet["freeTimePeriod"])) {
+                        foreach ($resultSet["freeTimePeriod"] as $value) {
+                            $time = new FreeTimePeriod();
+                            $time->setStartDate($value["dateStart"]);
+                            $time->setFinalDate($value["dateFinal"]);
+                            $keeper->AddTimePeriod($time);
+                        }
+                    }
+                }catch(Exception $ex)
+                {
+                    throw $ex;
+                }
     }
+
+
+    
+/*
 
     public function SaveData()
     {
@@ -176,7 +255,7 @@ class KeeperDAO
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
         file_put_contents('Data/keeper.json', $jsonContent);
     }
-
+*/
     public function IsAvaiableTime($dateStart, $dateFinal, $keeper)
     {
         $this->RetrieveData();

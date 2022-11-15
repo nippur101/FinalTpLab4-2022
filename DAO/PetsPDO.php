@@ -1,24 +1,25 @@
 <?php
 
 namespace DAO;
-namespace DAO;
 use \Exception as Exception;
 use DAO\OwnerPDO;
 use DAO\OwnerDAO;
 use Models\Pets;
 use Models\Owner;
 
-class PetsDAO
+class PetsPDO
 {
 
     private $petsList = array();
+
     private $connection;
     
     private $tableName = "Pets";
     public function __construct()
     {
-        $this->ownerPDO = new OwnerPDO();
-        $this->ownerDAO = new OwnerDAO();
+       
+
+      //  $this->ownerDAO = new OwnerDAO();
     }
 
     public function getAll()
@@ -30,25 +31,52 @@ class PetsDAO
     }
 
     public function Add(Pets $pets)
-    {
+    {/*
+        $ownerDAO = new OwnerPDO();
         $owner = $_SESSION["loggedUser"];
-        $this->ownerDAO->addPetOwner($pets, $owner);
+        $ownerDAO->addPetOwner($pets, $owner);
+*/
+        $this->SavePets($pets);
+       
 
-        $this->RetrieveData();
 
-        array_push($this->petsList, $pets);
-
-        $this->SavePets();
     }
 
     public function ReturnOwnerPets($ownerId){
-        $this->retrieveData();
         $ownerPets = array();
-        foreach($this->petsList as $pet){
-            if($pet->getOwner() == $ownerId){
-                array_push($ownerPets, $pet);
+        try
+            {
+                $query = "CALL ownerPets(".$ownerId.")";
+
+                $this->connection = Connection::GetInstance();
+
+                $ownerPets = $this->connection->Execute($query);
+                
+                foreach ($ownerPets as $pet)
+                {                
+                    $pets = new Pets();
+    
+                    $pets->setPetId($pet["petsId"]);
+                    $pets->setName($pet["_name"]);
+                    $pets->setVaccinationPlan($pet["vaccinationPlan"]);
+                    $pets->setRaze($pet["raze"]);
+                    $pets->setPetType($pet["petType"]);
+                    $pets->setVideo($pet["video"]);
+                    $pets->setImage($pet["image"]);
+                    $pets->setOwner($pet["ownerId"]);
+    
+    
+                    array_push($ownerPets, $pets);
+                }   
+
+
+                return $ownerPets;
+               
             }
-        }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         return $ownerPets;
     }
 
@@ -113,29 +141,27 @@ class PetsDAO
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
-                foreach ($resultSet as $valuesArray) {
+              
 
-                  
+                
                     
                     foreach ($resultSet as $valuesArray) {
                             $pets = new Pets();
     
-                            $pets->setPetId($valuesArray["petId"]);
-                            $pets->setName($valuesArray["name"]);
+                            $pets->setPetId($valuesArray["petsId"]);
+                            $pets->setName($valuesArray["_name"]);
                             $pets->setVaccinationPlan($valuesArray["vaccinationPlan"]);
                             $pets->setRaze($valuesArray["raze"]);
                             $pets->setPetType($valuesArray["petType"]);
                             $pets->setVideo($valuesArray["video"]);
                             $pets->setImage($valuesArray["image"]);
-                            $pets->setOwner($valuesArray["owner"]);
+                            $pets->setOwner($valuesArray["ownerId"]);
             
             
                             array_push($this->petsList, $pets);
                         }
                     
     
-                    array_push($this->petsList, $pets);
-                }
 
                 return $this->petsList;
                
@@ -151,34 +177,18 @@ class PetsDAO
     {
         try
         {
-            $query = "INSERT INTO ".$this->tableName." (petId, petId, vaccinationPlan, petType, raze,video,image,owner)
-             VALUES ( :petId, :petId, :vaccinationPlan, :petType, :raze,:video,:image,:owner);";
-            
-            $valuesArray["petId"] = $pets->getPetId();
-            $valuesArray["name"] = $pets->getName();
-            $valuesArray["vaccinationPlan"] = $pets->getVaccinationPlan();
-            $valuesArray["petType"] = $pets->getPetType();
-            $valuesArray["raze"] = $pets->getRaze();
-            $valuesArray["video"] = $pets->getVideo();
-            $valuesArray["image"] = $pets->getImage();
-            $valuesArray["owner"] = $pets->getOwner();
+            $query = "CALL addPet ('".$pets->getName()."','".$pets->getVaccinationPlan()."','".$pets->getRaze()."','".$pets->getPetType()."','".$pets->getVideo()."','".$pets->getImage()."',".$pets->getOwner().");";
+           
 
             $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query, $valuesArray);
+            $this->connection->ExecuteNonQuery($query);
 
         }
         catch(Exception $ex)
         {
             var_dump($query);
             throw $ex;
-        }
-
-        foreach ($this->petsList as $pets) {
-            
-
-
-            array_push($arrayToEncode, $valuesArray);
         }
 
        
@@ -198,26 +208,24 @@ class PetsDAO
     }
     public function Remove($id)
     {
-        $this->RetrieveData();
+        try
+        {
+            $query = "CALL eliminatePet (".$id.");";
+           
 
-        $newList = array();
+            $this->connection = Connection::GetInstance();
 
-        foreach ($this->petsList as $pets) {
-            if ($pets->getPetId() != $id) {
-                array_push($newList, $pets);
-            }
+            $this->connection->ExecuteNonQuery($query);
+
         }
-
-        $this->petsList = $newList;
-
-        $this->SavePets();
+        catch(Exception $ex)
+        {
+            var_dump($query);
+            throw $ex;
+        }
     }
 
-    public function recuperarMascotas($ownerId){
-        $query = "SELECT * FROM ".$this->tableName."INER JOING _owner AS o ON o.petsId=Pets.petsId where ownerId=$ownerId";
+    
 
-        $this->connection = Connection::GetInstance();
-
-        $resultSet = $this->connection->Execute($query);
-    }
 }
+?>

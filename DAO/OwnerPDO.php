@@ -10,6 +10,8 @@ class OwnerPDO
     private $connection;
     private $ownerList = array();
     private $tableName = "_Owner";
+
+    
     public function getAll()
     {
         $this->retrieveData();
@@ -18,46 +20,14 @@ class OwnerPDO
     }
 
     public function Add(Owner $owner)
-    {
-       
+    {   
         try
         {
-            $query = "INSERT INTO ".$this->tableName." (userId, firstName, lastName, email, _password, userType) VALUES (:userId, :firstName, :lastName :email, :_password, :userType);";
+            $query = "CALL addOwner(".$owner->getUserID().",'".$owner->getPhone()."');";
             
-                $arrayPets=array();
-
-     
-
-                $valuesArray["userId"] =NULL;
-                $valuesArray["firstName"] = $owner->getFirstName();
-                $valuesArray["lastName"] = $owner->getLastName();
-                $valuesArray["email"] = $owner->getEmail();
-                $valuesArray["phone"] = $owner->getPhone();
-                $valuesArray["password"] = $owner->getPassword();
-                $valuesArray["userType"] = $owner->getUserType();
-                //$valuesArray["pets"] = $owner->getPets();
-                if ($owner->getPets() != null) {
-                    foreach ($owner->getPets() as $pets) {
-                        $arrayPets["petId"] = $pets->getPetId();
-                        $arrayPets["name"] = $pets->getName();
-                        $arrayPets["vaccinationPlan"] = $pets->getVaccinationPlan();
-                        $arrayPets["petType"] = $pets->getPetType();
-                        $arrayPets["raze"] = $pets->getRaze();
-                        $arrayPets["video"] = $pets->getVideo();
-                        $arrayPets["image"] = $pets->getImage();
-                        $arrayPets["owner"] = $pets->getOwner();
-                        $valuesArray["pets"][] = $arrayPets;
-                    }
-                }
-    
-            
-
-
-
-
             $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query, $valuesArray);
+            $this->connection->ExecuteNonQuery($query);
         }
         catch(Exception $ex)
         {
@@ -110,62 +80,51 @@ class OwnerPDO
 
         $this->SaveOwner();
     }
-
+*/
     public function addPetOwner($pet, $owner)
     {
-        $this->retrieveData();
-        $owner->setPets($pet->getPetId());
+        
+        $pet->setOwner($owner->getUserID);
 
-
-        $this->Remove($owner->getUserID());
-
-        $this->add($owner);
-
-        $this->SaveOwner();
     }
-*/
+
     public function retrieveData()
     {
 
         $this->ownerList = array();
+        $petList=array();
+        $petsPDO=new PetsPDO();
+        $userList=array();
+        $userPDO=new UserPDO();
 
         try
             {
+                $userList=$userPDO->getAll();
               
                 $query = "SELECT * FROM ".$this->tableName;
 
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
+
                 foreach ($resultSet as $valuesArray) {
 
                     $owner = new Owner();
                     $owner->setUserId($valuesArray["userId"]);
-                    $owner->setFirstName($valuesArray["firstName"]);
-                    $owner->setLastName($valuesArray["lastName"]);
-                    $owner->setEmail($valuesArray["email"]);
-                    $owner->setPassword($valuesArray["_password"]);
-                    $owner->setUserType($valuesArray["userType"]);
                     $owner->setPhone($valuesArray["phone"]);
-                   // $owner->setPets($valuesArray["pets"]);
-                    if (isset($valuesArray["pets"])) {
-                        foreach ($valuesArray["pets"] as $value) {
-                            $pets = new Pets();
-    
-                            $pets->setPetId($value["petId"]);
-                            $pets->setName($value["name"]);
-                            $pets->setVaccinationPlan($value["vaccinationPlan"]);
-                            $pets->setRaze($value["raze"]);
-                            $pets->setPetType($value["petType"]);
-                            $pets->setVideo($value["video"]);
-                            $pets->setImage($value["image"]);
-                            $pets->setOwner($value["owner"]);
-            
-            
-                            $owner->addPets( $pets);
-                        }
+                
+                foreach($userList as $user){
+                    if($owner->getUserID()==$user->getUserID()){
+                        $owner->setFirstName($user->getFirstName());
+                        $owner->setLastName($user->getLastName());
+                        $owner->setEmail($user->getEmail());
+                        $owner->setPassword($user->getPassword());
+                        $owner->setUserType($user->getUserType());
                     }
     
+                }
+                    $petList= $petsPDO->ReturnOwnerPets($owner->getUserID());
+                    $owner->setPets($petList);
                     array_push($this->ownerList, $owner);
                 }
 
@@ -179,3 +138,4 @@ class OwnerPDO
     }
    
 }
+?>

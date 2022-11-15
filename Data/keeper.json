@@ -12,7 +12,93 @@
         "freeTimePeriod": [
             {
                 "dateStart": "2022-11-02",
-                "dateFinal": "2022-11-17"
+                "dateFinal": "2022-11-03"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-26"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-02",
+                "dateFinal": "2022-11-03"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-26"
+            },
+            {
+                "dateStart": "2022-11-04",
+                "dateFinal": "2022-11-05"
+            }
+        ]
+    },
+    {
+        "userId": 26,
+        "firstName": "Celine",
+        "lastName": "Dion",
+        "email": "c@d",
+        "password": "1234",
+        "userType": "1",
+        "address": "Incompleta",
+        "petSize": "Incompleta",
+        "stayCost": "Incompleta",
+        "reviews": [],
+        "freeTimePeriod": [
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-26"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-02",
+                "dateFinal": "2022-11-03"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-26"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-02",
+                "dateFinal": "2022-11-03"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-28"
+            },
+            {
+                "dateStart": "2022-11-10",
+                "dateFinal": "2022-11-26"
+            },
+            {
+                "dateStart": "2022-11-04",
+                "dateFinal": "2022-11-05"
             }
         ],
         "reviews": []

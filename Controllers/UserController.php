@@ -8,6 +8,10 @@ use DAO\OwnerDAO;
 use Models\User as User;
 use Models\Keeper as Keeper;
 use Models\Owner;
+use DAO\KeeperPDO;
+use DAO\OwnerPDO;
+use DAO\UserDAO;
+
 
 class UserController
 {
@@ -17,8 +21,12 @@ class UserController
     public function __construct()
     {
         $this->userDAO = new UserPDO();
-        $this->keeperDAO = new KeeperDAO();
-        $this->ownerDAO = new OwnerDAO();
+        $this->keeperDAO = new KeeperPDO();
+        $this->ownerDAO = new OwnerPDO();
+       // $this->userDAO = new UserDAO();
+        //$this->keeperDAO = new KeeperDAO();
+       // $this->ownerDAO = new OwnerDAO();
+        
     }
 
     public function Destroy()
@@ -79,6 +87,7 @@ class UserController
 
                 if ($user->getUserType() == 1) {
                     $keeper = $this->keeperDAO->ReturnDefaultKeeper($user);
+                    $this->userDAO->retrieveUserId($mail,$password1,$keeper);
                     $this->keeperDAO->Add($keeper);
 
                     $_SESSION["loggedUser"] = ($keeper);
@@ -87,6 +96,7 @@ class UserController
                     require_once(VIEWS_PATH . "keeper-profile.php");
                 } else {
                     $owner = $this->ownerDAO->ReturnDefaultOwner($user);
+                    $this->userDAO->retrieveUserId($mail,$password1,$owner);
                     $this->ownerDAO->Add($owner);
 
                     $_SESSION["loggedUser"] = ($owner);

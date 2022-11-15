@@ -17,7 +17,6 @@ class UserPDO
 
         try
             {
-                $studentList = array();
 
                 $query = "SELECT * FROM ".$this->tableName;
 
@@ -53,22 +52,16 @@ class UserPDO
 
         try
         {
-            $query = "INSERT INTO ".$this->tableName." (_User.firstName, _User.lastName, _User.email, _User._password, _User.userType) VALUES ( :firstName, :lastName :email, :_password, :userType);";
+            $query = "CALL addUser('".$user->getFirstName()."','".$user->getLastName()."','".$user->getEmail()."','".$user->getPassword()."',".$user->getUserType().");";
             
-           // $valuesArray["userId"] = NULL;
-            $valuesArray["firstName"] = $user->getFirstName();
-            $valuesArray["lastName"] = $user->getLastName();
-            $valuesArray["email"] = $user->getEmail();
-            $valuesArray["_password"] = $user->getPassword();
-            $valuesArray["userType"] = $user->getUserType();
-
             $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query, $valuesArray);
+            $this->connection->ExecuteNonQuery($query);
+          
         }
         catch(Exception $ex)
         {
-            var_dump($query);
+           
             throw $ex;
         }
         
@@ -123,50 +116,29 @@ class UserPDO
         return $check;
     }
 
-/*    public function retrieveData()
-    {
-
-        $this->userList = array();
-
-        if (file_exists('Data/users.json')) {
-            $jsonContent = file_get_contents('Data/users.json');
-
-            $arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-            foreach ($arrayToDecode as $valuesArray) {
-
-                $user = new User();
-                $user->setUserId($valuesArray["userId"]);
-                $user->setFirstName($valuesArray["firstName"]);
-                $user->setLastName($valuesArray["lastName"]);
-                $user->setEmail($valuesArray["email"]);
-                $user->setPassword($valuesArray["password"]);
-                $user->setUserType($valuesArray["userType"]);
-
-
-                array_push($this->userList, $user);
+    public function retrieveUserId($email,$password,$user){
+        try
+        {
+            $query = "CALL retrieveUserId('".$email."','".$password."');";
+            
+            $this->connection = Connection::GetInstance();
+            
+            $resultSet = $this->connection->Execute($query);
+            
+                foreach($resultSet as $value){
+                
+                $user->setUserId($value["userId"]);
             }
+
+           
+          
+        }
+        catch(Exception $ex)
+        {
+           
+            throw $ex;
         }
     }
-    private function SaveUser()
-    {
-        $arrayToEncode = array();
 
-        foreach ($this->userList as $user) {
-            $valuesArray["userId"] = $user->getUserId();
-            $valuesArray["firstName"] = $user->getFirstName();
-            $valuesArray["lastName"] = $user->getLastName();
-            $valuesArray["email"] = $user->getEmail();
-            $valuesArray["password"] = $user->getPassword();
-            $valuesArray["userType"] = $user->getUserType();
-
-
-            array_push($arrayToEncode, $valuesArray);
-        }
-
-        $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-
-        file_put_contents('Data/users.json', $jsonContent);
-    }
-    */
 }
+?>

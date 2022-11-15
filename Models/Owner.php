@@ -13,8 +13,8 @@
            
         }   
 
-        public function addPets(Pets $petsL){
-            array_push($this->petsList, $petsL);
+        public function addPets(Pets $pet){
+            array_push($this->petsList, $pet);
         }
 
         public function getPhone()

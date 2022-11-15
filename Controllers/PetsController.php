@@ -6,6 +6,7 @@ use DAO\PetsDAO;
 use Models\Pets as Pets;
 use Models\Owner as Owner;
 use DAO\OwnerDAO;
+use DAO\PetsPDO;
 
 class PetsController
 {
@@ -15,8 +16,11 @@ class PetsController
 
     public function __construct()
     {
-        $this->petsDAO = new PetsDAO();
-        $this->ownerDAO = new OwnerDAO();
+       // $this->petsDAO = new PetsDAO();
+        //$this->ownerDAO = new OwnerDAO();
+
+        $this->petsDAO = new PetsPDO();
+        $this->ownerDAO = new PetsPDO();
     }
 
     public function CreatePets($name, $vaccinationPlan, $raze, $petType, $video, $image)
@@ -35,7 +39,7 @@ class PetsController
             $pets->setImage($image);
             $pets->setOwner($owner->getUserID());
             $this->petsDAO->Add($pets);
-            $this->ownerDAO->addPetOwner($pets, $owner);
+           
             echo "<script> if(confirm('La Mascota se ha creado con exito!')); </script>";
         } else {
             echo "<script> if(confirm('La mascota ya existe!')); </script>";

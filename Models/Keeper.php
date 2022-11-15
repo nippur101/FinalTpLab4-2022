@@ -73,6 +73,7 @@
         public function AddTimePeriod(FreeTimePeriod $freeTimePeriod){
             array_push($this->freeTimePeriod, $freeTimePeriod);
         }
+        
       
         public function getFreeTimePeriod()
         {
