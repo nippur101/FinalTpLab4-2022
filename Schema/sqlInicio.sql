@@ -242,11 +242,13 @@ BEGIN
 END
 
 #===========================================================================================================================================
-CREATE DEFINER=`root`@`%` PROCEDURE `addKeeper`(in addres varchar(100),in pSize varchar(100),in sCost double, in uId int)
+CREATE DEFINER=`root`@`%` PROCEDURE `addFreeTimePeriod`(in starD date,in finaD date,in keepId int)
 BEGIN
-INSERT INTO Keeper (address,petsize,stayCost,userId) VALUES (  addres, pSize,sCost,uId);
+	ALTER TABLE FreeTimePeriod
+	DROP FOREIGN KEY  FK_FreeTimePeriod_Keeper;
+    INSERT INTO FreeTimePeriod ( startDate, finalDate, keeperId) VALUES ( starD, finaD,keepId);
+	ALTER TABLE FreeTimePeriod ADD CONSTRAINT FK_FreeTimePeriod_Keeper FOREIGN KEY FreeTimePeriod (keeperId) REFERENCES Keeper (KeeperId);
 END
-
 #===========================================================================================================================================
 
 #===========================================================================================================================================

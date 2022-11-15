@@ -51,7 +51,7 @@ class KeeperController
         $newTime->setFinalDate($finalDate);
 
         $this->keeperDAO->addFreePeriodOfTime($newTime, $keeper);
-        var_dump($keeper);
+        
         $this->ShowCalendarView();
     }
 

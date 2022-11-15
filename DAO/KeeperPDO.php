@@ -87,6 +87,7 @@ class KeeperPDO
 
     public function addFreePeriodOfTime($time, $keeper)
     {
+        $keeper->AddTimePeriod($time);
         try
         {
             $query = "CALL addFreeTimePeriod('".$time->getStartDate()."','".$time->getFinalDate()."',".$keeper->getUserID().");";
@@ -165,18 +166,20 @@ class KeeperPDO
                         $keeper->setStayCost($valuesArray["stayCost"]);
                         $keeper->setReviews($valuesArray["reviews"]);
                         $this->KeeperFreeTimePeriod($keeper);
-                        array_push($this->keeperList, $keeper);
-                    }
+                        
+                    
 
-                    foreach($userList as $user){
-                        if($keeper->getUserID()==$user->getUserID()){
-                            $keeper->setFirstName($user->getFirstName());
-                            $keeper->setLastName($user->getLastName());
-                            $keeper->setEmail($user->getEmail());
-                            $keeper->setPassword($user->getPassword());
-                            $keeper->setUserType($user->getUserType());
+                        foreach($userList as $user){
+                            if($keeper->getUserID()==$user->getUserID()){
+                                $keeper->setFirstName($user->getFirstName());
+                                $keeper->setLastName($user->getLastName());
+                                $keeper->setEmail($user->getEmail());
+                                $keeper->setPassword($user->getPassword());
+                                $keeper->setUserType($user->getUserType());
+                            }
+            
                         }
-        
+                        array_push($this->keeperList, $keeper);
                     }
     
                     return $this->keeperList;
