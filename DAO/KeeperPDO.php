@@ -41,7 +41,7 @@ class KeeperPDO
     public function updateKeeper($keeper){
         try
         {
-            $query = "CALL updateKeeper('".$keeper->getAddress()."','".$keeper->getPetSize()."',".$keeper->getStayCost().");";
+            $query = "CALL updateKeeper(".$keeper->getUserID()."'".$keeper->getAddress()."','".$keeper->getPetSize()."',".$keeper->getStayCost().");";
           
             $this->connection = Connection::GetInstance();
 
