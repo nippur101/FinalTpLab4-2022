@@ -32,6 +32,7 @@ class OwnerController
         $owner = $_SESSION["loggedUser"];
 
         if ($owner != NULL) {
+            $petsDAO = new PetsPDO();
             require_once(VIEWS_PATH . "validate-session.php");
             require_once(VIEWS_PATH . "owner-profile.php");
         }

@@ -2,11 +2,6 @@
 require_once(VIEWS_PATH . "header.php");
 require_once(VIEWS_PATH . "nav.php");
 
-use DAO\PetsDAO;
-use DAO\PetsPDO;
-
-$petsDAO = new PetsPDO();
-$user = $_SESSION["loggedUser"];
 ?>
 <main class="py-5">
      <section id="listado" class="mb-5">
@@ -37,8 +32,7 @@ $user = $_SESSION["loggedUser"];
                                              <th><?php echo $pets->getRaze(); ?></th>
                                              <th> <iframe width="200" height="150" src="<?php echo $pets->getVideo(); ?>"></iframe></th>
                                              <th><?php echo $pets->getPetType(); ?></th>
-                                             <th><a href="../Pets/deletePets?petsId=<?php echo $pets->getPetId();?>">Delete</a></th>
-
+                                             <th><a href="../Pets/deletePets?petsId=<?php echo $pets->getPetId(); ?>">Delete</a></th>
                                         </tr>
                               <?php }
                               } ?>
