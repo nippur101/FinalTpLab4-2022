@@ -37,7 +37,7 @@ $user = $_SESSION["loggedUser"];
                                              <th><?php echo $pets->getRaze(); ?></th>
                                              <th> <iframe width="200" height="150" src="<?php echo $pets->getVideo(); ?>"></iframe></th>
                                              <th><?php echo $pets->getPetType(); ?></th>
-
+                                             <th><a href="../Pets/deletePets?petsId=<?php echo $pets->getPetId();?>">Delete</a></th>
 
                                         </tr>
                               <?php }
@@ -45,13 +45,6 @@ $user = $_SESSION["loggedUser"];
                          </tbody>
                          <button type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar Mascota</button>
                     </table>
-               </form>
-               <form action="<?php echo FRONT_ROOT . "Pets/deletePets" ?>" method="POST" id="deletePet" class="mb-5">
-                    <div class="form-group">
-                         <h3>Id Mascota a Borrar</h3>
-                         <input type="text" name="petsId" class="form-control form-control-lg" placeholder="Id Mascota">
-                    </div>
-                    <button type="submit" name="" form="deletePet" class="btn btn-dark ml-auto d-block">Borrar Mascota</button>
                </form>
           </div>
      </section>
