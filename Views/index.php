@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('header.php');
 include_once('nav.php'); ?>
 
@@ -16,6 +16,7 @@ include_once('nav.php'); ?>
                <div class="form-group">
                     <label for="">Contraseña</label>
                     <input type="password" name="password" class="form-control form-control-lg" placeholder="Ingresar constraseña" required>
+                    <a href="../User/RecoveryPassword">No recuerdo mi contraseña...</a>
                </div>
 
                <button class="btn btn-primary btn-block btn-lg" type="submit">Iniciar Sesión</button> <br>

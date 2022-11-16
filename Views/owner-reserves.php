@@ -26,37 +26,37 @@ require_once(VIEWS_PATH . "nav.php");
                                         <td><?php echo $reserve->getReserveID(); ?></td>
                                         <td><?php echo $reserve->getStartDate(); ?></td>
                                         <td><?php echo $reserve->getFinalDate(); ?></td>
-                                        <td><?php 
+                                        <td><?php
                                              $pet = $pet_DAO->GetPet($reserve->getPets());
-                                             echo $pet->getName(); 
-                                        ?></td>
+                                             echo $pet->getName();
+                                             ?></td>
                                         <td><?php echo $pet->getPetType(); ?></td>
                                         <td><?php echo $reserve->getTotalCost(); ?></td>
                                         <td><?php
-                                                  switch ($reserve->getKeeperReviewStatus()) {
-                                                       case 0:
-                                                           echo "Unseen";
-                                                           break;
-                                                       case 1:
-                                                           echo "Approved";
-                                                           break;
-                                                       case 2:
-                                                           echo "Rejected";
-                                                           break;
-                                                  } 
+                                             switch ($reserve->getKeeperReviewStatus()) {
+                                                  case 0:
+                                                       echo "Unseen";
+                                                       break;
+                                                  case 1:
+                                                       echo "Approved";
+                                                       break;
+                                                  case 2:
+                                                       echo "Rejected";
+                                                       break;
+                                             }
                                              ?></td>
-                                             <td><?php 
-                                                  switch ($reserve->getPaymentReviewStatus()) {
-                                                       case 0:
-                                                           echo "No";
-                                                           break;
-                                                       case 1:
-                                                           echo "Yes";
-                                                           break;
-                                                  } 
-                                        ?></td>
-                                        <td><a href="../Reserve/DeleteReserve?reserveId=<?php echo $reserve->getReserveId();?>">Cancel</a></td>
-                                        <td><a href="../Reserve/PaidOut?reserveId=<?php echo $reserve->getReserveId();?>">Go pay</a></td>
+                                        <td><?php
+                                             switch ($reserve->getPaymentReviewStatus()) {
+                                                  case 0:
+                                                       echo "No";
+                                                       break;
+                                                  case 1:
+                                                       echo "Yes";
+                                                       break;
+                                             }
+                                             ?></td>
+                                        <td><a href="../Reserve/DeleteReserve?reserveId=<?php echo $reserve->getReserveId(); ?>">Cancel</a></td>
+                                        <td><a href="../Reserve/PaidOut?reserveId=<?php echo $reserve->getReserveId(); ?>">Go pay</a></td>
                                    </tr>
                               <?php
                               }

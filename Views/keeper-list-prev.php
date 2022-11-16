@@ -18,10 +18,10 @@ $tomorrowDate = date("Y") . "-" . date("m") . "-" . date("d", strtotime("+1 day"
                </div>
                <div class="form-group">
                     <label for="">Desde...</label>
-                    <input type="date" name="startDate" value="<?php echo $todaysDate; ?>" class="form-control form-control-lg">
+                    <input type="date" name="startDate" min="<?php echo date('Y-m-d') ?>" value="<?php echo $todaysDate; ?>" class="form-control form-control-lg">
 
                     <label for="">Hasta...</label>
-                    <input type="date" name="finalDate" value="<?php echo $tomorrowDate; ?>" class="form-control form-control-lg">
+                    <input type="date" name="finalDate" min="<?php echo date('Y-m-d') ?>" value="<?php echo $tomorrowDate; ?>" class="form-control form-control-lg">
                </div>
                <button class="btn btn-primary btn-block btn-lg" type="submit">Ok</button>
           </form>

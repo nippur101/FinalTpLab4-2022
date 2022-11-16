@@ -67,10 +67,10 @@ class ReserveController
     {
         $reserve = $this->reserveDAO->GetReserve($reserveId);
 
-        if($reserve->getPaymentReviewStatus() == PENDING_APPROVAL){
+        if ($reserve->getPaymentReviewStatus() == PENDING_APPROVAL) {
             $reserve->setKeeperReviewStatus(REJECTED);
             $this->reserveDAO->Update($reserve);
-        }else{
+        } else {
             echo "<script> if(confirm('Cannot change status once payed!')); </script>";
         }
         header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
@@ -88,34 +88,41 @@ class ReserveController
     {
         $event = $this->reserveDAO->GetReserve($reserveId);
 
-        if($event->getPaymentReviewStatus() == APPROVED){
+        if ($event->getPaymentReviewStatus() == APPROVED) {
             echo "<script> if(confirm('Cannot delete once payed!')); </script>";
             header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
-        }else{
+        } else {
             $this->reserveDAO->Delete($reserveId);
             header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
         }
     }
 
-    public function PaidOut($reserveId){
+    public function PaidOut($reserveId)
+    {
         $event = $this->reserveDAO->GetReserve($reserveId);
 
-        if($event->getPaymentReviewStatus() == APPROVED){
+        if ($event->getPaymentReviewStatus() == APPROVED) {
             echo "<script> if(confirm('Already payed!')); </script>";
             header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
-        }else{
-            $keeper = $this->keeperDAO->GetKeeper($event->getKeeper());
-            $petToKeep = $this->petDAO->GetPet($event->getPets());
-
-            $keeperDateStart = new DateTime($event->getStartDate());
-            $keeperDateFinal = new DateTime($event->getFinalDate());
-            $keeperInterval = $keeperDateStart->diff($keeperDateFinal);
-
-            require_once(VIEWS_PATH . "payment-view.php");
+        } else {
+            if($event->getKeeperReviewStatus() == PENDING_APPROVAL){
+                echo "<script> if(confirm('Cannot pay until keeper confirms!')); </script>";
+                header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
+            }else{
+                $keeper = $this->keeperDAO->GetKeeper($event->getKeeper());
+                $petToKeep = $this->petDAO->GetPet($event->getPets());
+    
+                $keeperDateStart = new DateTime($event->getStartDate());
+                $keeperDateFinal = new DateTime($event->getFinalDate());
+                $keeperInterval = $keeperDateStart->diff($keeperDateFinal);
+    
+                require_once(VIEWS_PATH . "payment-view.php");
+            }
         }
     }
 
-    public function FinishPayment($reserveId){
+    public function FinishPayment($reserveId)
+    {
         $reserve = $this->reserveDAO->GetReserve($reserveId);
         $reserve->setPaymentReviewStatus(APPROVED);
         $keeperObject = $this->keeperDAO->GetKeeper($reserve->getKeeper());

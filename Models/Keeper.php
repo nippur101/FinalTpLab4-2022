@@ -115,6 +115,3 @@
                 return $this->getKeeperId() . " - " . $this->getAddress() . " - " . $this->getPetSize() . " - " . $this->getStayCost();
         }
     }
-
-
-?>

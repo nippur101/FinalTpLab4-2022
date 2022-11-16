@@ -32,7 +32,9 @@ class UserPDO
                     $user->setEmail($valuesArray["email"]);
                     $user->setPassword($valuesArray["_password"]);
                     $user->setUserType($valuesArray["userType"]);
-    
+                    $user->setSecurityQuestion($valuesArray["securityQuestion"]);
+                    $user->setSecurityAnswer($valuesArray["securityAnswer"]);
+                    $user->setSecurityNumber($valuesArray["securityNumber"]);
     
                     array_push($this->userList, $user);
                 }
@@ -49,22 +51,27 @@ class UserPDO
    
     public function Add(User $user)
     {
-
         try
         {
-            $query = "CALL addUser('".$user->getFirstName()."','".$user->getLastName()."','".$user->getEmail()."','".$user->getPassword()."',".$user->getUserType().");";
-            
+            $query = "INSERT INTO ".$this->tableName." (firstName, lastName, email, _password, userType, securityQuestion, securityAnswer, securityNumber) VALUES (:firstName, :lastName, :email, :password, :userType, :securityQuestion, :securityAnswer, :securityNumber);";
+
+            $parameters["firstName"] = $user->getFirstName();
+            $parameters["lastName"] = $user->getLastName();
+            $parameters["email"] = $user->getEmail();
+            $parameters["password"] = $user->getPassword();
+            $parameters["userType"] = $user->getUserType();
+            $parameters["securityQuestion"] = $user->getSecurityQuestion();
+            $parameters["securityAnswer"] = $user->getSecurityAnswer();
+            $parameters["securityNumber"] = $user->getSecurityNumber();
+
             $this->connection = Connection::GetInstance();
 
-            $this->connection->ExecuteNonQuery($query);
-          
+            $this->connection->ExecuteNonQuery($query, $parameters);
         }
         catch(Exception $ex)
         {
-           
             throw $ex;
         }
-        
     }
 
     public function validUser($mail, $password)
@@ -94,7 +101,9 @@ class UserPDO
         $user->setEmail($mail);
         $user->setPassword($password1);
         $user->setUserType($type);
-        
+        $user->setSecurityQuestion("¿Cuál es tu color favorito?");
+        $user->setSecurityAnswer("Azul");
+        $user->setSecurityNumber("123456");
 
         return $user;
     }
@@ -114,6 +123,68 @@ class UserPDO
         }
 
         return $check;
+    }
+
+    public function GetUserByEmail($email)
+    {
+        try
+        {
+            $user = null;
+
+            $query = "SELECT * FROM ".$this->tableName." WHERE email = :email";
+
+            $parameters["email"] = $email;
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query, $parameters);
+
+            foreach($resultSet as $valuesArray)
+            {
+                $user = new User();
+                $user->setUserId($valuesArray["userId"]);
+                $user->setFirstName($valuesArray["firstName"]);
+                $user->setLastName($valuesArray["lastName"]);
+                $user->setEmail($valuesArray["email"]);
+                $user->setPassword($valuesArray["_password"]);
+                $user->setUserType($valuesArray["userType"]);
+                $user->setSecurityAnswer($valuesArray["securityAnswer"]);
+                $user->setSecurityQuestion($valuesArray["securityQuestion"]);
+                $user->setSecurityNumber($valuesArray["securityNumber"]);
+            }
+
+            return $user;
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
+    public function Update(User $user)
+    {
+        try
+        {
+            $query = "UPDATE ".$this->tableName." SET firstName = :firstName, lastName = :lastName, email = :email, _password = :password, userType = :userType, securityQuestion = :securityQuestion, securityAnswer = :securityAnswer, securityNumber = :securityNumber WHERE userId = :userId";
+
+            $parameters["firstName"] = $user->getFirstName();
+            $parameters["lastName"] = $user->getLastName();
+            $parameters["email"] = $user->getEmail();
+            $parameters["password"] = $user->getPassword();
+            $parameters["userType"] = $user->getUserType();
+            $parameters["securityQuestion"] = $user->getSecurityQuestion();
+            $parameters["securityAnswer"] = $user->getSecurityAnswer();
+            $parameters["securityNumber"] = $user->getSecurityNumber();
+            $parameters["userId"] = $user->getUserId();
+
+            $this->connection = Connection::GetInstance();
+
+            $this->connection->ExecuteNonQuery($query, $parameters);
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
     }
 
     public function retrieveUserId($email,$password,$user){
@@ -141,4 +212,3 @@ class UserPDO
     }
 
 }
-?>

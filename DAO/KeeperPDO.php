@@ -73,7 +73,7 @@ class KeeperPDO
         return $keeperR;
     }
 
-    
+
 
     public function ReturnDefaultKeeper($userObject)
     {
@@ -136,10 +136,11 @@ class KeeperPDO
         }
     }
 
-    public function IsValidDate($startDate, $finalDate){
+    public function IsValidDate($startDate, $finalDate)
+    {
         $isValid = true;
         $keeperList = $this->getAll();
-        if($startDate > $finalDate){
+        if ($startDate > $finalDate) {
             $isValid = false;
         }
         return $isValid;

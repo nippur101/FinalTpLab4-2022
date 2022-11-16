@@ -10,7 +10,39 @@
         private $email;
         private $password;
         private $userType;
-        
+        private $securityQuestion;
+        private $securityAnswer;
+        private $securityNumber;
+
+        public function setSecurityQuestion($securityQuestion)
+        {
+            $this->securityQuestion = $securityQuestion;
+        }
+
+        public function getSecurityQuestion()
+        {
+            return $this->securityQuestion;
+        }
+
+        public function setSecurityAnswer($securityAnswer)
+        {
+            $this->securityAnswer = $securityAnswer;
+        }
+
+        public function getSecurityAnswer()
+        {
+            return $this->securityAnswer;
+        }
+
+        public function setSecurityNumber($securityNumber)
+        {
+            $this->securityNumber = $securityNumber;
+        }
+
+        public function getSecurityNumber()
+        {
+            return $this->securityNumber;
+        }
 
         public function getEmail()
         {
