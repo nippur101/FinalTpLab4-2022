@@ -6,13 +6,19 @@
         private $description;
         private $date;
         private $keeper;
+        private $owner;
         private $pets;
         private $userScore;
-        function __construct($description,$date,$keeper,$pets){
-            $this->description=$description;
-            $this->date=$date;
-            $this->keeper=$keeper;
-            $this->pets=$pets;
+        function __construct(){
+           
+        }
+
+        public function getOwner(){
+            return $this->owner;
+        }
+
+        public function setOwner($owner){
+            $this->owner = $owner;
         }
          
         public function getReviewsId()

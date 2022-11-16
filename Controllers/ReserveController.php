@@ -90,10 +90,10 @@ class ReserveController
 
         if ($event->getPaymentReviewStatus() == APPROVED) {
             echo "<script> if(confirm('Cannot delete once payed!')); </script>";
-            header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
+            header("location:" . FRONT_ROOT . "Reserve/RetrieveMadedReserves");
         } else {
             $this->reserveDAO->Delete($reserveId);
-            header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
+            header("location:" . FRONT_ROOT . "Reserve/RetrieveMadedReserves");
         }
     }
 
@@ -103,11 +103,11 @@ class ReserveController
 
         if ($event->getPaymentReviewStatus() == APPROVED) {
             echo "<script> if(confirm('Already payed!')); </script>";
-            header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
+            header("location:" . FRONT_ROOT . "Reserve/RetrieveMadedReserves");
         } else {
             if($event->getKeeperReviewStatus() == PENDING_APPROVAL){
                 echo "<script> if(confirm('Cannot pay until keeper confirms!')); </script>";
-                header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
+                header("location:" . FRONT_ROOT . "Reserve/RetrieveMadedReserves");
             }else{
                 $keeper = $this->keeperDAO->GetKeeper($event->getKeeper());
                 $petToKeep = $this->petDAO->GetPet($event->getPets());
@@ -128,6 +128,6 @@ class ReserveController
         $keeperObject = $this->keeperDAO->GetKeeper($reserve->getKeeper());
         $this->keeperDAO->RemoveFreeTimePeriod($keeperObject, $reserve->getStartDate(), $reserve->getFinalDate());
         $this->reserveDAO->Update($reserve);
-        header("location:" . FRONT_ROOT . "Reserve/RetrievePendingReserves");
+        header("location:" . FRONT_ROOT . "Reserve/RetrieveMadedReserves");
     }
 }

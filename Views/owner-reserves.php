@@ -57,6 +57,7 @@ require_once(VIEWS_PATH . "nav.php");
                                              ?></td>
                                         <td><a href="../Reserve/DeleteReserve?reserveId=<?php echo $reserve->getReserveId(); ?>">Cancel</a></td>
                                         <td><a href="../Reserve/PaidOut?reserveId=<?php echo $reserve->getReserveId(); ?>">Go pay</a></td>
+                                        <td><a href="../Reviews/GenerateReview?reserveId=<?php echo $reserve->getReserveId(); ?>">Review it</a></td>
                                    </tr>
                               <?php
                               }

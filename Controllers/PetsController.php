@@ -26,6 +26,8 @@ class PetsController
     public function CreatePets($name, $vaccinationPlan, $raze, $petType, $video, $image)
     {
         $owner = $_SESSION["loggedUser"];
+        $user = $owner;
+        $petsDAO = new PetsPDO();
 
         if (!($this->petsDAO->alreadyExistPets($owner, $name))) {
 

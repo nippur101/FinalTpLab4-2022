@@ -13,8 +13,8 @@ $tomorrowDate = date("Y") . "-" . date("m") . "-" . date("d", strtotime("+1 day"
 
           <form action="<?php echo FRONT_ROOT . "Keeper/ReturnKeepersInTime" ?>" method="POST" class="login-form bg-dark-alpha p-5 bg-light">
                <div class="form-group">
-                    <label for="">Para cuidar a <?php echo $petToKeep->getName() ?> de id:</label>
-                    <input type="text" name="petId" value="<?php echo $petToKeep->getPetId(); ?>" class="form-control form-control-lg">
+                    <label for="">Para cuidar a <?php echo $petToKeep->getName() ?></label>
+                    <input type="hidden" name="petId" value="<?php echo $petToKeep->getPetId(); ?>" class="form-control form-control-lg">
                </div>
                <div class="form-group">
                     <label for="">Desde...</label>
