@@ -77,11 +77,11 @@ class PetsDAO implements IPetsDAO
     public function alreadyExistPets($owner, $name)
     {
 
-        $petsList = $this->getAll();
+        $petsLis = $this->getAll();
 
         $check = false;
 
-        foreach ($petsList as $pets) {
+        foreach ($petsLis as $pets) {
 
             if ($pets->getOwner() == $owner->getUserID()) {
                 if ($pets->getName() == $name) {

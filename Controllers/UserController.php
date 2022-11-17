@@ -20,12 +20,17 @@ class UserController
 
     public function __construct()
     {
-        $this->userDAO = new UserPDO();
-        $this->keeperDAO = new KeeperPDO();
-        $this->ownerDAO = new OwnerPDO();
-        // $this->userDAO = new UserDAO();
+        //--------------------------------------------------
+       $this->userDAO = new UserPDO();
+       $this->keeperDAO = new KeeperPDO();
+       $this->ownerDAO = new OwnerPDO();
+
+        //--------------------------------------------------
+
+       // $this->userDAO = new UserDAO();
         //$this->keeperDAO = new KeeperDAO();
-        // $this->ownerDAO = new OwnerDAO();
+         //$this->ownerDAO = new OwnerDAO();
+        //--------------------------------------------------
 
     }
 

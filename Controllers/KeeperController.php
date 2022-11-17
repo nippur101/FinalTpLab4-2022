@@ -21,14 +21,14 @@ class KeeperController
     {
         $this->keeperDAO = new KeeperPDO();
         $this->petDAO = new PetsPDO();
-        $this->reserveDAO = new ReservePDO();
-        
-        //$this->keeperDAO = new KeeperDAO();
+        //===========================================
+       // $this->keeperDAO = new KeeperDAO();
         //$this->petDAO = new PetsDAO();
-        $this->freeTimePeriod = new FreeTimePeriod();
+        //===========================================
 
-       
-       
+
+        $this->reserveDAO = new ReservePDO();
+        $this->freeTimePeriod = new FreeTimePeriod();   
     }
 
     public function ShowCalendarView()

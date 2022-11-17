@@ -4,9 +4,9 @@
         "firstName": "Owner",
         "lastName": "Prueba",
         "email": "prueba@owner",
-        "phone": "Incompleta",
         "password": "po",
         "userType": "2",
+        "phone": "Incompleta",
         "pets": 1
     },
     {
@@ -14,9 +14,19 @@
         "firstName": "Javier",
         "lastName": "Macedo",
         "email": "j@m",
-        "phone": "Incompleta",
         "password": "1234",
         "userType": "2",
+        "phone": "Incompleta",
         "pets": []
+    },
+    {
+        "userId": 8,
+        "firstName": "Diego ",
+        "lastName": "Arnedo",
+        "email": "d@a",
+        "password": "1234",
+        "userType": "2",
+        "phone": "Incompleta",
+        "pets": 4
     }
 ]

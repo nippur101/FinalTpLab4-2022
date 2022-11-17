@@ -46,5 +46,21 @@
         "email": "j@m",
         "password": "1234",
         "userType": "2"
+    },
+    {
+        "userId": 7,
+        "firstName": "Ricardo",
+        "lastName": "Mollo",
+        "email": "r@m",
+        "password": "1234",
+        "userType": "2"
+    },
+    {
+        "userId": 8,
+        "firstName": "Diego ",
+        "lastName": "Arnedo",
+        "email": "d@a",
+        "password": "1234",
+        "userType": "2"
     }
 ]

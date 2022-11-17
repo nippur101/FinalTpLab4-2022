@@ -19,11 +19,16 @@ class OwnerController
 
     public function __construct()
     {
-      //  $this->ownerDAO = new OwnerDAO();
-        //$this->petDAO = new PetsDAO();
-
+        //  $this->ownerDAO = new OwnerDAO();
+       // $this->petDAO = new PetsDAO();
+        //-----------------------------------------------
         $this->ownerDAO = new OwnerPDO();
-        $this->petDAO = new PetsPDO();
+       $this->petDAO = new PetsPDO();
+        //-----------------------------------------------
+
+
+
+
         $this->reserveDAO = new ReservePDO();
     }
 

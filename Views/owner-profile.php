@@ -23,6 +23,7 @@ require_once(VIEWS_PATH . "nav.php");
 
 
                               foreach ($petsDAO->getAll() as $pets) {
+                                   if($petsDAO->getAll()!=null){
                                    if ($pets->getOwner() == $user->getUserID()) {                              ?>
                                         <tr>
                                              <th><?php echo $pets->getPetId(); ?></th>
@@ -34,7 +35,7 @@ require_once(VIEWS_PATH . "nav.php");
                                              <th><?php echo $pets->getPetType(); ?></th>
                                              <th><a href="../Pets/deletePets?petsId=<?php echo $pets->getPetId(); ?>">Delete</a></th>
                                         </tr>
-                              <?php }
+                              <?php }}
                               } ?>
                          </tbody>
                          <button type="submit" name="" class="btn btn-dark ml-auto d-block">Agregar Mascota</button>

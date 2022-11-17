@@ -16,17 +16,21 @@ class PetsController
 
     public function __construct()
     {
+        //--------------------------------------------------
        // $this->petsDAO = new PetsDAO();
         //$this->ownerDAO = new OwnerDAO();
-
+        //--------------------------------------------------
         $this->petsDAO = new PetsPDO();
         $this->ownerDAO = new PetsPDO();
+        //--------------------------------------------------
     }
 
     public function CreatePets($name, $vaccinationPlan, $raze, $petType, $video, $image)
     {
+        $owner=new Owner();
         $owner = $_SESSION["loggedUser"];
         $user = $owner;
+        
         $petsDAO = new PetsPDO();
 
         if (!($this->petsDAO->alreadyExistPets($owner, $name))) {
@@ -41,6 +45,7 @@ class PetsController
             $pets->setImage($image);
             $pets->setOwner($owner->getUserID());
             $this->petsDAO->Add($pets);
+            $owner->addPets($pets);
            
             echo "<script> if(confirm('La Mascota se ha creado con exito!')); </script>";
         } else {

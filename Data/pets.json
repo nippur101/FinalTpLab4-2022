@@ -8,5 +8,35 @@
         "video": "https:\/\/www.youtube.com\/watch?v=rDbiZWEdFmE",
         "image": "https:\/\/www.petclic.es\/wikipets\/wp-content\/uploads\/sites\/default\/files\/library\/dalmata_-_razas_de_perro.jpg",
         "owner": 2
+    },
+    {
+        "petId": 2,
+        "name": "Bolt",
+        "vaccinationPlan": "https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg",
+        "petType": "Mediano",
+        "raze": "perro",
+        "video": "https:\/\/www.youtube.com\/embed\/rsTLyukvxGU",
+        "image": "https:\/\/www.petclic.es\/wikipets\/wp-content\/uploads\/sites\/default\/files\/library\/dalmata_-_razas_de_perro.jpg",
+        "owner": 8
+    },
+    {
+        "petId": 3,
+        "name": "fachero",
+        "vaccinationPlan": "https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg",
+        "petType": "Pequenio",
+        "raze": "perro",
+        "video": "https:\/\/www.youtube.com\/embed\/rsTLyukvxGU",
+        "image": "https:\/\/www.petclic.es\/wikipets\/wp-content\/uploads\/sites\/default\/files\/library\/dalmata_-_razas_de_perro.jpg",
+        "owner": 8
+    },
+    {
+        "petId": 4,
+        "name": "tito",
+        "vaccinationPlan": "https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg",
+        "petType": "Pequenio",
+        "raze": "perro",
+        "video": "https:\/\/www.youtube.com\/embed\/rsTLyukvxGU",
+        "image": "https:\/\/www.petclic.es\/wikipets\/wp-content\/uploads\/sites\/default\/files\/library\/dalmata_-_razas_de_perro.jpg",
+        "owner": 8
     }
 ]

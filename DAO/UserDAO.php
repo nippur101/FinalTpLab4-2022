@@ -4,7 +4,7 @@ namespace DAO;
 
 use Models\User;
 
-class UserDAO c
+class UserDAO 
 {
 
     private $userList = array();
@@ -39,6 +39,9 @@ class UserDAO c
         $this->SaveUser();
     }
 
+    public function retrieveUserId($email,$password,$user){
+        return $user->getUserID();
+    }
     public function validUser($mail, $password)
     {
 
