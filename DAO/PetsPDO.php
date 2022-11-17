@@ -7,7 +7,7 @@ use DAO\OwnerDAO;
 use Models\Pets;
 use Models\Owner;
 
-class PetsPDO
+class PetsPDO implements IPetsDAO
 {
 
     private $petsList = array();

@@ -4,7 +4,8 @@ namespace DAO;
 use \Exception as Exception;
 use Models\Reserve;
 
-class ReservePDO {
+class ReservePDO implements IReserveDAO
+{
     private $connection;
     private $tableName = "Reserve";
     private $reserveList = array();

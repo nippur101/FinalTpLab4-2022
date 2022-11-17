@@ -4,7 +4,7 @@ namespace DAO;
 
 use Models\Owner;
 
-class OwnerDAO
+class OwnerDAO implements IOwnerDAO
 {
 
     private $ownerList = array();

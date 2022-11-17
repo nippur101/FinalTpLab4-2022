@@ -4,7 +4,7 @@ namespace DAO;
 use \Exception as Exception;
 use Models\User;
 
-class UserPDO
+class UserPDO implements IUserDAO
 {
   
     private $connection;

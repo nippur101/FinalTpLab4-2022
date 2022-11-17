@@ -5,7 +5,7 @@ use \Exception as Exception;
 use Models\Owner;
 use Models\Pets;
 
-class OwnerPDO
+class OwnerPDO implements IOwnerDAO
 {
     private $connection;
     private $ownerList = array();

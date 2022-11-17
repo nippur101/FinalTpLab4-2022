@@ -4,7 +4,7 @@ namespace DAO;
 
 use Models\Reserve;
 
-class ReserveDAO
+class ReserveDAO implements IReserveDAO
 {
 
     private $reserveList = array();

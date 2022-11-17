@@ -4,7 +4,7 @@ namespace DAO;
 
 use Models\User;
 
-class UserDAO
+class UserDAO c
 {
 
     private $userList = array();

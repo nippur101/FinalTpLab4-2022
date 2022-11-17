@@ -8,7 +8,7 @@ use Models\Keeper as Keeper;
 use DAO\UserDAO as UserDAO;
 use Models\FreeTimePeriod;
 
-class KeeperPDO
+class KeeperPDO implements IKeeperDAO
 {
     private $keeperList = array();
     private $connection;
