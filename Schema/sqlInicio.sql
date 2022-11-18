@@ -36,7 +36,7 @@ petsId int not null auto_increment,
 vaccinationPlan varchar(100),
 raze varchar(40),
 petType varchar(100),
-viedo varchar(40),
+video varchar(40),
 image varchar(100),
 ownerId int,
 constraint primary key (petsId))engine = InnoDB;
@@ -44,20 +44,17 @@ constraint primary key (petsId))engine = InnoDB;
 create table _Owner(
 ownerId int not null auto_increment,
 phone varchar(100),
-petsId int,
+
 userId int,
-constraint primary key (ownerId),
-FOREIGN KEY(petsId )
-REFERENCES pethero.Pets(petsId))
+constraint primary key (ownerId))
 engine = InnoDB;
 
-alter table _Owner add column userId int,
-add constraint FK_Owner_User foreign key (userId) references pethero._User(userId);
+alter table _Owner add constraint FK_Owner_User foreign key (userId) references pethero._User(userId);
 
 
 alter table Pets add constraint FKPets__Owner
 foreign key Pets (ownerId)
-references _Owner(ownerId);
+references _Owner(userId);
 
 create table Keeper(
 keeperId int not null auto_increment,
@@ -68,13 +65,10 @@ stayCost double,
 freeTimePeriodId int,
 reviewsId int,
 userId int,
-petsId int,
-ftpId int,
+
 constraint primary key (keeperId),
-FOREIGN KEY(petsId )
-REFERENCES pethero.Pets(petsId),
-FOREIGN KEY(ftpId )
-REFERENCES pethero.FreeTimePeriod(ftpId),
+
+
 FOREIGN KEY(userId )
 REFERENCES pethero._User(userId))
 engine = InnoDB;
@@ -93,7 +87,7 @@ constraint primary key (reviewsId),
 FOREIGN KEY(petsId )
 REFERENCES pethero.Pets(petsId),
 FOREIGN KEY(keeperId )
-REFERENCES pethero.Keeper(keeperId))engine = InnoDB;
+REFERENCES pethero.Keeper(userId))engine = InnoDB;
 
 alter table Keeper add constraint FK_Keeper_Reviews foreign key (reviewsId) references pethero.Reviews(reviewsId);
 
@@ -111,7 +105,8 @@ constraint primary key (reserveId),
 FOREIGN KEY(petsId )
 REFERENCES pethero.Pets(petsId),
 FOREIGN KEY(keeperId )
-REFERENCES pethero.Keeper(keeperId))engine = InnoDB;
+REFERENCES pethero.Keeper(userId))engine = InnoDB;
+
 
 insert into Pets values (default,"https:\/\/t2.ea.ltmcdn.com\/es\/posts\/1\/2\/2\/calendario_de_vacunas_para_perros_20221_orig.jpg","Dalmata","Mediano",
 "https:\/\/images.hola.com\/imagenes\/estar-bien\/20200828174216\/razas-perro-dalmata-gt\/0-859-148\/dalmata-t.jpg","Firulais","https:\/\/www.youtube.com\/watch?v=bju7O_qv7l4");
