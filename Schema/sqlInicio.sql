@@ -1,5 +1,4 @@
 
-
 create database pethero;
 use pethero;
 
@@ -17,18 +16,15 @@ engine = InnoDB;
 
 
 
-insert into _User values (default,"Julieta","Macedo","ju@m","1234",2);
-insert into _User values (default,"Javier","Macedo","j@m","1234",2);
-
-
-
 create table FreeTimePeriod(
 ftpId int not null auto_increment,
 startDate date,
 finalDate date,
-constraint primary key (ftpId))
+keeperId int,
+constraint primary key (ftpId),
+FOREIGN KEY(keeperId )
+REFERENCES pethero.Keeper(userId))
 engine = InnoDB;
-
 
 
 create table Pets(
@@ -44,7 +40,6 @@ constraint primary key (petsId))engine = InnoDB;
 create table _Owner(
 ownerId int not null auto_increment,
 phone varchar(100),
-
 userId int,
 constraint primary key (ownerId))
 engine = InnoDB;
@@ -52,7 +47,7 @@ engine = InnoDB;
 alter table _Owner add constraint FK_Owner_User foreign key (userId) references pethero._User(userId);
 
 
-alter table Pets add constraint FKPets__Owner
+alter table Pets add constraint FK_Pets__Owner
 foreign key Pets (ownerId)
 references _Owner(userId);
 
@@ -65,10 +60,7 @@ stayCost double,
 freeTimePeriodId int,
 reviewsId int,
 userId int,
-
 constraint primary key (keeperId),
-
-
 FOREIGN KEY(userId )
 REFERENCES pethero._User(userId))
 engine = InnoDB;
@@ -82,10 +74,12 @@ _date date,
 userScore int,
 petsId int,
 keeperId int,
-
+ownerId int,
 constraint primary key (reviewsId),
 FOREIGN KEY(petsId )
 REFERENCES pethero.Pets(petsId),
+FOREIGN KEY(uwnerId )
+REFERENCES pethero._owner(userId),
 FOREIGN KEY(keeperId )
 REFERENCES pethero.Keeper(userId))engine = InnoDB;
 
