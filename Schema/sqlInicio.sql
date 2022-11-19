@@ -247,5 +247,88 @@ END
 #===========================================================================================================================================
 
 #===========================================================================================================================================
+#LOCALHOST
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminatePet`(in petId int)
+BEGIN
+	ALTER TABLE Pets
+	DROP FOREIGN KEY  FK_Pets__Owner;
+	delete from Pets
+	where petsId =petId;
+	ALTER TABLE Pets ADD CONSTRAINT FK_Pets__Owner FOREIGN KEY Pets (ownerId) REFERENCES _Owner (userId);
+END
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ownerPets`(in oId int)
+BEGIN
+SELECT * FROM Pets WHERE ownerId=oId;
+END
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addOwner`(in uId int,in pho varchar(50))
+BEGIN
+INSERT INTO _Owner (phone,userId) VALUES (  pho, uId);
+END
 
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`localhost`  PROCEDURE `addPet`(in _nam varchar(50),in vaccination varchar(200),in raz varchar(100), in pType varchar(50),in pVideo varchar(200), in imag varchar(200),in oId int)
+BEGIN
+INSERT INTO Pets (vaccinationPlan, raze, petType, image,_name,video,ownerId) VALUES ( vaccination, raz,pType, imag, _nam,  pVideo, oId);
+END
+
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`localhost`  PROCEDURE `addUser`(in firstName varchar(50),in lastName varchar(50),in email varchar(100), in _password varchar(50),in userType int)
+BEGIN
+INSERT INTO _User ( firstName, lastName, email, _password, userType) VALUES ( firstName, lastName, email, _password, userType);
+END
+
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`localhost`  PROCEDURE `eliminateUserOwner`(in uId int)
+BEGIN
+
+	ALTER TABLE _Owner
+	DROP FOREIGN KEY  FK_Owner__User;
+	delete from _User
+	where userId =uId;
+    delete from _Owner
+	where userId =uId;
+    
+	ALTER TABLE _Owner ADD CONSTRAINT FK_Owner__User FOREIGN KEY _Owner (userId) REFERENCES _User (userId);	
+	
+END
+#===========================================================================================================================================
+
+CREATE DEFINER=`root`@`localhost`  PROCEDURE `retrieveUserId`(in mail varchar(100),in pass varchar(50))
+BEGIN
+select userId from _User
+where email=mail and  _password=pass;
+END
+
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`localhost`  PROCEDURE `eliminateUserKeeper`(in uId int)
+BEGIN
+
+	ALTER TABLE Keeper
+	DROP FOREIGN KEY  Keeper_ibfk_3;
+	delete from _User
+	where userId =uId;
+    delete from Keeper
+	where userId =uId;
+    
+	ALTER TABLE Keeper ADD CONSTRAINT Keeper_ibfk_3 FOREIGN KEY Keeper (userId) REFERENCES _User (userId);	
+	
+END
+
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`localhost`  PROCEDURE `keeperFreeTimeperiod`(in oId int)
+BEGIN
+	SELECT * FROM FreeTimePeriod WHERE keeperId=oId;
+END
+
+#===========================================================================================================================================
+CREATE DEFINER=`root`@`localhost`  PROCEDURE `addFreeTimePeriod`(in starD date,in finaD date,in keepId int)
+BEGIN
+	ALTER TABLE FreeTimePeriod
+	DROP FOREIGN KEY  FK_FreeTimePeriod_Keeper;
+    INSERT INTO FreeTimePeriod ( startDate, finalDate, keeperId) VALUES ( starD, finaD,keepId);
+	ALTER TABLE FreeTimePeriod ADD CONSTRAINT FK_FreeTimePeriod_Keeper FOREIGN KEY FreeTimePeriod (keeperId) REFERENCES Keeper (KeeperId);
+END
 #===========================================================================================================================================

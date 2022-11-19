@@ -1,20 +1,21 @@
 <?php
 
 namespace DAO;
+
 use \Exception as Exception;
 use DAO\OwnerPDO;
 use DAO\OwnerDAO;
 use Models\Pets;
 use Models\Owner;
 
-class PetsPDO implements IPetsDAO
+class PetsPDO
 {
 
     private $petsList = array();
 
     private $connection;
     
-    private $tableName = "Pets";
+    private $tableName = "pets";
     public function __construct()
     {
        
@@ -46,13 +47,12 @@ class PetsPDO implements IPetsDAO
         $ownerPets = array();
         try
             {
-                $query = "CALL ownerPets(".$ownerId.")";
+                $query = "CALL ownerPets(".$ownerId.")";//?
 
                 $this->connection = Connection::GetInstance();
 
                 $ownerPets = $this->connection->Execute($query);
-                $ownerList = array();
-
+                
                 foreach ($ownerPets as $pet)
                 {                
                     $pets = new Pets();
@@ -67,18 +67,18 @@ class PetsPDO implements IPetsDAO
                     $pets->setOwner($pet["ownerId"]);
     
     
-                    array_push($ownerList, $pets);
+                    array_push($ownerPets, $pets);
                 }   
 
 
-                return $ownerList;
+                return $ownerPets;
                
             }
             catch(Exception $ex)
             {
                 throw $ex;
             }
-        return $ownerList;
+        return $ownerPets;
     }
 
     public function validPet($name, $owner)

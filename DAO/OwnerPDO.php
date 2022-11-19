@@ -9,7 +9,7 @@ class OwnerPDO implements IOwnerDAO
 {
     private $connection;
     private $ownerList = array();
-    private $tableName = "_Owner";
+    private $tableName = "_owner";
 
     
     public function getAll()

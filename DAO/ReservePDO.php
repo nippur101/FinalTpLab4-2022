@@ -7,7 +7,7 @@ use Models\Reserve;
 class ReservePDO implements IReserveDAO
 {
     private $connection;
-    private $tableName = "Reserve";
+    private $tableName = "reserve";
     private $reserveList = array();
 
     public function GetAll(){

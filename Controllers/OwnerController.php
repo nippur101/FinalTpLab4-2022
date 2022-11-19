@@ -35,7 +35,6 @@ class OwnerController
     public function ShowProfileView()
     {
         $owner = $_SESSION["loggedUser"];
-
         if ($owner != NULL) {
             $petsDAO = new PetsPDO();
             $user = $owner;

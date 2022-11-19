@@ -8,7 +8,7 @@ use Models\Reviews as Reviews;
 class ReviewsPDO{
     private $reviewsList = array();
     private $connection;
-    private $tableName = "Reviews";
+    private $tableName = "reviews";
 
     public function getAll()
     {

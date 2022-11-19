@@ -12,7 +12,7 @@ class KeeperPDO implements IKeeperDAO
 {
     private $keeperList = array();
     private $connection;
-    private $tableName = "Keeper";
+    private $tableName = "keeper";
     private $tableName2 = "FreeTimePeriod";
 
 

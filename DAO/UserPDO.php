@@ -8,7 +8,7 @@ class UserPDO implements IUserDAO
 {
   
     private $connection;
-    private $tableName = "_User";
+    private $tableName = "_user";
     private $userList = array();
 
 
