@@ -99,6 +99,8 @@ class KeeperPDO implements IKeeperDAO
         $userList = array();
         $userPDO = new UserPDO();
 
+        $reviewsPDO = new ReviewsPDO();
+
         try {
             $userList = $userPDO->getAll();
 
@@ -114,8 +116,7 @@ class KeeperPDO implements IKeeperDAO
                 $keeper->setAddress($valuesArray["address"]);
                 $keeper->setPetSize($valuesArray["petsize"]);
                 $keeper->setStayCost($valuesArray["stayCost"]);
-                $keeper->setReviews($valuesArray["reviews"]);
-
+                $keeper->setReviews($reviewsPDO->GetReviewsByKeeper($keeper));
                 $keeper->setFreeTimePeriod($this->GetFromTableKeeperFreeTimePeriod($keeper->getUserID()));
 
                 foreach ($userList as $user) {

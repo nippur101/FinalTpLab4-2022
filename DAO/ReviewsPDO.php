@@ -81,9 +81,10 @@ class ReviewsPDO{
     }
 
     public function GetReviewsByKeeper($keeper){
+       
         $reviewsList = array();
         try{
-            $query = "SELECT * FROM " . $this->tableName . " WHERE keeperId = " . $keeper->getUserId();
+            $query = "SELECT * FROM " . $this->tableName . " WHERE keeperId = " . $keeper->getUserID();
             $this->connection = Connection::GetInstance();
             $resultSet = $this->connection->Execute($query);
             foreach($resultSet as $row){
