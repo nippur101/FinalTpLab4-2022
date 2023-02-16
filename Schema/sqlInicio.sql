@@ -36,7 +36,7 @@ petsId int not null auto_increment,
 vaccinationPlan varchar(100),
 raze varchar(40),
 petType varchar(100),
-viedo varchar(40),
+video varchar(40),
 image varchar(100),
 ownerId int,
 constraint primary key (petsId))engine = InnoDB;
